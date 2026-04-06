@@ -191,9 +191,13 @@ a:hover{color:var(--mars)}
 /* PRESS */
 .pb{background:var(--canvas)}
 .pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
-.pc{background:var(--canvas-w);border-radius:14px;padding:24px;border:1px solid rgba(200,169,110,.1);transition:.3s var(--e);display:flex;flex-direction:column}
+.pc{background:var(--canvas-w);border-radius:14px;overflow:hidden;border:1px solid rgba(200,169,110,.1);transition:.3s var(--e);display:flex;flex-direction:column}
 .pc:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(45,42,38,.07);border-color:var(--gold-s)}
-.py{font-size:.72rem;font-weight:600;letter-spacing:.12em;color:var(--burg);margin-bottom:6px}
+.pi{width:100%;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,var(--canvas-w),var(--lg))}
+.pi img{width:100%;height:100%;object-fit:cover;transition:.4s var(--e)}
+.pc:hover .pi img{transform:scale(1.04)}
+.pb2{padding:20px 24px}
+.py{font-size:.72rem;font-weight:600;letter-spacing:.12em;color:var(--burg);margin-bottom:6px;display:block}
 .pn{font-family:var(--fd);font-size:1.12rem;font-weight:500;margin-bottom:10px;flex:1}
 .plk{font-size:.8rem;font-weight:500;color:var(--burg);display:inline-flex;align-items:center;gap:4px}
 .plk::after{content:'→';transition:.2s}
@@ -341,7 +345,7 @@ a:hover{color:var(--mars)}
           <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
           Instagram
         </a>
-        <a href="mailto:artpolushkina@gmail.com">
+        <a href="/cdn-cgi/l/email-protection#05647771756a6970766d6e6c6b64456268646c692b666a68">
           <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
           Email
         </a>
@@ -535,9 +539,9 @@ a:hover{color:var(--mars)}
         <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
         <span data-ru="Написать в Telegram" data-en="Message on Telegram">Написать в Telegram</span>
       </a>
-      <a href="mailto:artpolushkina@gmail.com" class="cl">
+      <a href="/cdn-cgi/l/email-protection#8beaf9fffbe4e7fef8e3e0e2e5eacbece6eae2e7a5e8e4e6" class="cl">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        artpolushkina@gmail.com
+        <span class="__cf_email__" data-cfemail="52332026223d3e27213a393b3c3312353f333b3e7c313d3f">[email&#160;protected]</span>
       </a>
       <a href="https://instagram.com/artpolushkina" target="_blank" rel="noopener" class="cl">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
@@ -551,7 +555,7 @@ a:hover{color:var(--mars)}
   </div>
 </section>
 
-<footer class="ft">© 2026 Мария Полушкина · artpolushkina@gmail.com</footer>
+<footer class="ft">© 2026 Мария Полушкина · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91f0e3e5e1fefde4e2f9faf8fff0d1f6fcf0f8fdbff2fefc">[email&#160;protected]</a></footer>
 
 <button class="btt" id="btt" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
 
@@ -575,7 +579,7 @@ a:hover{color:var(--mars)}
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const W=[
   {id:1,t:"ГАМАК",te:"Hammock",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×60",y:2026,p:62000},
   {id:2,t:"СЕМЬЯ",te:"Family",m:"Холст, акрил",me:"Canvas, acrylic",s:"50×40",y:2026,p:25000},
@@ -684,17 +688,17 @@ const EX=[
 ];
 
 const PB=[
-  {y:2025,r:"Журнал Salon",e:"Salon Magazine",u:"https://salon.ru/article/minimalizm-selementami-mid-century-kvartira-v-dome1936-goda-74182"},
-  {y:2025,r:"My Decor",e:"My Decor",u:"https://mydecor.ru/interiorflats/neskuchnyi-minimalizm-kvartira-47-m-v-moskve/"},
-  {y:2024,r:"Design Mate",e:"Design Mate",u:"https://design-mate.ru/read/objects/interior-of-small-apartment--project-by-art-studio-mir"},
-  {y:2024,r:"My Decor",e:"My Decor",u:"https://mydecor.ru/interior/flats/yarkaya-kvartira-40-m-pod-sdachu-v-moskve/"},
-  {y:2024,r:"«Идеи вашего дома»",e:"Ideas for Your Home",u:"https://www.ivd.ru/dizajn-i-dekor/kvartira/iz-treh-komnat-pochti-pyat-yarkaya-kvartira-mechty-dlya-semi-s-dvumya-detmi-123972"},
-  {y:2023,r:"Salon Interior (весенний номер)",e:"Salon Interior (spring)",u:null},
-  {y:2023,r:"In My Room",e:"In My Room",u:"https://www.inmyroom.ru/posts/36789-semejnaya-kvartira-v-krasnogorske-s-prohodnoj-gostinoj-i-dvumya-detskimi"},
-  {y:2022,r:"Salon Interior (зимний номер)",e:"Salon Interior (winter)",u:null},
-  {y:2021,r:"COSMOPOLITAN",e:"COSMOPOLITAN",u:"https://www.cosmo.ru/beauty/news/24-05-2021/igrivoe-nastroenie-i-yarkie-kraski-zaigrali-na-oknah-salonov-palchiki/"},
-  {y:2021,r:"InStyle",e:"InStyle",u:"https://instyle.ru/stars/za-kadrom/khudozhnitsa-mariya-polushkina-razukrasila-vitriny-salonov-palchiki/"},
-  {y:2020,r:"Art Muse (стр. 151)",e:"Art Muse (p. 151)",u:"https://ru.calameo.com/read/006223001745df126953b"}
+  {y:2025,r:"Журнал Salon",e:"Salon Magazine",u:"https://salon.ru/article/minimalizm-selementami-mid-century-kvartira-v-dome1936-goda-74182",img:"site/images/pub-salon-2025.jpg"},
+  {y:2025,r:"My Decor",e:"My Decor",u:"https://mydecor.ru/interiorflats/neskuchnyi-minimalizm-kvartira-47-m-v-moskve/",img:"site/images/pub-mydecor-2025.jpg"},
+  {y:2024,r:"Design Mate",e:"Design Mate",u:"https://design-mate.ru/read/objects/interior-of-small-apartment--project-by-art-studio-mir",img:"site/images/pub-designmate-2024.jpg"},
+  {y:2024,r:"My Decor",e:"My Decor",u:"https://mydecor.ru/interior/flats/yarkaya-kvartira-40-m-pod-sdachu-v-moskve/",img:"site/images/pub-mydecor-2024.jpg"},
+  {y:2024,r:"«Идеи вашего дома»",e:"Ideas for Your Home",u:"https://www.ivd.ru/dizajn-i-dekor/kvartira/iz-treh-komnat-pochti-pyat-yarkaya-kvartira-mechty-dlya-semi-s-dvumya-detmi-123972",img:"site/images/pub-ivd-2024.jpg"},
+  {y:2023,r:"Salon Interior (весенний номер)",e:"Salon Interior (spring)",u:null,img:"site/images/pub-salon-spring-2023.jpg"},
+  {y:2023,r:"In My Room",e:"In My Room",u:"https://www.inmyroom.ru/posts/36789-semejnaya-kvartira-v-krasnogorske-s-prohodnoj-gostinoj-i-dvumya-detskimi",img:"site/images/pub-inmyroom-2023.jpg"},
+  {y:2022,r:"Salon Interior (зимний номер)",e:"Salon Interior (winter)",u:null,img:"site/images/pub-salon-winter-2022.jpg"},
+  {y:2021,r:"COSMOPOLITAN",e:"COSMOPOLITAN",u:"https://www.cosmo.ru/beauty/news/24-05-2021/igrivoe-nastroenie-i-yarkie-kraski-zaigrali-na-oknah-salonov-palchiki/",img:"site/images/pub-cosmo-2021.jpg"},
+  {y:2021,r:"InStyle",e:"InStyle",u:"https://instyle.ru/stars/za-kadrom/khudozhnitsa-mariya-polushkina-razukrasila-vitriny-salonov-palchiki/",img:"site/images/pub-instyle-2021.jpg"},
+  {y:2020,r:"Art Muse (стр. 151)",e:"Art Muse (p. 151)",u:"https://ru.calameo.com/read/006223001745df126953b",img:"site/images/pub-artmuse-2020.jpg"}
 ];
 
 let L='ru',F='all';
@@ -725,12 +729,18 @@ function rE(){
 function rP(){
   document.getElementById('pG').innerHTML=PB.map(p=>`
     <div class="pc fi">
-      <span class="py">${p.y}</span>
-      <div class="pn">${L==='ru'?p.r:p.e}</div>
-      ${p.u
-        ?`<a href="${p.u}" target="_blank" rel="noopener" class="plk">${L==='ru'?'Читать':'Read'}</a>`
-        :`<span class="pp">${L==='ru'?'Печатное издание':'Print edition'}</span>`
-      }
+      <div class="pi">
+        <img src="${p.img}" alt="${L==='ru'?p.r:p.e}" loading="lazy"
+             onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="pb2">
+        <span class="py">${p.y}</span>
+        <div class="pn">${L==='ru'?p.r:p.e}</div>
+        ${p.u
+          ?`<a href="${p.u}" target="_blank" rel="noopener" class="plk">${L==='ru'?'Читать':'Read'}</a>`
+          :`<span class="pp">${L==='ru'?'Печатное издание':'Print edition'}</span>`
+        }
+      </div>
     </div>
   `).join('');
   ob();
@@ -836,21 +846,4 @@ window.addEventListener('scroll',()=>{
 document.querySelectorAll('.nk a').forEach(a=>
   a.addEventListener('click',()=>{
     document.getElementById('nk').classList.remove('open');
-    const btn=document.getElementById('hbBtn');
-    btn.style.zIndex='';
-    btn.querySelectorAll('span').forEach(s=>s.style.cssText='');
-  })
-);
-
-const io=new IntersectionObserver(
-  entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')}),
-  {threshold:.08}
-);
-function ob(){document.querySelectorAll('.fi:not(.v)').forEach(el=>io.observe(el))}
-
-rA();
-setTimeout(ob,100);
-setInterval(ob,800);
-</script>
-</body>
-</html>
+    const btn=docume
