@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500&display=swap" rel="stylesheet">
 <style>
+
 :root{
   --canvas:#F7F1E8;
   --canvas-w:#F2EADD;
@@ -44,7 +45,7 @@ a:hover{color:var(--mars)}
 .nk a:hover{color:var(--burg)}
 .lb{background:none;border:1px solid var(--lg);padding:4px 14px;border-radius:20px;font-family:var(--fb);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:var(--wg);transition:.3s var(--e)}
 .lb:hover{border-color:var(--burg);color:var(--burg)}
-.hb{display:none;background:none;border:none;cursor:pointer;width:26px;height:18px;position:relative;z-index:1}
+.hb{display:none;background:none;border:none;cursor:pointer;width:26px;height:18px;position:relative}
 .hb span{display:block;width:100%;height:1.5px;background:var(--char);border-radius:2px;position:absolute;left:0;transition:.3s}
 .hb span:nth-child(1){top:0}
 .hb span:nth-child(2){top:8px}
@@ -70,23 +71,47 @@ a:hover{color:var(--mars)}
 /* === PAINTING ANIMATIONS === */
 #heroSvg{animation:svgIn .5s ease forwards}
 @keyframes svgIn{from{opacity:0}to{opacity:1}}
+
+/* Wires draw in */
 .wire{stroke-dasharray:680;stroke-dashoffset:680;animation:wireDraw 1.2s .45s ease forwards}
 .wire2{animation-delay:.6s}
 @keyframes wireDraw{to{stroke-dashoffset:0}}
+
+/* Left tree trunk */
 .lt-trunk{transform-box:fill-box;transform-origin:center bottom;animation:trunkUp .35s .72s ease both}
+/* Right tree trunk */
 .rt-trunk{transform-box:fill-box;transform-origin:center bottom;animation:trunkUp .35s .78s ease both}
 @keyframes trunkUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+
+/* Left tree blocks slide from left */
 .lt{animation:ltSlide .45s cubic-bezier(.34,1.56,.64,1) both;opacity:0}
-.lt1{animation-delay:.86s}.lt2{animation-delay:.98s}.lt3{animation-delay:1.10s}.lt4{animation-delay:1.22s}
-.lt5{animation-delay:1.34s}.lt6{animation-delay:1.46s}.lt7{animation-delay:1.58s}.lt8{animation-delay:1.70s}
+.lt1{animation-delay:.86s}
+.lt2{animation-delay:.98s}
+.lt3{animation-delay:1.10s}
+.lt4{animation-delay:1.22s}
+.lt5{animation-delay:1.34s}
+.lt6{animation-delay:1.46s}
+.lt7{animation-delay:1.58s}
+.lt8{animation-delay:1.70s}
 @keyframes ltSlide{from{transform:translateX(-130px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* Right tree blocks slide from right */
 .rt{animation:rtSlide .45s cubic-bezier(.34,1.56,.64,1) both;opacity:0}
-.rt1{animation-delay:1.06s}.rt2{animation-delay:1.16s}.rt3{animation-delay:1.26s}.rt4{animation-delay:1.36s}
-.rt5{animation-delay:1.46s}.rt6{animation-delay:1.56s}.rt7{animation-delay:1.66s}
+.rt1{animation-delay:1.06s}
+.rt2{animation-delay:1.16s}
+.rt3{animation-delay:1.26s}
+.rt4{animation-delay:1.36s}
+.rt5{animation-delay:1.46s}
+.rt6{animation-delay:1.56s}
+.rt7{animation-delay:1.66s}
 @keyframes rtSlide{from{transform:translateX(130px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* Tree continuous sway — very slow */
 .ltree-g{transform-box:fill-box;transform-origin:center bottom;animation:treeSway 18s 2.4s ease-in-out infinite}
 .rtree-g{transform-box:fill-box;transform-origin:center bottom;animation:treeSway 24s 2.6s ease-in-out infinite reverse}
 @keyframes treeSway{0%,100%{transform:rotate(0deg)}30%{transform:rotate(2.5deg)}70%{transform:rotate(-2deg)}}
+
+/* Figure */
 .fig-disc{animation:discDrop .6s cubic-bezier(.34,1.56,.64,1) 2.0s both,discFloat 11s 4s ease-in-out infinite}
 @keyframes discDrop{from{transform:translateY(-65px);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes discFloat{0%,100%{transform:translateY(0) rotate(0deg)}40%{transform:translateY(-7px) rotate(1.5deg)}70%{transform:translateY(4px) rotate(-.8deg)}}
@@ -95,6 +120,8 @@ a:hover{color:var(--mars)}
 .fig-body{transform-box:fill-box;transform-origin:top center;animation:bodyGrow .7s ease 2.1s both,bodyBreath 14s 4s ease-in-out infinite}
 @keyframes bodyGrow{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
 @keyframes bodyBreath{0%,100%{transform:scaleX(1)}45%{transform:scaleX(1.02)}75%{transform:scaleX(.985)}}
+
+/* Waves — very slow, large amplitude */
 .w1{animation:waveIn .9s 2.5s ease both,waveFlowA 30s 3.5s ease-in-out infinite}
 .w2{animation:waveIn .9s 2.65s ease both,waveFlowB 24s 3.3s ease-in-out infinite}
 .w3{animation:waveIn .9s 2.8s ease both,waveFlowC 20s 3.55s ease-in-out infinite}
@@ -103,9 +130,14 @@ a:hover{color:var(--mars)}
 @keyframes waveFlowA{0%,100%{transform:translateX(0)}50%{transform:translateX(-95px)}}
 @keyframes waveFlowB{0%,100%{transform:translateX(-30px)}50%{transform:translateX(75px)}}
 @keyframes waveFlowC{0%,100%{transform:translateX(10px)}50%{transform:translateX(-80px)}}
-.boat-g{transform-box:fill-box;transform-origin:center center;animation:boatSlide .9s cubic-bezier(.34,1.56,.64,1) 3.1s both,boatBob 9s 4.1s ease-in-out infinite}
+
+/* Sailboat — slow dreamy bob */
+.boat-g{transform-box:fill-box;transform-origin:center center;
+  animation:boatSlide .9s cubic-bezier(.34,1.56,.64,1) 3.1s both,boatBob 9s 4.1s ease-in-out infinite}
 @keyframes boatSlide{from{transform:translateX(220px);opacity:0}to{transform:translateX(0);opacity:1}}
 @keyframes boatBob{0%,100%{transform:translateY(0) rotate(-2.5deg)}50%{transform:translateY(-18px) rotate(3deg)}}
+
+/* Signature */
 .sig-text{animation:sigIn 1s 3.5s ease both;opacity:0}
 @keyframes sigIn{to{opacity:.5}}
 
@@ -124,9 +156,32 @@ a:hover{color:var(--mars)}
 /* ABOUT */
 .ab{background:var(--canvas-w)}
 .ag{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.ap-outer{display:flex;justify-content:center;margin:0 0 44px;overflow:visible}
-.ap-ring{position:relative;width:260px;height:260px;flex-shrink:0;border-radius:50%;box-shadow:0 0 0 3px var(--canvas-w),0 0 0 6px var(--gold);overflow:hidden}
-.ap-img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;border-radius:50%;display:block}
+
+/* Artist portrait in about section */
+.ap-outer{
+  display:flex;
+  justify-content:center;
+  margin:0 0 44px;
+  overflow:visible;
+}
+.ap-ring{
+  position:relative;
+  width:260px;
+  height:260px;
+  flex-shrink:0;
+  border-radius:50%;
+  box-shadow:0 0 0 3px var(--canvas-w),0 0 0 6px var(--gold);
+  overflow:hidden;
+}
+.ap-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 18%;
+  border-radius:50%;
+  display:block;
+}
+
 .at p{margin-bottom:14px;font-size:.93rem}
 .aq{font-family:var(--fd);font-size:1.12rem;font-style:italic;color:var(--burg);border-left:3px solid var(--gold);padding:8px 0 8px 20px;margin:24px 0;line-height:1.7}
 .as h3{font-family:var(--fd);font-size:1.3rem;font-weight:400;margin-bottom:16px;color:var(--navy-d)}
@@ -211,10 +266,16 @@ a:hover{color:var(--mars)}
 /* SCROLL FADE */
 .fi{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
 .fi.v{opacity:1;transform:translateY(0)}
+/* CATALOG SKELETON */
+.csk{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px}
+.csk-item{background:var(--canvas);border-radius:14px;overflow:hidden;border:1px solid rgba(200,169,110,.08)}
+.csk-img{width:100%;aspect-ratio:1;background:linear-gradient(90deg,var(--lg) 25%,var(--canvas-w) 50%,var(--lg) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.csk-txt{padding:18px}
+.csk-line{height:13px;border-radius:4px;margin-bottom:10px;background:linear-gradient(90deg,var(--lg) 25%,var(--canvas-w) 50%,var(--lg) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.csk-line.short{width:55%}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* ══════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════ */
+/* RESPONSIVE */
 @media(max-width:900px){
   .hi{grid-template-columns:1fr;text-align:center}
   .hs{margin-left:auto;margin-right:auto}
@@ -225,29 +286,17 @@ a:hover{color:var(--mars)}
   .ap-ring{width:220px;height:220px}
   .md{grid-template-columns:1fr}
   .ml{min-height:260px;border-radius:18px 18px 0 0}
-
-  /* ── МОБИЛЬНОЕ МЕНЮ ──────────────────────────
-     ПРОБЛЕМА: backdrop-filter на .nav создаёт новый
-     containing block для position:fixed — меню
-     оказывалось «заперто» внутри 60px навбара.
-     РЕШЕНИЕ: position:absolute — дропдаун ниже
-     навбара, конфликта со stacking context нет. */
   .nk{
     display:none;
     position:absolute;
-    top:60px;
-    left:0;
-    right:0;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-    gap:28px;
-    padding:32px 24px 40px;
+    top:60px;left:0;right:0;
+    flex-direction:column;align-items:center;justify-content:flex-start;
+    gap:28px;padding:32px 24px 40px;
     background:rgba(247,241,232,.97);
     border-bottom:1px solid rgba(200,169,110,.22);
     box-shadow:0 8px 32px rgba(45,42,38,.12);
   }
-  .nk.open{display:flex;animation:menuSlide .22s var(--e) both}
+  .nk.open{display:flex;animation:menuSlide .22s cubic-bezier(.25,.46,.45,.94) both}
   @keyframes menuSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
   .nk a{font-size:1.05rem;letter-spacing:.1em}
   .lb{font-size:.85rem;padding:8px 24px}
@@ -262,10 +311,10 @@ a:hover{color:var(--mars)}
   .cby{padding:6px 12px;font-size:.7rem}
 }
 @media(max-width:400px){.cg{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
-
 <!-- NAV -->
 <nav class="nav">
   <div class="ni">
@@ -318,12 +367,21 @@ a:hover{color:var(--mars)}
           <clipPath id="pClip"><rect x="0" y="0" width="900" height="900" rx="14"/></clipPath>
           <clipPath id="sailCP"><polygon points="673,548 673,608 638,608"/></clipPath>
         </defs>
+
+        <!-- Background sky -->
         <rect width="900" height="900" fill="#EBF0EE" rx="14"/>
+
+        <!-- Everything inside painting bounds -->
         <g clip-path="url(#pClip)">
+
+          <!-- WIRES (draw in first) -->
           <line class="wire" x1="152" y1="320" x2="774" y2="332" stroke="#D0BFA8" stroke-width="1.5" opacity=".75"/>
           <line class="wire wire2" x1="152" y1="342" x2="774" y2="354" stroke="#D0BFA8" stroke-width="1.5" opacity=".75"/>
+
+          <!-- LEFT CYPRESS TREE -->
           <g class="ltree-g">
             <rect class="lt-trunk" x="109" y="534" width="8" height="165" fill="#5A3A25" rx="2"/>
+            <!-- blocks: lt1=bottom, lt8=top -->
             <rect class="lt lt1" x="84" y="483" width="56" height="51" fill="#3D6C4A" rx="2"/>
             <rect class="lt lt2" x="82" y="429" width="60" height="49" fill="#4A7A58" rx="2"/>
             <rect class="lt lt3" x="81" y="376" width="63" height="49" fill="#3B6845" rx="2"/>
@@ -333,8 +391,11 @@ a:hover{color:var(--mars)}
             <rect class="lt lt7" x="82" y="164" width="61" height="49" fill="#3D6E4A" rx="2"/>
             <rect class="lt lt8" x="84" y="113" width="57" height="47" fill="#2C5C38" rx="2"/>
           </g>
+
+          <!-- RIGHT CYPRESS TREE -->
           <g class="rtree-g">
             <rect class="rt-trunk" x="810" y="540" width="7" height="122" fill="#5A3A25" rx="2"/>
+            <!-- blocks: rt1=bottom, rt7=top -->
             <rect class="rt rt1" x="789" y="492" width="46" height="48" fill="#3D6C4A" rx="2"/>
             <rect class="rt rt2" x="790" y="450" width="44" height="38" fill="#4A7A58" rx="2"/>
             <rect class="rt rt3" x="789" y="408" width="46" height="38" fill="#3B6845" rx="2"/>
@@ -343,14 +404,22 @@ a:hover{color:var(--mars)}
             <rect class="rt rt6" x="790" y="282" width="44" height="38" fill="#4A7A58" rx="2"/>
             <rect class="rt rt7" x="791" y="237" width="43" height="41" fill="#2C5C38" rx="2"/>
           </g>
+
+          <!-- WAVES 1+2 drawn first (figure will cover them) -->
           <path class="w1" d="M -300,572 Q -150,558 0,570 Q 150,582 300,568 Q 450,554 600,570 Q 750,586 900,570 Q 1050,554 1200,570 L1200,900 L-300,900 Z" fill="#BDD2DF"/>
           <path class="w2" d="M -300,633 Q -120,618 60,632 Q 240,646 420,630 Q 600,614 780,632 Q 960,650 1140,632 L1200,900 L-300,900 Z" fill="#8BA5B9"/>
+
+          <!-- FIGURE — original vertical position, bathing between w2/w3 layers -->
           <rect class="fig-neck" x="435" y="278" width="14" height="63" fill="#E0C0A8" rx="5"/>
           <polygon class="fig-body" points="442,340 354,362 442,980 530,362" fill="#8B3840"/>
           <ellipse class="fig-disc" cx="442" cy="278" rx="74" ry="19" fill="#6A8FAB"/>
           <ellipse class="fig-disc" cx="442" cy="271" rx="74" ry="8" fill="#7B9EBB" opacity=".35"/>
+
+          <!-- WAVES 3+4 drawn after figure (cover her lower body) -->
           <path class="w3" d="M -300,700 Q -100,685 120,700 Q 340,715 560,698 Q 780,681 1000,698 Q 1150,711 1300,698 L1300,900 L-300,900 Z" fill="#5E7F9E"/>
           <path class="w4" d="M -300,762 Q -80,746 140,762 Q 360,778 580,760 Q 800,742 1020,762 Q 1160,776 1300,760 L1300,900 L-300,900 Z" fill="#3C5878"/>
+
+          <!-- SAILBOAT on top of all waves -->
           <g class="boat-g">
             <path d="M 635,618 C 649,608 661,605 674,604 C 687,605 699,608 713,618 C 707,631 694,635 674,636 C 654,635 641,631 635,618 Z" fill="#704030"/>
             <line x1="674" y1="605" x2="674" y2="548" stroke="#5A3020" stroke-width="2.5"/>
@@ -369,8 +438,15 @@ a:hover{color:var(--mars)}
               <rect x="659" y="548" width="12" height="12" fill="#4A7858"/>
             </g>
           </g>
-          <text class="sig-text" x="748" y="878" font-family="'Cormorant Garamond',Georgia,serif" font-size="14" fill="#5A4838" font-style="italic">M. Polushkina</text>
+
+          <!-- Signature -->
+          <text class="sig-text" x="748" y="878"
+                font-family="'Cormorant Garamond',Georgia,serif"
+                font-size="14" fill="#5A4838" font-style="italic">M. Polushkina</text>
+
         </g>
+
+        <!-- Border frame (on top) -->
         <rect x="1.5" y="1.5" width="897" height="897" fill="none" stroke="#C8A96E" stroke-width="1.5" rx="13.5" opacity=".22"/>
       </svg>
     </div>
@@ -389,17 +465,27 @@ a:hover{color:var(--mars)}
     </div>
     <div class="ag">
       <div class="at fi">
+        <!-- Artist portrait circle with gold ring -->
         <div class="ap-outer">
           <div class="ap-ring">
-            <img class="ap-img" src="site/images/artist-photo.jpg" alt="Мария Полушкина" onerror="this.onerror=null;this.src='images/artist.jpg'">
+            <img class="ap-img"
+                 src="site/images/artist-photo.jpg"
+                 alt="Мария Полушкина"
+                 onerror="this.onerror=null;this.src='images/artist.jpg'">
           </div>
         </div>
+
         <p data-ru="Мария Полушкина родилась в 1985 году в Москве. Творчеством начала заниматься в «КлассЦентре» музыкально-драматического искусства Сергея Казарновского. Посещала художественный класс Лены Будиной." data-en="Maria Polushkina was born in 1985 in Moscow. She began her creative path at the Sergey Kazarnovsky ClassCenter for musical-dramatic arts, attending Lena Budina's art class.">Мария Полушкина родилась в 1985 году в Москве. Творчеством начала заниматься в «КлассЦентре» музыкально-драматического искусства Сергея Казарновского. Посещала художественный класс Лены Будиной.</p>
+
         <p data-ru="Несколько лет жила и училась в Германии. Окончила факультет теории коммуникации и средств массовой информации Freie Universität Berlin (Свободный университет Берлина). С 2011 года живёт в Москве." data-en="She lived and studied in Germany for several years, graduating from the Faculty of Communication Theory and Mass Media at Freie Universität Berlin. Since 2011, she has been based in Moscow.">Несколько лет жила и училась в Германии. Окончила факультет теории коммуникации и средств массовой информации Freie Universität Berlin (Свободный университет Берлина). С 2011 года живёт в Москве.</p>
+
         <div class="aq" data-ru="«Для меня работа художника — летопись событий, происходящих внутри меня, в моём окружении и в мире вокруг.»" data-en="'For me, the artist's work is a chronicle of events unfolding inside me, in my surroundings, and in the world around.'">«Для меня работа художника — летопись событий, происходящих внутри меня, в моём окружении и в мире вокруг.»</div>
+
         <p data-ru="Выпустила две книги в соавторстве с поэтом Анной Аркатовой: «Между нами» (2016) и «Женщины внутри женщины» (2024), в которых гармонично сочетаются стихи поэта и картины художницы. Работы находятся в частных коллекциях в Германии, Нидерландах, Франции, Испании, Израиле, Эстонии, Латвии, Швеции, Греции, США и России. Одна из картин — в коллекции Copelouzos Family Art Museum в Афинах." data-en="She has co-authored two books with poet Anna Arkatova: 'Between Us' (2016) and 'Women Inside a Woman' (2024), in which the poet's verses and the artist's paintings harmoniously intertwine. Works are held in private collections in Germany, the Netherlands, France, Spain, Israel, Estonia, Latvia, Sweden, Greece, the USA, and Russia. One painting is in the collection of the Copelouzos Family Art Museum in Athens.">Выпустила две книги в соавторстве с поэтом Анной Аркатовой: «Между нами» (2016) и «Женщины внутри женщины» (2024), в которых гармонично сочетаются стихи поэта и картины художницы. Работы находятся в частных коллекциях в Германии, Нидерландах, Франции, Испании, Израиле, Эстонии, Латвии, Швеции, Греции, США и России. Одна из картин — в коллекции Copelouzos Family Art Museum в Афинах.</p>
+
         <p data-ru="С 2021 года Мария сотрудничает с сетью салонов красоты «Пальчики»: принты её работ украшают фасады входных групп, а в интерьерах салонов экспонируется триптих художницы." data-en="Since 2021, Maria has collaborated with the Palchiki beauty salon chain: prints of her works decorate the salon facades, and her triptych is exhibited inside.">С 2021 года Мария сотрудничает с сетью салонов красоты «Пальчики»: принты её работ украшают фасады входных групп, а в интерьерах салонов экспонируется триптих художницы.</p>
       </div>
+
       <div class="as fi">
         <h3 data-ru="Избранные выставки" data-en="Selected exhibitions">Избранные выставки</h3>
         <ul class="el" id="eL"></ul>
@@ -442,6 +528,12 @@ a:hover{color:var(--mars)}
         <option value="ya" data-ru="Старые" data-en="Oldest">Старые</option>
       </select>
     </div>
+    <div class="csk" id="cSk">
+      <div class="csk-item"><div class="csk-img"></div><div class="csk-txt"><div class="csk-line"></div><div class="csk-line short"></div></div></div>
+      <div class="csk-item"><div class="csk-img"></div><div class="csk-txt"><div class="csk-line"></div><div class="csk-line short"></div></div></div>
+      <div class="csk-item"><div class="csk-img"></div><div class="csk-txt"><div class="csk-line"></div><div class="csk-line short"></div></div></div>
+      <div class="csk-item"><div class="csk-img"></div><div class="csk-txt"><div class="csk-line"></div><div class="csk-line short"></div></div></div>
+    </div>
     <div class="cg" id="cG"></div>
   </div>
 </section>
@@ -459,9 +551,9 @@ a:hover{color:var(--mars)}
         <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
         <span data-ru="Написать в Telegram" data-en="Message on Telegram">Написать в Telegram</span>
       </a>
-      <a href="mailto:artpolushkina@gmail.com" class="cl">
+      <a href="/cdn-cgi/l/email-protection#accdded8dcc3c0d9dfc4c7c5c2cdeccbc1cdc5c082cfc3c1" class="cl">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        artpolushkina@gmail.com
+        <span class="__cf_email__" data-cfemail="b2d3c0c6c2dddec7c1dad9dbdcd3f2d5dfd3dbde9cd1dddf">[email&#160;protected]</span>
       </a>
       <a href="https://instagram.com/artpolushkina" target="_blank" rel="noopener" class="cl">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
@@ -475,7 +567,7 @@ a:hover{color:var(--mars)}
   </div>
 </section>
 
-<footer class="ft">© 2026 Мария Полушкина · artpolushkina@gmail.com</footer>
+<footer class="ft">© 2026 Мария Полушкина · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ed8c9f999d8281989e858684838cad8a808c8481c38e8280">[email&#160;protected]</a></footer>
 
 <button class="btt" id="btt" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
 
@@ -498,9 +590,8 @@ a:hover{color:var(--mars)}
     </div>
   </div>
 </div>
-
 <script>
-const W=[
+const W_FALLBACK=[
   {id:1,t:"ГАМАК",te:"Hammock",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×60",y:2026,p:62000},
   {id:2,t:"СЕМЬЯ",te:"Family",m:"Холст, акрил",me:"Canvas, acrylic",s:"50×40",y:2026,p:25000},
   {id:3,t:"БУТОНЫ",te:"Buds",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×60",y:2026,p:45000},
@@ -582,6 +673,25 @@ const W=[
   {id:79,t:"ЛИЦО",te:"Face",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×30",y:2018,p:20000},
   {id:80,t:"СВИДАНИЕ ПОД ДОЖДЁМ",te:"Date in the Rain",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×30",y:2018,p:15000}
 ];
+
+/* ── Каталог: загружается из catalog.json, резерв — W_FALLBACK ── */
+let W=[];
+
+async function loadCatalog(){
+  const sk=document.getElementById('cSk');
+  try{
+    const resp=await fetch('catalog.json?t='+Date.now());
+    if(!resp.ok)throw new Error('not found');
+    W=await resp.json();
+    if(sk)sk.style.display='none';
+  }catch(e){
+    console.warn('catalog.json недоступен, используем резерв');
+    W=W_FALLBACK;
+    if(sk)sk.style.display='none';
+  }
+  rA();
+  setTimeout(ob,100);
+}
 
 const EX=[
   {y:2025,r:"«Ничего подобного». Дом-музей Марины Цветаевой, Москва",e:"'Nothing Like It'. Tsvetaeva House Museum, Moscow"},
@@ -682,13 +792,9 @@ function rC(){
   else if(s==='pd')items.sort((a,b)=>b.p-a.p);
   else if(s==='yd')items.sort((a,b)=>b.y-a.y);
   else if(s==='ya')items.sort((a,b)=>a.y-b.y);
-
-  document.getElementById('cC').textContent=
-    L==='ru'?`${items.length} работ`:`${items.length} works`;
-
+  document.getElementById('cC').textContent=L==='ru'?`${items.length} работ`:`${items.length} works`;
   const u=L==='ru'?'см':'cm';
   const b=L==='ru'?'Купить':'Buy';
-
   document.getElementById('cG').innerHTML=items.map(a=>{
     const tt=L==='ru'?a.t:a.te;
     const mm=L==='ru'?a.m:a.me;
@@ -728,10 +834,7 @@ function oM(id){
   document.getElementById('mT').textContent=tt;
   document.getElementById('mM').innerHTML=`${mm}<br>${a.s} ${u}<br>${a.y}`;
   document.getElementById('mP').textContent=a.p.toLocaleString('ru-RU')+' ₽';
-  const msg=encodeURIComponent(L==='ru'
-    ?`Здравствуйте! Интересует работа «${a.t}», ${a.s} см, ${a.y} г.`
-    :`Hello! Interested in the artwork "${a.te}", ${a.s} cm, ${a.y}.`);
-  document.getElementById('mB').href=`https://t.me/artpolushkina?text=${msg}`;
+  document.getElementById('mB').href='https://instagram.com/artpolushkina';
   document.getElementById('ov').classList.add('on');
   document.body.style.overflow='hidden';
 }
@@ -743,14 +846,10 @@ function xM(){
   img.src='';img.style.display='none';
 }
 
-// ── МОБИЛЬНОЕ МЕНЮ ──────────────────────────────
 function closeMenu(){
-  const nk=document.getElementById('nk');
-  const btn=document.getElementById('hbBtn');
-  nk.classList.remove('open');
-  btn.querySelectorAll('span').forEach(s=>s.style.cssText='');
+  document.getElementById('nk').classList.remove('open');
+  document.getElementById('hbBtn').querySelectorAll('span').forEach(s=>s.style.cssText='');
 }
-
 function toggleMenu(){
   const nk=document.getElementById('nk');
   const btn=document.getElementById('hbBtn');
@@ -760,35 +859,18 @@ function toggleMenu(){
     spans[0].style.cssText='top:8px;transform:rotate(45deg)';
     spans[1].style.cssText='opacity:0';
     spans[2].style.cssText='top:8px;transform:rotate(-45deg)';
-  } else {
-    // При закрытии сбросим иконку вручную
-    spans[0].style.cssText='';spans[1].style.cssText='';spans[2].style.cssText='';
-  }
+  }else{spans[0].style.cssText='';spans[1].style.cssText='';spans[2].style.cssText='';}
 }
-
-// Закрытие при клике на пункт меню
-document.querySelectorAll('.nk a').forEach(a=>
-  a.addEventListener('click', closeMenu)
-);
-
-// Закрытие при клике вне меню
-document.addEventListener('click', e=>{
+document.querySelectorAll('.nk a').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('click',e=>{
   const nk=document.getElementById('nk');
   const btn=document.getElementById('hbBtn');
-  if(nk.classList.contains('open') && !nk.contains(e.target) && !btn.contains(e.target)){
-    closeMenu();
-  }
+  if(nk.classList.contains('open')&&!nk.contains(e.target)&&!btn.contains(e.target))closeMenu();
 });
-
-// Закрытие по Escape (и модалки, и меню)
-document.addEventListener('keydown', e=>{
-  if(e.key==='Escape'){xM();closeMenu();}
-});
-
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){xM();closeMenu();}});
 window.addEventListener('scroll',()=>{
   document.getElementById('btt').classList.toggle('vis',scrollY>500);
-  // Закрытие меню при скролле
-  if(document.getElementById('nk').classList.contains('open')) closeMenu();
+  if(document.getElementById('nk').classList.contains('open'))closeMenu();
 });
 
 const io=new IntersectionObserver(
@@ -797,9 +879,9 @@ const io=new IntersectionObserver(
 );
 function ob(){document.querySelectorAll('.fi:not(.v)').forEach(el=>io.observe(el))}
 
-rA();
-setTimeout(ob,100);
+rE();rP();
 setInterval(ob,800);
+loadCatalog();
 </script>
 </body>
 </html>
