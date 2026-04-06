@@ -409,7 +409,12 @@ async function ghGet(path) {
   );
   if (r.status === 404) return null;
   if (!r.ok) { const e = await r.json(); throw new Error(e.message || r.status); }
-  return r.json();
+  const data = await r.json();
+  // Decode base64 → UTF-8 bytes → string (atob alone breaks Cyrillic/Unicode)
+  const b64 = data.content.replace(/\n/g, '');
+  const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+  const content = new TextDecoder('utf-8').decode(bytes);
+  return { ...data, content };
 }
 
 async function ghPut(path, b64content, sha, message) {
