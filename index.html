@@ -17,13 +17,8 @@
   --burg:#8B4049;
   --mars:#7A3040;
   --terra:#C67858;
-  --forest:#2D5E3F;
-  --forest-l:#4A8B60;
-  --cypress:#3A7B52;
   --gold:#C8A96E;
   --gold-s:#DABB85;
-  --blush:#E8CFC0;
-  --skin:#F0D8C8;
   --char:#2D2A26;
   --wg:#8A8178;
   --lg:#D1CBC3;
@@ -40,7 +35,7 @@ img{max-width:100%;display:block}
 a{color:var(--burg);text-decoration:none;transition:.3s var(--e)}
 a:hover{color:var(--mars)}
 
-/* ─── NAV ─── */
+/* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,241,232,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(200,169,110,.15)}
 .ni{max-width:var(--mw);margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:60px}
 .nl{font-family:var(--fd);font-size:1.1rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--char)}
@@ -55,7 +50,7 @@ a:hover{color:var(--mars)}
 .hb span:nth-child(2){top:8px}
 .hb span:nth-child(3){top:16px}
 
-/* ─── HERO ─── */
+/* HERO */
 .hero{min-height:100vh;display:flex;align-items:center;padding:80px 28px 40px;position:relative;overflow:hidden;background:var(--canvas)}
 .hi{max-width:var(--mw);margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .ht{position:relative;z-index:2}
@@ -68,16 +63,87 @@ a:hover{color:var(--mars)}
 .hc{display:inline-block;padding:13px 32px;border-radius:28px;background:var(--burg);color:#fff;font-size:.88rem;font-weight:400;letter-spacing:.04em;transition:.3s var(--e)}
 .hc:hover{background:var(--mars);color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(122,48,64,.25)}
 
-/* Hero photo */
-.ha{position:relative;display:flex;justify-content:center;align-items:flex-end}
-.ha-photo{width:100%;max-width:480px;height:580px;object-fit:cover;object-position:center top;border-radius:16px;box-shadow:0 20px 60px rgba(45,42,38,.12)}
-.ha-badge{position:absolute;bottom:24px;right:0;background:var(--canvas-w);border:1px solid rgba(200,169,110,.2);border-radius:12px;padding:14px 20px;font-family:var(--fd);font-size:.82rem;color:var(--wg);font-style:italic;max-width:200px;text-align:center;box-shadow:0 8px 24px rgba(45,42,38,.08)}
+/* Hero SVG painting */
+.ha{position:relative;display:flex;justify-content:center;align-items:center}
+.ha-svg{width:100%;max-width:520px;height:auto;display:block;cursor:default}
 
-/* ─── WAVE DIVIDER ─── */
+/* === PAINTING ANIMATIONS === */
+#heroSvg{animation:svgIn .5s ease forwards}
+@keyframes svgIn{from{opacity:0}to{opacity:1}}
+
+/* Wires draw in */
+.wire{stroke-dasharray:680;stroke-dashoffset:680;animation:wireDraw 1.2s .45s ease forwards}
+.wire2{animation-delay:.6s}
+@keyframes wireDraw{to{stroke-dashoffset:0}}
+
+/* Left tree trunk */
+.lt-trunk{transform-box:fill-box;transform-origin:center bottom;animation:trunkUp .35s .72s ease both}
+/* Right tree trunk */
+.rt-trunk{transform-box:fill-box;transform-origin:center bottom;animation:trunkUp .35s .78s ease both}
+@keyframes trunkUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+
+/* Left tree blocks slide from left */
+.lt{animation:ltSlide .45s cubic-bezier(.34,1.56,.64,1) both;opacity:0}
+.lt1{animation-delay:.86s}
+.lt2{animation-delay:.98s}
+.lt3{animation-delay:1.10s}
+.lt4{animation-delay:1.22s}
+.lt5{animation-delay:1.34s}
+.lt6{animation-delay:1.46s}
+.lt7{animation-delay:1.58s}
+.lt8{animation-delay:1.70s}
+@keyframes ltSlide{from{transform:translateX(-130px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* Right tree blocks slide from right */
+.rt{animation:rtSlide .45s cubic-bezier(.34,1.56,.64,1) both;opacity:0}
+.rt1{animation-delay:1.06s}
+.rt2{animation-delay:1.16s}
+.rt3{animation-delay:1.26s}
+.rt4{animation-delay:1.36s}
+.rt5{animation-delay:1.46s}
+.rt6{animation-delay:1.56s}
+.rt7{animation-delay:1.66s}
+@keyframes rtSlide{from{transform:translateX(130px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* Tree continuous sway */
+.ltree-g{transform-box:fill-box;transform-origin:center bottom;animation:treeSway 9s 2.4s ease-in-out infinite}
+.rtree-g{transform-box:fill-box;transform-origin:center bottom;animation:treeSway 11s 2.6s ease-in-out infinite reverse}
+@keyframes treeSway{0%,100%{transform:rotate(0deg)}35%{transform:rotate(.65deg)}65%{transform:rotate(-.5deg)}}
+
+/* Figure */
+.fig-disc{animation:discDrop .6s cubic-bezier(.34,1.56,.64,1) 2.0s both}
+@keyframes discDrop{from{transform:translateY(-65px);opacity:0}to{transform:translateY(0);opacity:1}}
+.fig-neck{animation:fadeEl .45s ease 2.05s both;opacity:0}
+@keyframes fadeEl{to{opacity:1}}
+.fig-body{transform-box:fill-box;transform-origin:top center;animation:bodyGrow .7s ease 2.1s both}
+@keyframes bodyGrow{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
+.fig-leg{animation:fadeEl .4s ease 2.75s both;opacity:0}
+
+/* Waves entry + continuous flow */
+.w4{animation:waveIn .9s 2.5s ease both,waveFlowA 16s 3.5s ease-in-out infinite}
+.w3{animation:waveIn .9s 2.65s ease both,waveFlowB 12s 3.55s ease-in-out infinite}
+.w2{animation:waveIn .9s 2.8s ease both,waveFlowA 10s 3.3s ease-in-out infinite reverse}
+.w1{animation:waveIn .9s 2.95s ease both,waveFlowC 8s 3.75s ease-in-out infinite}
+@keyframes waveIn{from{opacity:0;transform:translateY(75px)}to{opacity:1;transform:translateY(0)}}
+@keyframes waveFlowA{0%,100%{transform:translateX(0)}50%{transform:translateX(-48px)}}
+@keyframes waveFlowB{0%,100%{transform:translateX(-22px)}50%{transform:translateX(32px)}}
+@keyframes waveFlowC{0%,100%{transform:translateX(0)}50%{transform:translateX(-38px)}}
+
+/* Sailboat entry + bob */
+.boat-g{transform-box:fill-box;transform-origin:center center;
+  animation:boatSlide .9s cubic-bezier(.34,1.56,.64,1) 3.1s both,boatBob 4s 4.1s ease-in-out infinite}
+@keyframes boatSlide{from{transform:translateX(220px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes boatBob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-8px) rotate(1.5deg)}}
+
+/* Signature */
+.sig-text{animation:sigIn 1s 3.5s ease both;opacity:0}
+@keyframes sigIn{to{opacity:.5}}
+
+/* WAVE DIVIDER */
 .wd{width:100%;line-height:0;overflow:hidden}
 .wd svg{width:100%;height:auto;display:block}
 
-/* ─── SECTIONS ─── */
+/* SECTIONS */
 .sec{padding:90px 28px}
 .si{max-width:var(--mw);margin:0 auto}
 .sh{text-align:center;margin-bottom:56px}
@@ -85,9 +151,30 @@ a:hover{color:var(--mars)}
 .gl{width:48px;height:2px;background:var(--gold);margin:12px auto 0;border-radius:2px}
 .ss{color:var(--wg);font-size:.9rem;margin-top:14px}
 
-/* ─── ABOUT ─── */
+/* ABOUT */
 .ab{background:var(--canvas-w)}
 .ag{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+
+/* Artist portrait in about section */
+.ap-outer{
+  position:relative;
+  width:220px;
+  height:220px;
+  margin:0 auto 32px;
+  overflow:visible;
+}
+.ap-img{
+  position:absolute;
+  width:280px;
+  height:280px;
+  left:-30px;
+  top:-30px;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:60% 15%;
+  box-shadow:0 0 0 4px var(--canvas-w),0 0 0 7px var(--gold);
+}
+
 .at p{margin-bottom:14px;font-size:.93rem}
 .aq{font-family:var(--fd);font-size:1.12rem;font-style:italic;color:var(--burg);border-left:3px solid var(--gold);padding:8px 0 8px 20px;margin:24px 0;line-height:1.7}
 .as h3{font-family:var(--fd);font-size:1.3rem;font-weight:400;margin-bottom:16px;color:var(--navy-d)}
@@ -95,7 +182,7 @@ a:hover{color:var(--mars)}
 .el li{padding:9px 0;border-bottom:1px solid rgba(200,169,110,.12);font-size:.85rem;color:var(--wg);display:flex;gap:12px}
 .el .yr{min-width:40px;font-weight:500;color:var(--burg)}
 
-/* ─── PRESS ─── */
+/* PRESS */
 .pb{background:var(--canvas)}
 .pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
 .pc{background:var(--canvas-w);border-radius:14px;padding:24px;border:1px solid rgba(200,169,110,.1);transition:.3s var(--e);display:flex;flex-direction:column}
@@ -107,7 +194,7 @@ a:hover{color:var(--mars)}
 .pc:hover .plk::after{transform:translateX(4px)}
 .pp{font-size:.8rem;color:var(--lg);font-style:italic}
 
-/* ─── CATALOG ─── */
+/* CATALOG */
 .ct{background:var(--canvas-w)}
 .cf{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:32px}
 .fb{padding:7px 18px;border-radius:22px;border:1px solid var(--lg);background:transparent;font-family:var(--fb);font-size:.8rem;cursor:pointer;color:var(--wg);transition:.3s var(--e)}
@@ -115,7 +202,6 @@ a:hover{color:var(--mars)}
 .cb{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
 .cc{font-size:.82rem;color:var(--wg)}
 .cs{padding:7px 14px;border-radius:8px;border:1px solid var(--lg);background:var(--canvas-w);font-family:var(--fb);font-size:.8rem;color:var(--char);cursor:pointer}
-
 .cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px}
 .cd{background:var(--canvas);border-radius:14px;overflow:hidden;border:1px solid rgba(200,169,110,.08);transition:.3s var(--e);cursor:pointer}
 .cd:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(45,42,38,.09)}
@@ -131,7 +217,7 @@ a:hover{color:var(--mars)}
 .cby{padding:7px 16px;border-radius:20px;background:var(--burg);color:#fff;font-size:.75rem;font-weight:500;border:none;cursor:pointer;transition:.3s}
 .cby:hover{background:var(--mars)}
 
-/* ─── MODAL / OVERLAY ─── */
+/* MODAL */
 .ov{display:none;position:fixed;inset:0;z-index:200;background:rgba(45,42,38,.65);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px}
 .ov.on{display:flex}
 .md{background:var(--canvas);border-radius:18px;max-width:800px;width:100%;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;position:relative}
@@ -148,7 +234,7 @@ a:hover{color:var(--mars)}
 .mt:hover{background:var(--mars);color:#fff;transform:translateY(-2px)}
 .mt svg{width:18px;height:18px;fill:#fff}
 
-/* ─── CONTACT ─── */
+/* CONTACT */
 .co{background:var(--navy-d);color:var(--canvas);text-align:center;position:relative;overflow:hidden}
 .co .st{color:var(--canvas)}
 .co .ss{color:var(--steel)}
@@ -158,25 +244,25 @@ a:hover{color:var(--mars)}
 .cl:hover{border-color:var(--gold);color:var(--gold);background:rgba(200,169,110,.06)}
 .cl svg{width:16px;height:16px;fill:currentColor}
 
-/* ─── FOOTER ─── */
+/* FOOTER */
 .ft{background:var(--char);color:var(--wg);text-align:center;padding:20px 28px;font-size:.78rem;border-top:1px solid rgba(200,169,110,.08)}
 
-/* ─── BACK TO TOP ─── */
+/* BACK TO TOP */
 .btt{position:fixed;bottom:24px;right:24px;z-index:90;width:44px;height:44px;border-radius:50%;background:var(--burg);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:none;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(122,48,64,.25);transition:.3s}
 .btt.vis{display:flex}
 .btt:hover{background:var(--mars);transform:translateY(-2px)}
 
-/* ─── SCROLL ANIMATION ─── */
+/* SCROLL FADE */
 .fi{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
 .fi.v{opacity:1;transform:translateY(0)}
 
-/* ─── RESPONSIVE ─── */
+/* RESPONSIVE */
 @media(max-width:900px){
   .hi{grid-template-columns:1fr;text-align:center}
   .hs{margin-left:auto;margin-right:auto}
   .hl{justify-content:center}
   .ha{order:-1;margin-bottom:16px}
-  .ha-photo{max-width:320px;height:400px}
+  .ha-svg{max-width:360px}
   .ag{grid-template-columns:1fr}
   .md{grid-template-columns:1fr}
   .ml{min-height:260px;border-radius:18px 18px 0 0}
@@ -191,16 +277,13 @@ a:hover{color:var(--mars)}
   .ctt{font-size:.9rem}
   .cp{font-size:.95rem}
   .cby{padding:6px 12px;font-size:.7rem}
-  .ha-badge{display:none}
 }
-@media(max-width:400px){
-  .cg{grid-template-columns:1fr}
-}
+@media(max-width:400px){.cg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- ─── NAVIGATION ─── -->
+<!-- NAV -->
 <nav class="nav">
   <div class="ni">
     <a href="#" class="nl" data-ru="М. Полушкина" data-en="M. Polushkina">М. Полушкина</a>
@@ -217,7 +300,7 @@ a:hover{color:var(--mars)}
   </div>
 </nav>
 
-<!-- ─── HERO ─── -->
+<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hi">
     <div class="ht">
@@ -244,16 +327,100 @@ a:hover{color:var(--mars)}
       <a href="#catalog" class="hc" data-ru="Смотреть каталог ↓" data-en="View catalog ↓">Смотреть каталог ↓</a>
     </div>
 
+    <!-- ANIMATED PAINTING «ПОПЛЫЛИ!» -->
     <div class="ha">
-      <img
-        class="ha-photo"
-        src="site/images/artist-photo.jpg"
-        alt="Мария Полушкина"
-        onerror="this.onerror=null;this.src='images/artist.jpg'"
-      >
-      <div class="ha-badge" data-ru="«Для меня работа художника — летопись событий»" data-en="'The artist's work is a chronicle of events'">
-        «Для меня работа художника — летопись событий»
-      </div>
+      <svg id="heroSvg" class="ha-svg" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg"
+           role="img" aria-label="ПОПЛЫЛИ! — Мария Полушкина, холст акрил, 70×80 см, 2023">
+        <defs>
+          <clipPath id="pClip"><rect x="0" y="0" width="900" height="900" rx="14"/></clipPath>
+          <clipPath id="sailCP"><polygon points="673,488 673,548 638,548"/></clipPath>
+        </defs>
+
+        <!-- Background sky -->
+        <rect width="900" height="900" fill="#EBF0EE" rx="14"/>
+
+        <!-- Everything inside painting bounds -->
+        <g clip-path="url(#pClip)">
+
+          <!-- WIRES (draw in first) -->
+          <line class="wire" x1="152" y1="320" x2="774" y2="332" stroke="#D0BFA8" stroke-width="1.5" opacity=".75"/>
+          <line class="wire wire2" x1="152" y1="342" x2="774" y2="354" stroke="#D0BFA8" stroke-width="1.5" opacity=".75"/>
+
+          <!-- LEFT CYPRESS TREE -->
+          <g class="ltree-g">
+            <rect class="lt-trunk" x="109" y="534" width="8" height="165" fill="#5A3A25" rx="2"/>
+            <!-- blocks: lt1=bottom, lt8=top -->
+            <rect class="lt lt1" x="84" y="483" width="56" height="51" fill="#3D6C4A" rx="2"/>
+            <rect class="lt lt2" x="82" y="429" width="60" height="49" fill="#4A7A58" rx="2"/>
+            <rect class="lt lt3" x="81" y="376" width="63" height="49" fill="#3B6845" rx="2"/>
+            <rect class="lt lt4" x="79" y="323" width="67" height="49" fill="#4E8260" rx="2"/>
+            <rect class="lt lt5" x="81" y="270" width="63" height="49" fill="#386A48" rx="2"/>
+            <rect class="lt lt6" x="79" y="217" width="65" height="49" fill="#4A7A58" rx="2"/>
+            <rect class="lt lt7" x="82" y="164" width="61" height="49" fill="#3D6E4A" rx="2"/>
+            <rect class="lt lt8" x="84" y="113" width="57" height="47" fill="#2C5C38" rx="2"/>
+          </g>
+
+          <!-- RIGHT CYPRESS TREE -->
+          <g class="rtree-g">
+            <rect class="rt-trunk" x="810" y="540" width="7" height="122" fill="#5A3A25" rx="2"/>
+            <!-- blocks: rt1=bottom, rt7=top -->
+            <rect class="rt rt1" x="789" y="492" width="46" height="48" fill="#3D6C4A" rx="2"/>
+            <rect class="rt rt2" x="790" y="450" width="44" height="38" fill="#4A7A58" rx="2"/>
+            <rect class="rt rt3" x="789" y="408" width="46" height="38" fill="#3B6845" rx="2"/>
+            <rect class="rt rt4" x="790" y="366" width="44" height="38" fill="#4E8260" rx="2"/>
+            <rect class="rt rt5" x="789" y="324" width="46" height="38" fill="#386A48" rx="2"/>
+            <rect class="rt rt6" x="790" y="282" width="44" height="38" fill="#4A7A58" rx="2"/>
+            <rect class="rt rt7" x="791" y="237" width="43" height="41" fill="#2C5C38" rx="2"/>
+          </g>
+
+          <!-- FIGURE -->
+          <rect class="fig-neck" x="435" y="278" width="14" height="63" fill="#E0C0A8" rx="5"/>
+          <polygon class="fig-body" points="442,340 354,362 442,720 530,362" fill="#8B3840"/>
+          <line class="fig-leg" x1="442" y1="720" x2="409" y2="787" stroke="#8B3840" stroke-width="4" stroke-linecap="round"/>
+          <line class="fig-leg" x1="442" y1="720" x2="475" y2="787" stroke="#8B3840" stroke-width="4" stroke-linecap="round"/>
+          <!-- Hat disc -->
+          <ellipse class="fig-disc" cx="442" cy="278" rx="74" ry="19" fill="#6A8FAB"/>
+          <ellipse class="fig-disc" cx="442" cy="271" rx="74" ry="8" fill="#7B9EBB" opacity=".35"/>
+
+          <!-- WAVES (back to front, darkest first) -->
+          <path class="w4" d="M -250,760 Q -100,751 100,760 Q 300,769 500,760 Q 700,751 900,760 Q 1100,769 1250,760 L1250,900 L-250,900 Z" fill="#3C5878"/>
+          <path class="w3" d="M -250,698 Q -100,688 100,698 Q 300,708 500,698 Q 700,688 900,698 Q 1100,708 1250,698 L1250,900 L-250,900 Z" fill="#5E7F9E"/>
+          <path class="w2" d="M -250,633 Q -100,621 100,633 Q 300,645 500,633 Q 700,621 900,633 Q 1100,645 1250,633 L1250,900 L-250,900 Z" fill="#8BA5B9"/>
+          <path class="w1" d="M -250,572 Q -100,559 100,572 Q 300,585 500,572 Q 700,559 900,572 Q 1100,585 1250,572 L1250,900 L-250,900 Z" fill="#BDD2DF"/>
+
+          <!-- SAILBOAT -->
+          <g class="boat-g">
+            <!-- Hull -->
+            <path d="M 635,558 C 649,548 661,545 674,544 C 687,545 699,548 713,558 C 707,571 694,575 674,576 C 654,575 641,571 635,558 Z" fill="#704030"/>
+            <!-- Mast -->
+            <line x1="674" y1="545" x2="674" y2="488" stroke="#5A3020" stroke-width="2.5"/>
+            <!-- Patchwork sail -->
+            <g clip-path="url(#sailCP)">
+              <rect x="638" y="536" width="12" height="12" fill="#4B6A8B"/>
+              <rect x="650" y="536" width="12" height="12" fill="#C8A96E"/>
+              <rect x="662" y="536" width="12" height="12" fill="#4A7858"/>
+              <rect x="641" y="524" width="12" height="12" fill="#8B3842"/>
+              <rect x="653" y="524" width="12" height="12" fill="#6B8FAB"/>
+              <rect x="665" y="524" width="12" height="12" fill="#C8A96E"/>
+              <rect x="646" y="512" width="12" height="12" fill="#4A7858"/>
+              <rect x="658" y="512" width="12" height="12" fill="#3C5A7A"/>
+              <rect x="670" y="512" width="12" height="12" fill="#8B3842"/>
+              <rect x="651" y="500" width="12" height="12" fill="#C8A96E"/>
+              <rect x="663" y="500" width="12" height="12" fill="#4B6A8B"/>
+              <rect x="659" y="488" width="12" height="12" fill="#4A7858"/>
+            </g>
+          </g>
+
+          <!-- Signature -->
+          <text class="sig-text" x="748" y="878"
+                font-family="'Cormorant Garamond',Georgia,serif"
+                font-size="14" fill="#5A4838" font-style="italic">M. Polushkina</text>
+
+        </g>
+
+        <!-- Border frame (on top) -->
+        <rect x="1.5" y="1.5" width="897" height="897" fill="none" stroke="#C8A96E" stroke-width="1.5" rx="13.5" opacity=".22"/>
+      </svg>
     </div>
   </div>
 </section>
@@ -261,7 +428,7 @@ a:hover{color:var(--mars)}
 <!-- wave divider -->
 <div class="wd"><svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40Q180 0 360 35Q540 70 720 35Q900 0 1080 35Q1260 70 1440 40L1440 80 0 80Z" fill="#F2EADD"/></svg></div>
 
-<!-- ─── ABOUT ─── -->
+<!-- ABOUT -->
 <section class="sec ab" id="about">
   <div class="si">
     <div class="sh fi">
@@ -270,12 +437,25 @@ a:hover{color:var(--mars)}
     </div>
     <div class="ag">
       <div class="at fi">
+        <!-- Artist portrait circle with hair overflow -->
+        <div class="ap-outer">
+          <img class="ap-img"
+               src="site/images/artist-photo.jpg"
+               alt="Мария Полушкина"
+               onerror="this.onerror=null;this.src='images/artist.jpg'">
+        </div>
+
         <p data-ru="Мария Полушкина родилась в 1985 году в Москве. Творчеством начала заниматься в «КлассЦентре» музыкально-драматического искусства Сергея Казарновского. Посещала художественный класс Лены Будиной." data-en="Maria Polushkina was born in 1985 in Moscow. She began her creative path at the Sergey Kazarnovsky ClassCenter for musical-dramatic arts, attending Lena Budina's art class.">Мария Полушкина родилась в 1985 году в Москве. Творчеством начала заниматься в «КлассЦентре» музыкально-драматического искусства Сергея Казарновского. Посещала художественный класс Лены Будиной.</p>
+
         <p data-ru="Несколько лет жила и училась в Германии. Окончила факультет теории коммуникации и средств массовой информации Freie Universität Berlin (Свободный университет Берлина). С 2011 года живёт в Москве." data-en="She lived and studied in Germany for several years, graduating from the Faculty of Communication Theory and Mass Media at Freie Universität Berlin. Since 2011, she has been based in Moscow.">Несколько лет жила и училась в Германии. Окончила факультет теории коммуникации и средств массовой информации Freie Universität Berlin (Свободный университет Берлина). С 2011 года живёт в Москве.</p>
+
         <div class="aq" data-ru="«Для меня работа художника — летопись событий, происходящих внутри меня, в моём окружении и в мире вокруг.»" data-en="'For me, the artist's work is a chronicle of events unfolding inside me, in my surroundings, and in the world around.'">«Для меня работа художника — летопись событий, происходящих внутри меня, в моём окружении и в мире вокруг.»</div>
+
         <p data-ru="Выпустила две книги в соавторстве с поэтом Анной Аркатовой: «Между нами» (2016) и «Женщины внутри женщины» (2024), в которых гармонично сочетаются стихи поэта и картины художницы. Работы находятся в частных коллекциях в Германии, Нидерландах, Франции, Испании, Израиле, Эстонии, Латвии, Швеции, Греции, США и России. Одна из картин — в коллекции Copelouzos Family Art Museum в Афинах." data-en="She has co-authored two books with poet Anna Arkatova: 'Between Us' (2016) and 'Women Inside a Woman' (2024), in which the poet's verses and the artist's paintings harmoniously intertwine. Works are held in private collections in Germany, the Netherlands, France, Spain, Israel, Estonia, Latvia, Sweden, Greece, the USA, and Russia. One painting is in the collection of the Copelouzos Family Art Museum in Athens.">Выпустила две книги в соавторстве с поэтом Анной Аркатовой: «Между нами» (2016) и «Женщины внутри женщины» (2024), в которых гармонично сочетаются стихи поэта и картины художницы. Работы находятся в частных коллекциях в Германии, Нидерландах, Франции, Испании, Израиле, Эстонии, Латвии, Швеции, Греции, США и России. Одна из картин — в коллекции Copelouzos Family Art Museum в Афинах.</p>
+
         <p data-ru="С 2021 года Мария сотрудничает с сетью салонов красоты «Пальчики»: принты её работ украшают фасады входных групп, а в интерьерах салонов экспонируется триптих художницы." data-en="Since 2021, Maria has collaborated with the Palchiki beauty salon chain: prints of her works decorate the salon facades, and her triptych is exhibited inside.">С 2021 года Мария сотрудничает с сетью салонов красоты «Пальчики»: принты её работ украшают фасады входных групп, а в интерьерах салонов экспонируется триптих художницы.</p>
       </div>
+
       <div class="as fi">
         <h3 data-ru="Избранные выставки" data-en="Selected exhibitions">Избранные выставки</h3>
         <ul class="el" id="eL"></ul>
@@ -284,7 +464,7 @@ a:hover{color:var(--mars)}
   </div>
 </section>
 
-<!-- ─── PRESS ─── -->
+<!-- PRESS -->
 <section class="sec pb" id="press">
   <div class="si">
     <div class="sh fi">
@@ -299,7 +479,7 @@ a:hover{color:var(--mars)}
 <!-- wave divider -->
 <div class="wd"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 30Q240 0 480 28Q720 56 960 28Q1200 0 1440 30L1440 60 0 60Z" fill="#F2EADD"/></svg></div>
 
-<!-- ─── CATALOG ─── -->
+<!-- CATALOG -->
 <section class="sec ct" id="catalog">
   <div class="si">
     <div class="sh fi">
@@ -322,7 +502,7 @@ a:hover{color:var(--mars)}
   </div>
 </section>
 
-<!-- ─── CONTACT ─── -->
+<!-- CONTACT -->
 <section class="sec co" id="contact">
   <div class="si">
     <div class="sh fi">
@@ -351,13 +531,11 @@ a:hover{color:var(--mars)}
   </div>
 </section>
 
-<!-- ─── FOOTER ─── -->
 <footer class="ft">© 2026 Мария Полушкина · artpolushkina@gmail.com</footer>
 
-<!-- ─── BACK TO TOP ─── -->
 <button class="btt" id="btt" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<!-- ─── MODAL ─── -->
+<!-- MODAL -->
 <div class="ov" id="ov" onclick="if(event.target===this)xM()">
   <div class="md">
     <button class="mx" onclick="xM()">✕</button>
@@ -378,217 +556,196 @@ a:hover{color:var(--mars)}
 </div>
 
 <script>
-// ─── DATA ───
-// Catalog works — order and data verified against PDF pages 11–90
-// IDs 1–80 map to site/images/work-1.jpg … work-80.jpg
-const W = [
-  {id:1,  t:"ГАМАК",                          te:"Hammock",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"70×60",       y:2026, p:62000},
-  {id:2,  t:"СЕМЬЯ",                          te:"Family",                     m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"50×40",       y:2026, p:25000},
-  {id:3,  t:"БУТОНЫ",                         te:"Buds",                       m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"70×60",       y:2026, p:45000},
-  {id:4,  t:"The Man Who Sold the World",     te:"The Man Who Sold the World", m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"70×60",       y:2026, p:60000},
-  {id:5,  t:"ПЕРСПЕКТИВНЫЙ МОЛОДОЙ ЧЕЛОВЕК", te:"A Promising Young Man",       m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"50×50",       y:2026, p:45000},
-  {id:6,  t:"МОЛИТВА",                        te:"Prayer",                     m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×80",       y:2025, p:95000},
-  {id:7,  t:"На расПУТЬе",                    te:"At the Crossroads",          m:"Холст, акрил, золотая нить",         me:"Canvas, acrylic, gold thread",       s:"100×80",      y:2025, p:80000},
-  {id:8,  t:"ДОЖДАТЬСЯ",                      te:"Waiting For",                m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"100×80",      y:2025, p:100000},
-  {id:9,  t:"КИПАРИС",                        te:"Cypress",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"40×30",       y:2025, p:20000},
-  {id:10, t:"ПИНИЯ",                          te:"Stone Pine",                 m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"40×30",       y:2025, p:20000},
-  {id:11, t:"МОРЯК",                          te:"Sailor",                     m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"50×40",       y:2025, p:25000},
-  {id:12, t:"УКРАДКОЙ",                       te:"Stealthily",                 m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×25",       y:2025, p:20000},
-  {id:13, t:"НАКРЫЛО",                        te:"Overwhelmed",                m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2025, p:95000},
-  {id:14, t:"САД КАМНЕЙ",                     te:"Rock Garden",                m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"105×75",      y:2025, p:85000},
-  {id:15, t:"ДЕВУШКА И САМОЛЁТ",              te:"Girl and Airplane",          m:"Холст, акрил. Диптих",               me:"Canvas, acrylic. Diptych",           s:"80×60",       y:2025, p:70000},
-  {id:16, t:"В ПОДВЕШЕННОМ СОСТОЯНИИ",        te:"In Limbo",                   m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"60×70",       y:2025, p:55000},
-  {id:17, t:"ДЕРЖИСЬ",                        te:"Hold On",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×24",       y:2025, p:15000},
-  {id:18, t:"ЗАТМЕНИЕ",                       te:"Eclipse",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2025, p:80000},
-  {id:19, t:"БАЛАНС",                         te:"Balance",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"80×90",       y:2025, p:60000},
-  {id:20, t:"YOU CAN LEAVE YOUR HAT ON",      te:"You Can Leave Your Hat On",  m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2025, p:80000},
-  {id:21, t:"ТАНЦЫ",                          te:"Dancing",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"80×100",      y:2025, p:90000},
-  {id:22, t:"РЕСНИЦЫ-РАСЧЁСКИ",               te:"Eyelash Combs",              m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"40×30",       y:2025, p:22000},
-  {id:23, t:"ГОЛУБОЙ БАРХАТНЫЙ ДИВАН",        te:"Blue Velvet Sofa",           m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"80×90",       y:2024, p:105000},
-  {id:24, t:"SHE IS ALWAYS A GOOD IDEA",      te:"She Is Always a Good Idea",  m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2023, p:85000},
-  {id:25, t:"ТОЛЬКО ВПЕРЁД!",                 te:"Only Forward!",              m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×110",      y:2023, p:115000},
-  {id:26, t:"ОНА ЖДАЛА ДОЖДЯ",               te:"She Was Waiting for Rain",   m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2023, p:70000},
-  {id:27, t:"ВРЕМЯ",                          te:"Time",                       m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2023, p:80000},
-  {id:28, t:"ЗАПУТАЛАСЬ",                     te:"Tangled",                    m:"Холст, акрил, золотая нить",         me:"Canvas, acrylic, gold thread",       s:"90×70",       y:2023, p:90000},
-  {id:29, t:"НАСКВОЗЬ",                       te:"Through",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2023, p:80000},
-  {id:30, t:"ОДИНОЧЕСТВО",                    te:"Loneliness",                 m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2024, p:70000},
-  {id:31, t:"УБЫВАЮЩИЙ",                      te:"Waning",                     m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×30",       y:2025, p:15000},
-  {id:32, t:"ОБНЯТЬ",                         te:"Embrace",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×24",       y:2025, p:15000},
-  {id:33, t:"ОДНА",                           te:"Alone",                      m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×30",       y:2025, p:15000},
-  {id:34, t:"ВЗЛЕТЕТЬ",                       te:"Take Flight",                m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×24",       y:2025, p:15000},
-  {id:35, t:"МЕЖДУ",                          te:"Between",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"70×50",       y:2024, p:40000},
-  {id:36, t:"УСТАЛА",                         te:"Tired",                      m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"70×90",       y:2024, p:50000},
-  {id:37, t:"СОЗАВИСИМОСТЬ / СЕПАРАЦИЯ",      te:"Codependency / Separation",  m:"Холст, акрил, золотая нить",         me:"Canvas, acrylic, gold thread",       s:"90×70",       y:2024, p:80000},
-  {id:38, t:"THE ONE",                        te:"The One",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"40×30",       y:2024, p:18000},
-  {id:39, t:"YOGA 14",                        te:"Yoga 14",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"20×30",       y:2024, p:15000},
-  {id:40, t:"БУТЫЛКА",                        te:"Bottle",                     m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"50×30",       y:2024, p:22000},
-  {id:41, t:"КРАСНАЯ ШЛЯПА",                  te:"Red Hat",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"60×40",       y:2024, p:29000},
-  {id:42, t:"YOGA 12",                        te:"Yoga 12",                    m:"Холст на картоне, акрил",            me:"Canvas on board, acrylic",           s:"20×20",       y:2024, p:15000},
-  {id:43, t:"YOGA 11",                        te:"Yoga 11",                    m:"Холст на картоне, акрил",            me:"Canvas on board, acrylic",           s:"21×15",       y:2024, p:15000},
-  {id:44, t:"YOGA 10",                        te:"Yoga 10",                    m:"Холст на картоне, акрил",            me:"Canvas on board, acrylic",           s:"20×20",       y:2024, p:15000},
-  {id:45, t:"YOGA 9",                         te:"Yoga 9",                     m:"Холст на картоне, акрил",            me:"Canvas on board, acrylic",           s:"15×21",       y:2024, p:15000},
-  {id:46, t:"YOGA 7",                         te:"Yoga 7",                     m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×25",       y:2024, p:15000},
-  {id:47, t:"YOGA 6",                         te:"Yoga 6",                     m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×20",       y:2024, p:15000},
-  {id:48, t:"YOGA 4",                         te:"Yoga 4",                     m:"Холст, акрил, багет",                me:"Canvas, acrylic, framed",            s:"35×25",       y:2024, p:22000},
-  {id:49, t:"YOGA 3",                         te:"Yoga 3",                     m:"Холст, акрил, багет",                me:"Canvas, acrylic, framed",            s:"20×25",       y:2024, p:22000},
-  {id:50, t:"ПУТЬ",                           te:"The Way",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2024, p:90000},
-  {id:51, t:"ГДЕ-ТО В ТБИЛИСИ",              te:"Somewhere in Tbilisi",       m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×20",       y:2024, p:18000},
-  {id:52, t:"ЛЕТО",                           te:"Summer",                     m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"60×60",       y:2024, p:40000},
-  {id:53, t:"ГДЕ-ТО В ИТАЛИИ",               te:"Somewhere in Italy",         m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2024, p:100000},
-  {id:54, t:"ПОДРУГИ",                        te:"Girlfriends",                m:"Диптих. Холст, акрил",               me:"Diptych. Canvas, acrylic",           s:"40×30 + 40×30",y:2024,p:40000},
-  {id:55, t:"ПРИВЯЗАННОСТЬ",                  te:"Attachment",                 m:"Холст, акрил, золотая нить",         me:"Canvas, acrylic, gold thread",       s:"90×70",       y:2023, p:100000},
-  {id:56, t:"ПОСЛЕДНЯЯ КАПЛЯ",                te:"The Last Drop",              m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×80",       y:2023, p:90000},
-  {id:57, t:"ПОПЛЫЛИ!",                       te:"Let's Sail!",                m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"70×80",       y:2023, p:70000},
-  {id:58, t:"ОТБРОСЬ ВСЁ!",                   te:"Let It All Go!",             m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"80×60",       y:2022, p:80000},
-  {id:59, t:"Я С ТОБОЙ!",                     te:"I'm With You!",              m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×75",       y:2022, p:90000},
-  {id:60, t:"ХОРОШИЙ МУЗЫКАЛЬНЫЙ ВКУС",       te:"Good Musical Taste",         m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"50×40",       y:2022, p:55000},
-  {id:61, t:"ПОСЛЕ",                          te:"After",                      m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"90×70",       y:2024, p:85000},
-  {id:62, t:"ДОМ",                            te:"Home",                       m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"60×40",       y:2023, p:35000},
-  {id:63, t:"ОЖИДАНИЕ",                       te:"Waiting",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"60×50",       y:2022, p:45000},
-  {id:64, t:"В ПРЕДВКУШЕНИИ",                 te:"In Anticipation",            m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"70×60",       y:2022, p:55000},
-  {id:65, t:"ДЕРЖИСЬ",                        te:"Hold On",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"70×60",       y:2022, p:25000},
-  {id:66, t:"CHEERS!",                        te:"Cheers!",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"80×70",       y:2023, p:75000},
-  {id:67, t:"ЦВЕТЫ",                          te:"Flowers",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"40×30",       y:2023, p:20000},
-  {id:68, t:"В УНИСОН",                       te:"In Unison",                  m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"120×100",     y:2024, p:95000},
-  {id:69, t:"ВСЁ СВЯЗАНО",                    te:"All Connected",              m:"Холст, акрил, золотая нить",         me:"Canvas, acrylic, gold thread",       s:"40×50",       y:2023, p:35000},
-  {id:70, t:"КОНТРАСТНЫЙ ДУШ",                te:"Contrast Shower",            m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"100×50",      y:2021, p:45000},
-  {id:71, t:"ДОМИКИ",                         te:"Little Houses",              m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"60×40",       y:2023, p:30000},
-  {id:72, t:"ЦВЕТЫ",                          te:"Flowers",                    m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"50×40",       y:2021, p:22000},
-  {id:73, t:"ЧЕРЕЗ МОНОКЛЬ",                  te:"Through a Monocle",          m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"50×50",       y:2020, p:28000},
-  {id:74, t:"БУТЫЛКА",                        te:"Bottle",                     m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×20",       y:2022, p:15000},
-  {id:75, t:"ОДИНОЧЕСТВО",                    te:"Loneliness",                 m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"80×60",       y:2020, p:35000},
-  {id:76, t:"ПОСЛЕ",                          te:"After",                      m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"70×70",       y:2020, p:55000},
-  {id:77, t:"ВСЁ ПРОХОДИТ",                   te:"Everything Passes",          m:"Холст, акрил, багет",                me:"Canvas, acrylic, framed",            s:"40×40",       y:2018, p:35000},
-  {id:78, t:"НЕСОВЕРШЕНСТВО",                 te:"Imperfection",               m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"60×60",       y:2018, p:22000},
-  {id:79, t:"ЛИЦО",                           te:"Face",                       m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×30",       y:2018, p:20000},
-  {id:80, t:"СВИДАНИЕ ПОД ДОЖДЁМ",            te:"Date in the Rain",           m:"Холст, акрил",                       me:"Canvas, acrylic",                    s:"30×30",       y:2018, p:15000}
+const W=[
+  {id:1,t:"ГАМАК",te:"Hammock",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×60",y:2026,p:62000},
+  {id:2,t:"СЕМЬЯ",te:"Family",m:"Холст, акрил",me:"Canvas, acrylic",s:"50×40",y:2026,p:25000},
+  {id:3,t:"БУТОНЫ",te:"Buds",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×60",y:2026,p:45000},
+  {id:4,t:"The Man Who Sold the World",te:"The Man Who Sold the World",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×60",y:2026,p:60000},
+  {id:5,t:"ПЕРСПЕКТИВНЫЙ МОЛОДОЙ ЧЕЛОВЕК",te:"A Promising Young Man",m:"Холст, акрил",me:"Canvas, acrylic",s:"50×50",y:2026,p:45000},
+  {id:6,t:"МОЛИТВА",te:"Prayer",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×80",y:2025,p:95000},
+  {id:7,t:"На расПУТЬе",te:"At the Crossroads",m:"Холст, акрил, золотая нить",me:"Canvas, acrylic, gold thread",s:"100×80",y:2025,p:80000},
+  {id:8,t:"ДОЖДАТЬСЯ",te:"Waiting For",m:"Холст, акрил",me:"Canvas, acrylic",s:"100×80",y:2025,p:100000},
+  {id:9,t:"КИПАРИС",te:"Cypress",m:"Холст, акрил",me:"Canvas, acrylic",s:"40×30",y:2025,p:20000},
+  {id:10,t:"ПИНИЯ",te:"Stone Pine",m:"Холст, акрил",me:"Canvas, acrylic",s:"40×30",y:2025,p:20000},
+  {id:11,t:"МОРЯК",te:"Sailor",m:"Холст, акрил",me:"Canvas, acrylic",s:"50×40",y:2025,p:25000},
+  {id:12,t:"УКРАДКОЙ",te:"Stealthily",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×25",y:2025,p:20000},
+  {id:13,t:"НАКРЫЛО",te:"Overwhelmed",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2025,p:95000},
+  {id:14,t:"САД КАМНЕЙ",te:"Rock Garden",m:"Холст, акрил",me:"Canvas, acrylic",s:"105×75",y:2025,p:85000},
+  {id:15,t:"ДЕВУШКА И САМОЛЁТ",te:"Girl and Airplane",m:"Холст, акрил. Диптих",me:"Canvas, acrylic. Diptych",s:"80×60",y:2025,p:70000},
+  {id:16,t:"В ПОДВЕШЕННОМ СОСТОЯНИИ",te:"In Limbo",m:"Холст, акрил",me:"Canvas, acrylic",s:"60×70",y:2025,p:55000},
+  {id:17,t:"ДЕРЖИСЬ",te:"Hold On",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×24",y:2025,p:15000},
+  {id:18,t:"ЗАТМЕНИЕ",te:"Eclipse",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2025,p:80000},
+  {id:19,t:"БАЛАНС",te:"Balance",m:"Холст, акрил",me:"Canvas, acrylic",s:"80×90",y:2025,p:60000},
+  {id:20,t:"YOU CAN LEAVE YOUR HAT ON",te:"You Can Leave Your Hat On",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2025,p:80000},
+  {id:21,t:"ТАНЦЫ",te:"Dancing",m:"Холст, акрил",me:"Canvas, acrylic",s:"80×100",y:2025,p:90000},
+  {id:22,t:"РЕСНИЦЫ-РАСЧЁСКИ",te:"Eyelash Combs",m:"Холст, акрил",me:"Canvas, acrylic",s:"40×30",y:2025,p:22000},
+  {id:23,t:"ГОЛУБОЙ БАРХАТНЫЙ ДИВАН",te:"Blue Velvet Sofa",m:"Холст, акрил",me:"Canvas, acrylic",s:"80×90",y:2024,p:105000},
+  {id:24,t:"SHE IS ALWAYS A GOOD IDEA",te:"She Is Always a Good Idea",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2023,p:85000},
+  {id:25,t:"ТОЛЬКО ВПЕРЁД!",te:"Only Forward!",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×110",y:2023,p:115000},
+  {id:26,t:"ОНА ЖДАЛА ДОЖДЯ",te:"She Was Waiting for Rain",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2023,p:70000},
+  {id:27,t:"ВРЕМЯ",te:"Time",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2023,p:80000},
+  {id:28,t:"ЗАПУТАЛАСЬ",te:"Tangled",m:"Холст, акрил, золотая нить",me:"Canvas, acrylic, gold thread",s:"90×70",y:2023,p:90000},
+  {id:29,t:"НАСКВОЗЬ",te:"Through",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2023,p:80000},
+  {id:30,t:"ОДИНОЧЕСТВО",te:"Loneliness",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2024,p:70000},
+  {id:31,t:"УБЫВАЮЩИЙ",te:"Waning",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×30",y:2025,p:15000},
+  {id:32,t:"ОБНЯТЬ",te:"Embrace",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×24",y:2025,p:15000},
+  {id:33,t:"ОДНА",te:"Alone",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×30",y:2025,p:15000},
+  {id:34,t:"ВЗЛЕТЕТЬ",te:"Take Flight",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×24",y:2025,p:15000},
+  {id:35,t:"МЕЖДУ",te:"Between",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×50",y:2024,p:40000},
+  {id:36,t:"УСТАЛА",te:"Tired",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×90",y:2024,p:50000},
+  {id:37,t:"СОЗАВИСИМОСТЬ / СЕПАРАЦИЯ",te:"Codependency / Separation",m:"Холст, акрил, золотая нить",me:"Canvas, acrylic, gold thread",s:"90×70",y:2024,p:80000},
+  {id:38,t:"THE ONE",te:"The One",m:"Холст, акрил",me:"Canvas, acrylic",s:"40×30",y:2024,p:18000},
+  {id:39,t:"YOGA 14",te:"Yoga 14",m:"Холст, акрил",me:"Canvas, acrylic",s:"20×30",y:2024,p:15000},
+  {id:40,t:"БУТЫЛКА",te:"Bottle",m:"Холст, акрил",me:"Canvas, acrylic",s:"50×30",y:2024,p:22000},
+  {id:41,t:"КРАСНАЯ ШЛЯПА",te:"Red Hat",m:"Холст, акрил",me:"Canvas, acrylic",s:"60×40",y:2024,p:29000},
+  {id:42,t:"YOGA 12",te:"Yoga 12",m:"Холст на картоне, акрил",me:"Canvas on board, acrylic",s:"20×20",y:2024,p:15000},
+  {id:43,t:"YOGA 11",te:"Yoga 11",m:"Холст на картоне, акрил",me:"Canvas on board, acrylic",s:"21×15",y:2024,p:15000},
+  {id:44,t:"YOGA 10",te:"Yoga 10",m:"Холст на картоне, акрил",me:"Canvas on board, acrylic",s:"20×20",y:2024,p:15000},
+  {id:45,t:"YOGA 9",te:"Yoga 9",m:"Холст на картоне, акрил",me:"Canvas on board, acrylic",s:"15×21",y:2024,p:15000},
+  {id:46,t:"YOGA 7",te:"Yoga 7",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×25",y:2024,p:15000},
+  {id:47,t:"YOGA 6",te:"Yoga 6",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×20",y:2024,p:15000},
+  {id:48,t:"YOGA 4",te:"Yoga 4",m:"Холст, акрил, багет",me:"Canvas, acrylic, framed",s:"35×25",y:2024,p:22000},
+  {id:49,t:"YOGA 3",te:"Yoga 3",m:"Холст, акрил, багет",me:"Canvas, acrylic, framed",s:"20×25",y:2024,p:22000},
+  {id:50,t:"ПУТЬ",te:"The Way",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2024,p:90000},
+  {id:51,t:"ГДЕ-ТО В ТБИЛИСИ",te:"Somewhere in Tbilisi",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×20",y:2024,p:18000},
+  {id:52,t:"ЛЕТО",te:"Summer",m:"Холст, акрил",me:"Canvas, acrylic",s:"60×60",y:2024,p:40000},
+  {id:53,t:"ГДЕ-ТО В ИТАЛИИ",te:"Somewhere in Italy",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2024,p:100000},
+  {id:54,t:"ПОДРУГИ",te:"Girlfriends",m:"Диптих. Холст, акрил",me:"Diptych. Canvas, acrylic",s:"40×30 + 40×30",y:2024,p:40000},
+  {id:55,t:"ПРИВЯЗАННОСТЬ",te:"Attachment",m:"Холст, акрил, золотая нить",me:"Canvas, acrylic, gold thread",s:"90×70",y:2023,p:100000},
+  {id:56,t:"ПОСЛЕДНЯЯ КАПЛЯ",te:"The Last Drop",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×80",y:2023,p:90000},
+  {id:57,t:"ПОПЛЫЛИ!",te:"Let's Sail!",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×80",y:2023,p:70000},
+  {id:58,t:"ОТБРОСЬРВСЁ!",te:"Let It All Go!",m:"Холст, акрил",me:"Canvas, acrylic",s:"80×60",y:2022,p:80000},
+  {id:59,t:"Я С ТОБОЙ!",te:"I'm With You!",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×75",y:2022,p:90000},
+  {id:60,t:"ХОРОШИЙ МУЗЫКАЛЬНЫЙ ВКУС",te:"Good Musical Taste",m:"Холст, акрил",me:"Canvas, acrylic",s:"50×40",y:2022,p:55000},
+  {id:61,t:"ПОСЛЕ",te:"After",m:"Холст, акрил",me:"Canvas, acrylic",s:"90×70",y:2024,p:85000},
+  {id:62,t:"ДОМ",te:"Home",m:"Холст, акрил",me:"Canvas, acrylic",s:"60×40",y:2023,p:35000},
+  {id:63,t:"ОЖИДАНИЕ",te:"Waiting",m:"Холст, акрил",me:"Canvas, acrylic",s:"60×50",y:2022,p:45000},
+  {id:64,t:"В ПРЕДВКУШЕНИИ",te:"In Anticipation",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×60",y:2022,p:55000},
+  {id:65,t:"ДЕРЖИСЬ",te:"Hold On",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×60",y:2022,p:25000},
+  {id:66,t:"CHEERS!",te:"Cheers!",m:"Холст, акрил",me:"Canvas, acrylic",s:"80×70",y:2023,p:75000},
+  {id:67,t:"ЦВЕТЫ",te:"Flowers",m:"Холст, акрил",me:"Canvas, acrylic",s:"40×30",y:2023,p:20000},
+  {id:68,t:"В УНИСОН",te:"In Unison",m:"Холст, акрил",me:"Canvas, acrylic",s:"120×100",y:2024,p:95000},
+  {id:69,t:"ВСЁ СВЯЗАНО",te:"All Connected",m:"Холст, акрил, золотая нить",me:"Canvas, acrylic, gold thread",s:"40×50",y:2023,p:35000},
+  {id:70,t:"КОНТРАСТНЫЙ ДУШ",te:"Contrast Shower",m:"Холст, акрил",me:"Canvas, acrylic",s:"100×50",y:2021,p:45000},
+  {id:71,t:"ДОМИКИ",te:"Little Houses",m:"Холст, акрил",me:"Canvas, acrylic",s:"60×40",y:2023,p:30000},
+  {id:72,t:"ЦВЕТЫ",te:"Flowers",m:"Холст, акрил",me:"Canvas, acrylic",s:"50×40",y:2021,p:22000},
+  {id:73,t:"ЧЕРЕЗ МОНОКЛЬ",te:"Through a Monocle",m:"Холст, акрил",me:"Canvas, acrylic",s:"50×50",y:2020,p:28000},
+  {id:74,t:"БУТЫЛКА",te:"Bottle",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×20",y:2022,p:15000},
+  {id:75,t:"ОДИНОЧЕСТВО",te:"Loneliness",m:"Холст, акрил",me:"Canvas, acrylic",s:"80×60",y:2020,p:35000},
+  {id:76,t:"ПОСЛЕ",te:"After",m:"Холст, акрил",me:"Canvas, acrylic",s:"70×70",y:2020,p:55000},
+  {id:77,t:"ВСЁ ПРОХОДИТ",te:"Everything Passes",m:"Холст, акрил, багет",me:"Canvas, acrylic, framed",s:"40×40",y:2018,p:35000},
+  {id:78,t:"НЕСОВЕРШЕНСТВО",te:"Imperfection",m:"Холст, акрил",me:"Canvas, acrylic",s:"60×60",y:2018,p:22000},
+  {id:79,t:"ЛИЦО",te:"Face",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×30",y:2018,p:20000},
+  {id:80,t:"СВИДАНИЕ ПОД ДОЖДЁМ",te:"Date in the Rain",m:"Холст, акрил",me:"Canvas, acrylic",s:"30×30",y:2018,p:15000}
 ];
 
-// Exhibitions — from PDF page 3 (personal + group, chronological desc)
-const EX = [
-  {y:2025, r:"«Ничего подобного». Дом-музей Марины Цветаевой, Москва",               e:"'Nothing Like It'. Tsvetaeva House Museum, Moscow"},
-  {y:2025, r:"«Женщины внутри женщины». Галерея на Трубной (Выставочные залы Москвы)",e:"'Women Inside a Woman'. Gallery on Trubnaya, Moscow"},
-  {y:2025, r:"Pop-Up выставка у Киры Альтман и Артёма Соловейчика, Москва",           e:"Pop-Up exhibition, Moscow"},
-  {y:2024, r:"«Беспредельное». Культурный центр «Артишок», Москва",                   e:"'Boundless'. Artichoke Cultural Center, Moscow"},
-  {y:2024, r:"«Дышу тобой». Галерея Ordynka Art, Москва",                             e:"'Breathing You'. Ordynka Art Gallery, Moscow"},
-  {y:2023, r:"«Яхтинг — это». Галерея МУХА + Сила Ветра, Москва",                    e:"'Yachting Is'. MUKHA + Sila Vetra Gallery, Moscow"},
-  {y:2022, r:"«Искусство и спорт». Omelchenko Gallery, Москва",                        e:"'Art & Sport'. Omelchenko Gallery, Moscow"},
-  {y:2022, r:"«Так никто не делает». Галерея Квартира S. ARTPLAY, Москва",            e:"'Nobody Does That'. Apartment S Gallery. ARTPLAY, Moscow"},
-  {y:2021, r:"«Вчера-сегодня-завтра». Галерея Квартира S. ARTPLAY, Москва",           e:"'Yesterday–Today–Tomorrow'. Apartment S Gallery. ARTPLAY, Moscow"},
-  {y:2021, r:"«Внутреннее и внешнее». Галерея Квартира S. ARTPLAY, Москва",           e:"'Inner and Outer'. Apartment S Gallery. ARTPLAY, Moscow"},
-  {y:2020, r:"Moon Gallery. Het Glazen Huis, Амстердам, Нидерланды",                  e:"Moon Gallery. Het Glazen Huis, Amsterdam, Netherlands"},
-  {y:2020, r:"35×35 Art Project. Copelouzos Family Art Museum, Афины, Греция",        e:"35×35 Art Project. Copelouzos Family Art Museum, Athens, Greece"},
-  {y:2019, r:"Moon Gallery. Onze Ambassade, Гаага, Нидерланды",                       e:"Moon Gallery. Onze Ambassade, The Hague, Netherlands"},
-  {y:2019, r:"Moon Gallery. Kunsträume / The Heinz Julen Art Gallery, Церматт, Швейцария", e:"Moon Gallery. Heinz Julen Art Gallery, Zermatt, Switzerland"},
-  {y:2018, r:"«Анна-Мария». Галерея CUB, Рига, Латвия",                               e:"'Anna-Maria'. CUB Gallery, Riga, Latvia"},
-  {y:2018, r:"«NU. Эстетика обнажённой натуры». OXE Capital, Москва",                 e:"'NU. Aesthetics of the Nude'. OXE Capital, Moscow"},
-  {y:2017, r:"«Между нами». Боярские палаты СТД РФ, Москва",                          e:"'Between Us'. Boyar Chambers STD RF, Moscow"},
-  {y:2017, r:"«Эра Водолея». Универмаг Цветной, Москва",                               e:"'Age of Aquarius'. Tsvetnoj Department Store, Moscow"},
-  {y:2017, r:"Art for Your Heart. Дизайн-завод FLACON, Москва",                        e:"Art for Your Heart. FLACON Design Factory, Moscow"},
-  {y:2015, r:"Выставка в КлассЦентре музыкально-драматического искусства, Москва",     e:"Exhibition at ClassCenter for Musical-Dramatic Arts, Moscow"},
-  {y:2011, r:"«Pleasure». Фестиваль искусства 48 Stunden Neukölln, Берлин, Германия", e:"'Pleasure'. 48 Stunden Neukölln Art Festival, Berlin, Germany"}
+const EX=[
+  {y:2025,r:"«Ничего подобного». Дом-музей Марины Цветаевой, Москва",e:"'Nothing Like It'. Tsvetaeva House Museum, Moscow"},
+  {y:2025,r:"«Женщины внутри женщины». Галерея на Трубной (Выставочные залы Москвы)",e:"'Women Inside a Woman'. Gallery on Trubnaya, Moscow"},
+  {y:2025,r:"Pop-Up выставка у Киры Альтман и Артёма Соловейчика, Москва",e:"Pop-Up exhibition, Moscow"},
+  {y:2024,r:"«Беспредельное». Культурный центр «Артишок», Москва",e:"'Boundless'. Artichoke Cultural Center, Moscow"},
+  {y:2024,r:"«Дышу тобой». Галерея Ordynka Art, Москва",e:"'Breathing You'. Ordynka Art Gallery, Moscow"},
+  {y:2023,r:"«Яхтинг — это». Галерея МУХА + Сила Ветра, Москва",e:"'Yachting Is'. MUKHA + Sila Vetra Gallery, Moscow"},
+  {y:2022,r:"«Искусство и спорт». Omelchenko Gallery, Москва",e:"'Art & Sport'. Omelchenko Gallery, Moscow"},
+  {y:2022,r:"«Так никто не делает». Галерея Квартира S. ARTPLAY, Москва",e:"'Nobody Does That'. Apartment S Gallery. ARTPLAY, Moscow"},
+  {y:2021,r:"«Вчера-сегодня-завтра». Галерея Квартира S. ARTPLAY, Москва",e:"'Yesterday–Today–Tomorrow'. Apartment S Gallery. ARTPLAY, Moscow"},
+  {y:2021,r:"«Внутреннее и внешнее». Галерея Квартира S. ARTPLAY, Москва",e:"'Inner and Outer'. Apartment S Gallery. ARTPLAY, Moscow"},
+  {y:2020,r:"Moon Gallery. Het Glazen Huis, Амстердам, Нидерланды",e:"Moon Gallery. Het Glazen Huis, Amsterdam, Netherlands"},
+  {y:2020,r:"35×35 Art Project. Copelouzos Family Art Museum, Афины, Греция",e:"35×35 Art Project. Copelouzos Family Art Museum, Athens, Greece"},
+  {y:2019,r:"Moon Gallery. Onze Ambassade, Гаага, Нидерланды",e:"Moon Gallery. Onze Ambassade, The Hague, Netherlands"},
+  {y:2019,r:"Moon Gallery. Kunsträume / The Heinz Julen Art Gallery, Церматт, Швейцария",e:"Moon Gallery. Heinz Julen Art Gallery, Zermatt, Switzerland"},
+  {y:2018,r:"«Анна-Мария». Галерея CUB, Рига, Латвия",e:"'Anna-Maria'. CUB Gallery, Riga, Latvia"},
+  {y:2018,r:"«NU. Эстетика обнажённой натуры». OXE Capital, Москва",e:"'NU. Aesthetics of the Nude'. OXE Capital, Moscow"},
+  {y:2017,r:"«Между нами». Боярские палаты СТД РФ, Москва",e:"'Between Us'. Boyar Chambers STD RF, Moscow"},
+  {y:2017,r:"«Эра Водолея». Универмаг Цветной, Москва",e:"'Age of Aquarius'. Tsvetnoj Department Store, Moscow"},
+  {y:2017,r:"Art for Your Heart. Дизайн-завод FLACON, Москва",e:"Art for Your Heart. FLACON Design Factory, Moscow"},
+  {y:2015,r:"Выставка в КлассЦентре музыкально-драматического искусства, Москва",e:"Exhibition at ClassCenter for Musical-Dramatic Arts, Moscow"},
+  {y:2011,r:"«Pleasure». Фестиваль искусства 48 Stunden Neukölln, Берлин, Германия",e:"'Pleasure'. 48 Stunden Neukölln Art Festival, Berlin, Germany"}
 ];
 
-// Press publications — from PDF page 6–10
-const PB = [
-  {y:2025, r:"Журнал Salon",                  e:"Salon Magazine",          u:"https://salon.ru/article/minimalizm-selementami-mid-century-kvartira-v-dome1936-goda-74182"},
-  {y:2025, r:"My Decor",                      e:"My Decor",                u:"https://mydecor.ru/interiorflats/neskuchnyi-minimalizm-kvartira-47-m-v-moskve/"},
-  {y:2024, r:"Design Mate",                   e:"Design Mate",             u:"https://design-mate.ru/read/objects/interior-of-small-apartment--project-by-art-studio-mir"},
-  {y:2024, r:"My Decor",                      e:"My Decor",                u:"https://mydecor.ru/interior/flats/yarkaya-kvartira-40-m-pod-sdachu-v-moskve/"},
-  {y:2024, r:"«Идеи вашего дома»",            e:"Ideas for Your Home",     u:"https://www.ivd.ru/dizajn-i-dekor/kvartira/iz-treh-komnat-pochti-pyat-yarkaya-kvartira-mechty-dlya-semi-s-dvumya-detmi-123972"},
-  {y:2023, r:"Salon Interior (весенний номер)",e:"Salon Interior (spring)", u:null},
-  {y:2023, r:"In My Room",                    e:"In My Room",              u:"https://www.inmyroom.ru/posts/36789-semejnaya-kvartira-v-krasnogorske-s-prohodnoj-gostinoj-i-dvumya-detskimi"},
-  {y:2022, r:"Salon Interior (зимний номер)", e:"Salon Interior (winter)", u:null},
-  {y:2021, r:"COSMOPOLITAN",                  e:"COSMOPOLITAN",            u:"https://www.cosmo.ru/beauty/news/24-05-2021/igrivoe-nastroenie-i-yarkie-kraski-zaigrali-na-oknah-salonov-palchiki/"},
-  {y:2021, r:"InStyle",                       e:"InStyle",                 u:"https://instyle.ru/stars/za-kadrom/khudozhnitsa-mariya-polushkina-razukrasila-vitriny-salonov-palchiki/"},
-  {y:2020, r:"Art Muse (стр. 151)",           e:"Art Muse (p. 151)",       u:"https://ru.calameo.com/read/006223001745df126953b"}
+const PB=[
+  {y:2025,r:"Журнал Salon",e:"Salon Magazine",u:"https://salon.ru/article/minimalizm-selementami-mid-century-kvartira-v-dome1936-goda-74182"},
+  {y:2025,r:"My Decor",e:"My Decor",u:"https://mydecor.ru/interiorflats/neskuchnyi-minimalizm-kvartira-47-m-v-moskve/"},
+  {y:2024,r:"Design Mate",e:"Design Mate",u:"https://design-mate.ru/read/objects/interior-of-small-apartment--project-by-art-studio-mir"},
+  {y:2024,r:"My Decor",e:"My Decor",u:"https://mydecor.ru/interior/flats/yarkaya-kvartira-40-m-pod-sdachu-v-moskve/"},
+  {y:2024,r:"«Идеи вашего дома»",e:"Ideas for Your Home",u:"https://www.ivd.ru/dizajn-i-dekor/kvartira/iz-treh-komnat-pochti-pyat-yarkaya-kvartira-mechty-dlya-semi-s-dvumya-detmi-123972"},
+  {y:2023,r:"Salon Interior (весенний номер)",e:"Salon Interior (spring)",u:null},
+  {y:2023,r:"In My Room",e:"In My Room",u:"https://www.inmyroom.ru/posts/36789-semejnaya-kvartira-v-krasnogorske-s-prohodnoj-gostinoj-i-dvumya-detskimi"},
+  {y:2022,r:"Salon Interior (зимний номер)",e:"Salon Interior (winter)",u:null},
+  {y:2021,r:"COSMOPOLITAN",e:"COSMOPOLITAN",u:"https://www.cosmo.ru/beauty/news/24-05-2021/igrivoe-nastroenie-i-yarkie-kraski-zaigrali-na-oknah-salonov-palchiki/"},
+  {y:2021,r:"InStyle",e:"InStyle",u:"https://instyle.ru/stars/za-kadrom/khudozhnitsa-mariya-polushkina-razukrasila-vitriny-salonov-palchiki/"},
+  {y:2020,r:"Art Muse (стр. 151)",e:"Art Muse (p. 151)",u:"https://ru.calameo.com/read/006223001745df126953b"}
 ];
 
-// ─── STATE ───
-let L = 'ru';  // current language
-let F = 'all'; // current year filter
+let L='ru',F='all';
 
-// ─── LANGUAGE TOGGLE ───
-function tL() {
-  L = L === 'ru' ? 'en' : 'ru';
-  document.getElementById('lB').textContent = L === 'ru' ? 'EN' : 'RU';
-  document.documentElement.lang = L;
-  document.querySelectorAll('[data-ru]').forEach(el => {
-    const v = el.getAttribute('data-' + L);
-    if (v) el.innerHTML = v;
+function tL(){
+  L=L==='ru'?'en':'ru';
+  document.getElementById('lB').textContent=L==='ru'?'EN':'RU';
+  document.documentElement.lang=L;
+  document.querySelectorAll('[data-ru]').forEach(el=>{
+    const v=el.getAttribute('data-'+L);
+    if(v)el.innerHTML=v;
   });
-  // update select options
-  document.querySelectorAll('#cS option').forEach(o => {
-    const v = o.getAttribute('data-' + L);
-    if (v) o.textContent = v;
+  document.querySelectorAll('#cS option').forEach(o=>{
+    const v=o.getAttribute('data-'+L);
+    if(v)o.textContent=v;
   });
   rA();
 }
 
-// ─── RENDER ALL ───
-function rA() { rE(); rP(); rF(); rC(); }
+function rA(){rE();rP();rF();rC()}
 
-// Exhibitions list
-function rE() {
-  document.getElementById('eL').innerHTML = EX.map(e =>
-    `<li><span class="yr">${e.y}</span><span>${L === 'ru' ? e.r : e.e}</span></li>`
+function rE(){
+  document.getElementById('eL').innerHTML=EX.map(e=>
+    `<li><span class="yr">${e.y}</span><span>${L==='ru'?e.r:e.e}</span></li>`
   ).join('');
 }
 
-// Press cards
-function rP() {
-  document.getElementById('pG').innerHTML = PB.map(p => `
+function rP(){
+  document.getElementById('pG').innerHTML=PB.map(p=>`
     <div class="pc fi">
       <span class="py">${p.y}</span>
-      <div class="pn">${L === 'ru' ? p.r : p.e}</div>
+      <div class="pn">${L==='ru'?p.r:p.e}</div>
       ${p.u
-        ? `<a href="${p.u}" target="_blank" rel="noopener" class="plk">${L === 'ru' ? 'Читать' : 'Read'}</a>`
-        : `<span class="pp">${L === 'ru' ? 'Печатное издание' : 'Print edition'}</span>`
+        ?`<a href="${p.u}" target="_blank" rel="noopener" class="plk">${L==='ru'?'Читать':'Read'}</a>`
+        :`<span class="pp">${L==='ru'?'Печатное издание':'Print edition'}</span>`
       }
     </div>
   `).join('');
   ob();
 }
 
-// Year filter buttons
-function rF() {
-  const yrs = [...new Set(W.map(a => a.y))].sort((a, b) => b - a);
-  document.getElementById('cF').innerHTML =
-    `<button class="fb ${F === 'all' ? 'on' : ''}" onclick="sF('all')">${L === 'ru' ? 'Все' : 'All'}</button>` +
-    yrs.map(y =>
-      `<button class="fb ${F == y ? 'on' : ''}" onclick="sF(${y})">${y}</button>`
-    ).join('');
+function rF(){
+  const yrs=[...new Set(W.map(a=>a.y))].sort((a,b)=>b-a);
+  document.getElementById('cF').innerHTML=
+    `<button class="fb ${F==='all'?'on':''}" onclick="sF('all')">${L==='ru'?'Все':'All'}</button>`+
+    yrs.map(y=>`<button class="fb ${F==y?'on':''}" onclick="sF(${y})">${y}</button>`).join('');
 }
 
-function sF(f) { F = f; rF(); rC(); }
+function sF(f){F=f;rF();rC()}
 
-// Catalog grid
-function rC() {
-  let items = F === 'all' ? [...W] : W.filter(a => a.y == F);
-  const s = document.getElementById('cS').value;
-  if (s === 'pa') items.sort((a, b) => a.p - b.p);
-  else if (s === 'pd') items.sort((a, b) => b.p - a.p);
-  else if (s === 'yd') items.sort((a, b) => b.y - a.y);
-  else if (s === 'ya') items.sort((a, b) => a.y - b.y);
+function rC(){
+  let items=F==='all'?[...W]:W.filter(a=>a.y==F);
+  const s=document.getElementById('cS').value;
+  if(s==='pa')items.sort((a,b)=>a.p-b.p);
+  else if(s==='pd')items.sort((a,b)=>b.p-a.p);
+  else if(s==='yd')items.sort((a,b)=>b.y-a.y);
+  else if(s==='ya')items.sort((a,b)=>a.y-b.y);
 
-  document.getElementById('cC').textContent =
-    L === 'ru' ? `${items.length} работ` : `${items.length} works`;
+  document.getElementById('cC').textContent=
+    L==='ru'?`${items.length} работ`:`${items.length} works`;
 
-  const u = L === 'ru' ? 'см' : 'cm';
-  const b = L === 'ru' ? 'Купить' : 'Buy';
+  const u=L==='ru'?'см':'cm';
+  const b=L==='ru'?'Купить':'Buy';
 
-  document.getElementById('cG').innerHTML = items.map(a => {
-    const tt = L === 'ru' ? a.t : a.te;
-    const mm = L === 'ru' ? a.m : a.me;
-    // Primary: site/images/work-{id}.jpg  Fallback: images/art-{id+10}.jpg
+  document.getElementById('cG').innerHTML=items.map(a=>{
+    const tt=L==='ru'?a.t:a.te;
+    const mm=L==='ru'?a.m:a.me;
     return `<div class="cd" onclick="oM(${a.id})">
       <div class="ci">
-        <img
-          src="site/images/work-${a.id}.jpg"
-          alt="${tt}"
-          loading="lazy"
-          onerror="this.onerror=null;this.src='images/art-${a.id + 10}.jpg';this.onerror=function(){this.style.display='none'}"
-        >
+        <img src="site/images/work-${a.id}.jpg" alt="${tt}" loading="lazy"
+             onerror="this.onerror=null;this.src='images/art-${a.id+10}.jpg';this.onerror=function(){this.style.display='none'}">
         <span class="ph" style="display:none" aria-hidden="true">${tt}</span>
       </div>
       <div class="cb2">
@@ -601,92 +758,58 @@ function rC() {
       </div>
     </div>`;
   }).join('');
-
   ob();
 }
 
-// ─── MODAL ───
-function oM(id) {
-  const a = W.find(x => x.id === id);
-  if (!a) return;
-  const tt = L === 'ru' ? a.t : a.te;
-  const mm = L === 'ru' ? a.m : a.me;
-  const u  = L === 'ru' ? 'см' : 'cm';
-
-  // image
-  const img = document.getElementById('mImg');
-  const ph  = document.getElementById('mI');
-  img.alt = tt;
-  img.style.display = 'block';
-  ph.style.display = 'none';
-  img.onerror = function() {
-    this.onerror = null;
-    this.src = `images/art-${a.id + 10}.jpg`;
-    this.onerror = function() {
-      this.style.display = 'none';
-      ph.textContent = tt;
-      ph.style.display = 'flex';
-    };
+function oM(id){
+  const a=W.find(x=>x.id===id);
+  if(!a)return;
+  const tt=L==='ru'?a.t:a.te;
+  const mm=L==='ru'?a.m:a.me;
+  const u=L==='ru'?'см':'cm';
+  const img=document.getElementById('mImg');
+  const ph=document.getElementById('mI');
+  img.alt=tt;img.style.display='block';ph.style.display='none';
+  img.onerror=function(){
+    this.onerror=null;this.src=`images/art-${a.id+10}.jpg`;
+    this.onerror=function(){this.style.display='none';ph.textContent=tt;ph.style.display='flex'};
   };
-  img.src = `site/images/work-${a.id}.jpg`;
-
-  // text
-  document.getElementById('mT').textContent = tt;
-  document.getElementById('mM').innerHTML = `${mm}<br>${a.s} ${u}<br>${a.y}`;
-  document.getElementById('mP').textContent = a.p.toLocaleString('ru-RU') + ' ₽';
-
-  // telegram link with pre-filled message
-  const msg = encodeURIComponent(
-    L === 'ru'
-      ? `Здравствуйте! Интересует работа «${a.t}», ${a.s} см, ${a.y} г.`
-      : `Hello! Interested in the artwork "${a.te}", ${a.s} cm, ${a.y}.`
-  );
-  document.getElementById('mB').href = `https://t.me/artpolushkina?text=${msg}`;
-
-  // update button label
-  const btn = document.getElementById('mB').querySelector('span[data-ru]');
-  if (btn) btn.textContent = L === 'ru' ? 'Написать в Telegram' : 'Message on Telegram';
-
+  img.src=`site/images/work-${a.id}.jpg`;
+  document.getElementById('mT').textContent=tt;
+  document.getElementById('mM').innerHTML=`${mm}<br>${a.s} ${u}<br>${a.y}`;
+  document.getElementById('mP').textContent=a.p.toLocaleString('ru-RU')+' ₽';
+  const msg=encodeURIComponent(L==='ru'
+    ?`Здравствуйте! Интересует работа «${a.t}», ${a.s} см, ${a.y} г.`
+    :`Hello! Interested in the artwork "${a.te}", ${a.s} cm, ${a.y}.`);
+  document.getElementById('mB').href=`https://t.me/artpolushkina?text=${msg}`;
   document.getElementById('ov').classList.add('on');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
 
-function xM() {
+function xM(){
   document.getElementById('ov').classList.remove('on');
-  document.body.style.overflow = '';
-  // reset modal image to avoid flash of previous image
-  const img = document.getElementById('mImg');
-  img.src = '';
-  img.style.display = 'none';
+  document.body.style.overflow='';
+  const img=document.getElementById('mImg');
+  img.src='';img.style.display='none';
 }
 
-// ─── KEYBOARD ───
-document.addEventListener('keydown', e => { if (e.key === 'Escape') xM(); });
-
-// ─── SCROLL: back-to-top visibility ───
-window.addEventListener('scroll', () => {
-  document.getElementById('btt').classList.toggle('vis', scrollY > 500);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')xM()});
+window.addEventListener('scroll',()=>{
+  document.getElementById('btt').classList.toggle('vis',scrollY>500);
 });
-
-// ─── MOBILE NAV: close on link click ───
-document.querySelectorAll('.nk a').forEach(a =>
-  a.addEventListener('click', () => document.getElementById('nk').classList.remove('open'))
+document.querySelectorAll('.nk a').forEach(a=>
+  a.addEventListener('click',()=>document.getElementById('nk').classList.remove('open'))
 );
 
-// ─── INTERSECTION OBSERVER (scroll fade-in) ───
-const io = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); }),
-  {threshold: .08}
+const io=new IntersectionObserver(
+  entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')}),
+  {threshold:.08}
 );
-function ob() {
-  document.querySelectorAll('.fi:not(.v)').forEach(el => io.observe(el));
-}
+function ob(){document.querySelectorAll('.fi:not(.v)').forEach(el=>io.observe(el))}
 
-// ─── INIT ───
 rA();
-setTimeout(ob, 100);
-// re-observe after dynamic renders (press cards, catalog)
-setInterval(ob, 800);
+setTimeout(ob,100);
+setInterval(ob,800);
 </script>
 </body>
 </html>
