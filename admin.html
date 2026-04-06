@@ -491,7 +491,7 @@ async function loadCatalog() {
     return;
   }
   catSha = data.sha;
-  catalog = JSON.parse(atob(data.content.replace(/\n/g, '')));
+  catalog = JSON.parse(data.content);
 }
 
 async function commitCatalog(message = 'Обновление каталога') {
