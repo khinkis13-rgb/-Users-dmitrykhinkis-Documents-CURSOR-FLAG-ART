@@ -105,35 +105,36 @@ a:hover{color:var(--mars)}
 .rt7{animation-delay:1.66s}
 @keyframes rtSlide{from{transform:translateX(130px);opacity:0}to{transform:translateX(0);opacity:1}}
 
-/* Tree continuous sway */
-.ltree-g{transform-box:fill-box;transform-origin:center bottom;animation:treeSway 9s 2.4s ease-in-out infinite}
-.rtree-g{transform-box:fill-box;transform-origin:center bottom;animation:treeSway 11s 2.6s ease-in-out infinite reverse}
-@keyframes treeSway{0%,100%{transform:rotate(0deg)}35%{transform:rotate(.65deg)}65%{transform:rotate(-.5deg)}}
+/* Tree continuous sway — very slow */
+.ltree-g{transform-box:fill-box;transform-origin:center bottom;animation:treeSway 18s 2.4s ease-in-out infinite}
+.rtree-g{transform-box:fill-box;transform-origin:center bottom;animation:treeSway 24s 2.6s ease-in-out infinite reverse}
+@keyframes treeSway{0%,100%{transform:rotate(0deg)}30%{transform:rotate(2.5deg)}70%{transform:rotate(-2deg)}}
 
 /* Figure */
-.fig-disc{animation:discDrop .6s cubic-bezier(.34,1.56,.64,1) 2.0s both}
+.fig-disc{animation:discDrop .6s cubic-bezier(.34,1.56,.64,1) 2.0s both,discFloat 11s 4s ease-in-out infinite}
 @keyframes discDrop{from{transform:translateY(-65px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes discFloat{0%,100%{transform:translateY(0) rotate(0deg)}40%{transform:translateY(-7px) rotate(1.5deg)}70%{transform:translateY(4px) rotate(-.8deg)}}
 .fig-neck{animation:fadeEl .45s ease 2.05s both;opacity:0}
 @keyframes fadeEl{to{opacity:1}}
-.fig-body{transform-box:fill-box;transform-origin:top center;animation:bodyGrow .7s ease 2.1s both}
+.fig-body{transform-box:fill-box;transform-origin:top center;animation:bodyGrow .7s ease 2.1s both,bodyBreath 14s 4s ease-in-out infinite}
 @keyframes bodyGrow{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
-.fig-leg{animation:fadeEl .4s ease 2.75s both;opacity:0}
+@keyframes bodyBreath{0%,100%{transform:scaleX(1)}45%{transform:scaleX(1.02)}75%{transform:scaleX(.985)}}
 
-/* Waves entry + continuous flow */
-.w4{animation:waveIn .9s 2.5s ease both,waveFlowA 16s 3.5s ease-in-out infinite}
-.w3{animation:waveIn .9s 2.65s ease both,waveFlowB 12s 3.55s ease-in-out infinite}
-.w2{animation:waveIn .9s 2.8s ease both,waveFlowA 10s 3.3s ease-in-out infinite reverse}
-.w1{animation:waveIn .9s 2.95s ease both,waveFlowC 8s 3.75s ease-in-out infinite}
+/* Waves — very slow, large amplitude */
+.w1{animation:waveIn .9s 2.5s ease both,waveFlowA 30s 3.5s ease-in-out infinite}
+.w2{animation:waveIn .9s 2.65s ease both,waveFlowB 24s 3.3s ease-in-out infinite}
+.w3{animation:waveIn .9s 2.8s ease both,waveFlowC 20s 3.55s ease-in-out infinite}
+.w4{animation:waveIn .9s 2.95s ease both,waveFlowA 36s 3.7s ease-in-out infinite reverse}
 @keyframes waveIn{from{opacity:0;transform:translateY(75px)}to{opacity:1;transform:translateY(0)}}
-@keyframes waveFlowA{0%,100%{transform:translateX(0)}50%{transform:translateX(-48px)}}
-@keyframes waveFlowB{0%,100%{transform:translateX(-22px)}50%{transform:translateX(32px)}}
-@keyframes waveFlowC{0%,100%{transform:translateX(0)}50%{transform:translateX(-38px)}}
+@keyframes waveFlowA{0%,100%{transform:translateX(0)}50%{transform:translateX(-95px)}}
+@keyframes waveFlowB{0%,100%{transform:translateX(-30px)}50%{transform:translateX(75px)}}
+@keyframes waveFlowC{0%,100%{transform:translateX(10px)}50%{transform:translateX(-80px)}}
 
-/* Sailboat entry + bob */
+/* Sailboat — slow dreamy bob */
 .boat-g{transform-box:fill-box;transform-origin:center center;
-  animation:boatSlide .9s cubic-bezier(.34,1.56,.64,1) 3.1s both,boatBob 4s 4.1s ease-in-out infinite}
+  animation:boatSlide .9s cubic-bezier(.34,1.56,.64,1) 3.1s both,boatBob 9s 4.1s ease-in-out infinite}
 @keyframes boatSlide{from{transform:translateX(220px);opacity:0}to{transform:translateX(0);opacity:1}}
-@keyframes boatBob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-8px) rotate(1.5deg)}}
+@keyframes boatBob{0%,100%{transform:translateY(0) rotate(-2.5deg)}50%{transform:translateY(-18px) rotate(3deg)}}
 
 /* Signature */
 .sig-text{animation:sigIn 1s 3.5s ease both;opacity:0}
@@ -157,22 +158,27 @@ a:hover{color:var(--mars)}
 
 /* Artist portrait in about section */
 .ap-outer{
-  position:relative;
-  width:220px;
-  height:220px;
-  margin:0 auto 32px;
+  display:flex;
+  justify-content:center;
+  margin:0 0 44px;
   overflow:visible;
 }
-.ap-img{
-  position:absolute;
-  width:280px;
-  height:280px;
-  left:-30px;
-  top:-30px;
+.ap-ring{
+  position:relative;
+  width:260px;
+  height:260px;
+  flex-shrink:0;
   border-radius:50%;
+  box-shadow:0 0 0 3px var(--canvas-w),0 0 0 6px var(--gold);
+  overflow:hidden;
+}
+.ap-img{
+  width:100%;
+  height:100%;
   object-fit:cover;
-  object-position:60% 15%;
-  box-shadow:0 0 0 4px var(--canvas-w),0 0 0 7px var(--gold);
+  object-position:50% 18%;
+  border-radius:50%;
+  display:block;
 }
 
 .at p{margin-bottom:14px;font-size:.93rem}
@@ -264,11 +270,27 @@ a:hover{color:var(--mars)}
   .ha{order:-1;margin-bottom:16px}
   .ha-svg{max-width:360px}
   .ag{grid-template-columns:1fr}
+  .ap-ring{width:220px;height:220px}
   .md{grid-template-columns:1fr}
   .ml{min-height:260px;border-radius:18px 18px 0 0}
-  .nk{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(247,241,232,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:28px}
+  .nk{
+    display:none;
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    z-index:99;
+    background:rgba(242,234,221,.98);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:36px;
+    padding-top:60px;
+  }
   .nk.open{display:flex}
-  .hb{display:block}
+  .nk a{font-size:1.1rem;letter-spacing:.14em}
+  .lb{font-size:.85rem;padding:8px 24px}
+  .hb{display:block;z-index:101;position:relative}
 }
 @media(max-width:600px){
   .sec{padding:56px 16px}
@@ -294,7 +316,7 @@ a:hover{color:var(--mars)}
       <a href="#contact" data-ru="Контакты" data-en="Contact">Контакты</a>
       <button class="lb" onclick="tL()" id="lB">EN</button>
     </div>
-    <button class="hb" onclick="document.getElementById('nk').classList.toggle('open')" aria-label="Menu">
+    <button class="hb" id="hbBtn" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -333,7 +355,7 @@ a:hover{color:var(--mars)}
            role="img" aria-label="ПОПЛЫЛИ! — Мария Полушкина, холст акрил, 70×80 см, 2023">
         <defs>
           <clipPath id="pClip"><rect x="0" y="0" width="900" height="900" rx="14"/></clipPath>
-          <clipPath id="sailCP"><polygon points="673,488 673,548 638,548"/></clipPath>
+          <clipPath id="sailCP"><polygon points="673,548 673,608 638,608"/></clipPath>
         </defs>
 
         <!-- Background sky -->
@@ -373,41 +395,37 @@ a:hover{color:var(--mars)}
             <rect class="rt rt7" x="791" y="237" width="43" height="41" fill="#2C5C38" rx="2"/>
           </g>
 
-          <!-- FIGURE -->
+          <!-- WAVES 1+2 drawn first (figure will cover them) -->
+          <path class="w1" d="M -300,572 Q -150,558 0,570 Q 150,582 300,568 Q 450,554 600,570 Q 750,586 900,570 Q 1050,554 1200,570 L1200,900 L-300,900 Z" fill="#BDD2DF"/>
+          <path class="w2" d="M -300,633 Q -120,618 60,632 Q 240,646 420,630 Q 600,614 780,632 Q 960,650 1140,632 L1200,900 L-300,900 Z" fill="#8BA5B9"/>
+
+          <!-- FIGURE — original vertical position, bathing between w2/w3 layers -->
           <rect class="fig-neck" x="435" y="278" width="14" height="63" fill="#E0C0A8" rx="5"/>
-          <polygon class="fig-body" points="442,340 354,362 442,720 530,362" fill="#8B3840"/>
-          <line class="fig-leg" x1="442" y1="720" x2="409" y2="787" stroke="#8B3840" stroke-width="4" stroke-linecap="round"/>
-          <line class="fig-leg" x1="442" y1="720" x2="475" y2="787" stroke="#8B3840" stroke-width="4" stroke-linecap="round"/>
-          <!-- Hat disc -->
+          <polygon class="fig-body" points="442,340 354,362 442,980 530,362" fill="#8B3840"/>
           <ellipse class="fig-disc" cx="442" cy="278" rx="74" ry="19" fill="#6A8FAB"/>
           <ellipse class="fig-disc" cx="442" cy="271" rx="74" ry="8" fill="#7B9EBB" opacity=".35"/>
 
-          <!-- WAVES (back to front, darkest first) -->
-          <path class="w4" d="M -250,760 Q -100,751 100,760 Q 300,769 500,760 Q 700,751 900,760 Q 1100,769 1250,760 L1250,900 L-250,900 Z" fill="#3C5878"/>
-          <path class="w3" d="M -250,698 Q -100,688 100,698 Q 300,708 500,698 Q 700,688 900,698 Q 1100,708 1250,698 L1250,900 L-250,900 Z" fill="#5E7F9E"/>
-          <path class="w2" d="M -250,633 Q -100,621 100,633 Q 300,645 500,633 Q 700,621 900,633 Q 1100,645 1250,633 L1250,900 L-250,900 Z" fill="#8BA5B9"/>
-          <path class="w1" d="M -250,572 Q -100,559 100,572 Q 300,585 500,572 Q 700,559 900,572 Q 1100,585 1250,572 L1250,900 L-250,900 Z" fill="#BDD2DF"/>
+          <!-- WAVES 3+4 drawn after figure (cover her lower body) -->
+          <path class="w3" d="M -300,700 Q -100,685 120,700 Q 340,715 560,698 Q 780,681 1000,698 Q 1150,711 1300,698 L1300,900 L-300,900 Z" fill="#5E7F9E"/>
+          <path class="w4" d="M -300,762 Q -80,746 140,762 Q 360,778 580,760 Q 800,742 1020,762 Q 1160,776 1300,760 L1300,900 L-300,900 Z" fill="#3C5878"/>
 
-          <!-- SAILBOAT -->
+          <!-- SAILBOAT on top of all waves -->
           <g class="boat-g">
-            <!-- Hull -->
-            <path d="M 635,558 C 649,548 661,545 674,544 C 687,545 699,548 713,558 C 707,571 694,575 674,576 C 654,575 641,571 635,558 Z" fill="#704030"/>
-            <!-- Mast -->
-            <line x1="674" y1="545" x2="674" y2="488" stroke="#5A3020" stroke-width="2.5"/>
-            <!-- Patchwork sail -->
+            <path d="M 635,618 C 649,608 661,605 674,604 C 687,605 699,608 713,618 C 707,631 694,635 674,636 C 654,635 641,631 635,618 Z" fill="#704030"/>
+            <line x1="674" y1="605" x2="674" y2="548" stroke="#5A3020" stroke-width="2.5"/>
             <g clip-path="url(#sailCP)">
-              <rect x="638" y="536" width="12" height="12" fill="#4B6A8B"/>
-              <rect x="650" y="536" width="12" height="12" fill="#C8A96E"/>
-              <rect x="662" y="536" width="12" height="12" fill="#4A7858"/>
-              <rect x="641" y="524" width="12" height="12" fill="#8B3842"/>
-              <rect x="653" y="524" width="12" height="12" fill="#6B8FAB"/>
-              <rect x="665" y="524" width="12" height="12" fill="#C8A96E"/>
-              <rect x="646" y="512" width="12" height="12" fill="#4A7858"/>
-              <rect x="658" y="512" width="12" height="12" fill="#3C5A7A"/>
-              <rect x="670" y="512" width="12" height="12" fill="#8B3842"/>
-              <rect x="651" y="500" width="12" height="12" fill="#C8A96E"/>
-              <rect x="663" y="500" width="12" height="12" fill="#4B6A8B"/>
-              <rect x="659" y="488" width="12" height="12" fill="#4A7858"/>
+              <rect x="638" y="596" width="12" height="12" fill="#4B6A8B"/>
+              <rect x="650" y="596" width="12" height="12" fill="#C8A96E"/>
+              <rect x="662" y="596" width="12" height="12" fill="#4A7858"/>
+              <rect x="641" y="584" width="12" height="12" fill="#8B3842"/>
+              <rect x="653" y="584" width="12" height="12" fill="#6B8FAB"/>
+              <rect x="665" y="584" width="12" height="12" fill="#C8A96E"/>
+              <rect x="646" y="572" width="12" height="12" fill="#4A7858"/>
+              <rect x="658" y="572" width="12" height="12" fill="#3C5A7A"/>
+              <rect x="670" y="572" width="12" height="12" fill="#8B3842"/>
+              <rect x="651" y="560" width="12" height="12" fill="#C8A96E"/>
+              <rect x="663" y="560" width="12" height="12" fill="#4B6A8B"/>
+              <rect x="659" y="548" width="12" height="12" fill="#4A7858"/>
             </g>
           </g>
 
@@ -437,12 +455,14 @@ a:hover{color:var(--mars)}
     </div>
     <div class="ag">
       <div class="at fi">
-        <!-- Artist portrait circle with hair overflow -->
+        <!-- Artist portrait circle with gold ring -->
         <div class="ap-outer">
-          <img class="ap-img"
-               src="site/images/artist-photo.jpg"
-               alt="Мария Полушкина"
-               onerror="this.onerror=null;this.src='images/artist.jpg'">
+          <div class="ap-ring">
+            <img class="ap-img"
+                 src="site/images/artist-photo.jpg"
+                 alt="Мария Полушкина"
+                 onerror="this.onerror=null;this.src='images/artist.jpg'">
+          </div>
         </div>
 
         <p data-ru="Мария Полушкина родилась в 1985 году в Москве. Творчеством начала заниматься в «КлассЦентре» музыкально-драматического искусства Сергея Казарновского. Посещала художественный класс Лены Будиной." data-en="Maria Polushkina was born in 1985 in Moscow. She began her creative path at the Sergey Kazarnovsky ClassCenter for musical-dramatic arts, attending Lena Budina's art class.">Мария Полушкина родилась в 1985 году в Москве. Творчеством начала заниматься в «КлассЦентре» музыкально-драматического искусства Сергея Казарновского. Посещала художественный класс Лены Будиной.</p>
@@ -793,12 +813,33 @@ function xM(){
   img.src='';img.style.display='none';
 }
 
+function toggleMenu(){
+  const nk=document.getElementById('nk');
+  const btn=document.getElementById('hbBtn');
+  const open=nk.classList.toggle('open');
+  btn.style.zIndex=open?'200':'';
+  // animate hamburger to X
+  const spans=btn.querySelectorAll('span');
+  if(open){
+    spans[0].style.cssText='top:8px;transform:rotate(45deg)';
+    spans[1].style.cssText='opacity:0';
+    spans[2].style.cssText='top:8px;transform:rotate(-45deg)';
+  } else {
+    spans[0].style.cssText='';spans[1].style.cssText='';spans[2].style.cssText='';
+  }
+}
+
 document.addEventListener('keydown',e=>{if(e.key==='Escape')xM()});
 window.addEventListener('scroll',()=>{
   document.getElementById('btt').classList.toggle('vis',scrollY>500);
 });
 document.querySelectorAll('.nk a').forEach(a=>
-  a.addEventListener('click',()=>document.getElementById('nk').classList.remove('open'))
+  a.addEventListener('click',()=>{
+    document.getElementById('nk').classList.remove('open');
+    const btn=document.getElementById('hbBtn');
+    btn.style.zIndex='';
+    btn.querySelectorAll('span').forEach(s=>s.style.cssText='');
+  })
 );
 
 const io=new IntersectionObserver(
