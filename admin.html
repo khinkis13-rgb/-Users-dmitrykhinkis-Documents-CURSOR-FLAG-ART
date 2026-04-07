@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Редактор каталога — М. Полушкина</title>
+<title>CMS — М. Полушкина</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500&display=swap" rel="stylesheet">
 <style>
@@ -12,11 +12,10 @@
   --burg:#8B4049;--mars:#7A3040;
   --gold:#C8A96E;--gold-s:#DABB85;
   --char:#2D2A26;--wg:#8A8178;--lg:#D1CBC3;
-  --green:#3A7A52;--red:#9B3535;
+  --green:#3A7A52;--red:#9B3535;--blue:#3A6A8B;
   --fd:'Cormorant Garamond',Georgia,serif;
   --fb:'Nunito Sans',sans-serif;
   --e:cubic-bezier(.25,.46,.45,.94);
-  --radius:14px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{height:100%}
@@ -24,242 +23,183 @@ body{font-family:var(--fb);background:var(--canvas);color:var(--char);font-weigh
 input,textarea,select,button{font-family:var(--fb);font-size:15px}
 button{cursor:pointer}
 img{display:block;max-width:100%}
+textarea{resize:vertical}
 
-/* ── PAGES ── */
-.page{display:none}
-.page.active{display:block}
+.page{display:none}.page.active{display:block}
 
-/* ══ LOGIN ══════════════════════════════════════════ */
-#pg-login{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:24px;background:var(--canvas)
-}
-.login-box{
-  background:var(--canvas-w);border-radius:20px;padding:40px 36px;
-  max-width:480px;width:100%;box-shadow:0 8px 40px rgba(45,42,38,.10);
-  border:1px solid rgba(200,169,110,.18)
-}
-.login-logo{
-  font-family:var(--fd);font-size:1.3rem;font-weight:400;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--char);
-  text-align:center;margin-bottom:6px
-}
+/* ══ LOGIN ══ */
+#pg-login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-box{background:var(--canvas-w);border-radius:20px;padding:40px 36px;max-width:480px;width:100%;box-shadow:0 8px 40px rgba(45,42,38,.10);border:1px solid rgba(200,169,110,.18)}
+.login-logo{font-family:var(--fd);font-size:1.3rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;text-align:center;margin-bottom:6px}
 .login-sub{text-align:center;font-size:.82rem;color:var(--wg);margin-bottom:28px}
-.login-box h2{
-  font-family:var(--fd);font-size:1.4rem;font-weight:300;
-  text-align:center;margin-bottom:24px
-}
+.login-box h2{font-family:var(--fd);font-size:1.4rem;font-weight:300;text-align:center;margin-bottom:24px}
 .field{margin-bottom:16px}
 .field label{display:block;font-size:.78rem;color:var(--wg);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
-.field input{
-  width:100%;padding:11px 14px;border:1px solid var(--lg);border-radius:10px;
-  background:#fff;color:var(--char);font-size:.95rem;
-  transition:.2s var(--e);outline:none
-}
+.field input{width:100%;padding:11px 14px;border:1px solid var(--lg);border-radius:10px;background:#fff;color:var(--char);outline:none;transition:.2s}
 .field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,169,110,.12)}
-.btn-primary{
-  width:100%;padding:13px;border-radius:28px;border:none;
-  background:var(--burg);color:#fff;font-size:.9rem;font-weight:400;
-  letter-spacing:.04em;transition:.25s var(--e);margin-top:8px
-}
+.btn-primary{width:100%;padding:13px;border-radius:28px;border:none;background:var(--burg);color:#fff;font-size:.9rem;transition:.25s;margin-top:8px}
 .btn-primary:hover{background:var(--mars);transform:translateY(-1px)}
 .btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.login-hint{
-  margin-top:28px;padding:16px;background:rgba(200,169,110,.08);
-  border-radius:10px;border:1px solid rgba(200,169,110,.2)
-}
+.login-hint{margin-top:28px;padding:16px;background:rgba(200,169,110,.08);border-radius:10px;border:1px solid rgba(200,169,110,.2)}
 .login-hint p{font-size:.8rem;color:var(--wg);line-height:1.7}
-.login-hint a{color:var(--burg)}
-.login-hint strong{color:var(--char);font-weight:500}
-#login-err{
-  display:none;margin-top:12px;padding:10px 14px;
-  background:rgba(155,53,53,.08);border:1px solid rgba(155,53,53,.2);
-  border-radius:8px;font-size:.82rem;color:var(--red);text-align:center
-}
+.login-hint a{color:var(--burg)}.login-hint strong{color:var(--char);font-weight:500}
+#login-err{display:none;margin-top:12px;padding:10px 14px;background:rgba(155,53,53,.08);border:1px solid rgba(155,53,53,.2);border-radius:8px;font-size:.82rem;color:var(--red);text-align:center}
 
-/* ══ HEADER ══════════════════════════════════════════ */
-.adm-header{
-  position:sticky;top:0;z-index:50;
-  background:rgba(247,241,232,.94);backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(200,169,110,.18);
-  padding:0 20px;height:60px;
-  display:flex;align-items:center;justify-content:space-between;gap:12px
-}
-.adm-title{font-family:var(--fd);font-size:1.05rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase}
-.adm-actions{display:flex;align-items:center;gap:10px}
-.btn-add{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 18px;border-radius:22px;border:none;
-  background:var(--burg);color:#fff;font-size:.82rem;font-weight:400;
-  transition:.2s var(--e)
-}
+/* ══ HEADER + TABS ══ */
+.adm-header{position:sticky;top:0;z-index:50;background:rgba(247,241,232,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,169,110,.18)}
+.adm-top{padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.adm-title{font-family:var(--fd);font-size:1rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase}
+.adm-actions{display:flex;align-items:center;gap:8px}
+.btn-add{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;border:none;background:var(--burg);color:#fff;font-size:.8rem;transition:.2s}
 .btn-add:hover{background:var(--mars)}
-.btn-signout{
-  padding:7px 14px;border-radius:20px;border:1px solid var(--lg);
-  background:none;color:var(--wg);font-size:.78rem;
-  transition:.2s var(--e)
-}
+.btn-signout{padding:6px 12px;border-radius:18px;border:1px solid var(--lg);background:none;color:var(--wg);font-size:.75rem;transition:.2s}
 .btn-signout:hover{border-color:var(--burg);color:var(--burg)}
 
-/* ── STATUS TOAST ── */
-#toast{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
-  z-index:200;padding:12px 22px;border-radius:28px;font-size:.84rem;font-weight:400;
-  box-shadow:0 4px 20px rgba(45,42,38,.18);opacity:0;
-  transition:transform .3s var(--e),opacity .3s var(--e);pointer-events:none;
-  white-space:nowrap
-}
+/* TABS */
+.tabs{display:flex;overflow-x:auto;border-top:1px solid rgba(200,169,110,.12);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:11px 18px;font-size:.78rem;letter-spacing:.04em;color:var(--wg);border:none;background:none;border-bottom:2px solid transparent;transition:.2s;white-space:nowrap}
+.tab:hover{color:var(--char)}
+.tab.on{color:var(--burg);border-bottom-color:var(--burg)}
+
+.tab-body{display:none;padding:20px}
+.tab-body.on{display:block}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);z-index:300;padding:11px 20px;border-radius:28px;font-size:.83rem;box-shadow:0 4px 20px rgba(45,42,38,.18);opacity:0;transition:transform .3s var(--e),opacity .3s;pointer-events:none;white-space:nowrap}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 #toast.ok{background:var(--green);color:#fff}
 #toast.err{background:var(--red);color:#fff}
 #toast.info{background:var(--char);color:#fff}
 
-/* ══ GRID ══════════════════════════════════════════ */
-#pg-main .body{padding:20px}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:16px
-}
-.card{
-  background:var(--canvas-w);border-radius:var(--radius);overflow:hidden;
-  border:1px solid rgba(200,169,110,.12);cursor:pointer;
-  transition:.25s var(--e)
-}
-.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(45,42,38,.09);border-color:var(--gold-s)}
-.card-img{
-  width:100%;aspect-ratio:1;overflow:hidden;
-  background:linear-gradient(135deg,var(--canvas-w),var(--lg));
-  position:relative
-}
-.card-img img{width:100%;height:100%;object-fit:cover;transition:.3s var(--e)}
+/* ═══ TAB: CATALOG ═══ */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.card{background:var(--canvas-w);border-radius:12px;overflow:hidden;border:1px solid rgba(200,169,110,.12);cursor:pointer;transition:.25s}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(45,42,38,.09);border-color:var(--gold-s)}
+.card-img{width:100%;aspect-ratio:1;overflow:hidden;background:linear-gradient(135deg,var(--canvas-w),var(--lg));position:relative}
+.card-img img,.card-img video{width:100%;height:100%;object-fit:cover;transition:.3s}
 .card:hover .card-img img{transform:scale(1.04)}
-.card-img .no-photo{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:var(--fd);font-size:.85rem;color:var(--lg);font-style:italic
-}
-.card-info{padding:14px}
-.card-title{font-family:var(--fd);font-size:1rem;font-weight:500;margin-bottom:3px;line-height:1.3}
-.card-year{font-size:.75rem;color:var(--wg);margin-bottom:8px}
-.card-price{font-family:var(--fd);font-size:1rem;font-weight:500;color:var(--burg)}
+.card-img .no-photo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.8rem;color:var(--lg);font-style:italic}
+.card-badge{position:absolute;bottom:5px;right:5px;background:rgba(45,42,38,.55);color:#fff;font-size:.65rem;padding:2px 6px;border-radius:8px;backdrop-filter:blur(4px)}
+.card-vid-badge{position:absolute;top:5px;left:5px;background:rgba(58,106,139,.85);color:#fff;font-size:.6rem;padding:2px 6px;border-radius:8px}
+.card-info{padding:12px}
+.card-title{font-family:var(--fd);font-size:.95rem;font-weight:500;margin-bottom:2px;line-height:1.3}
+.card-year{font-size:.72rem;color:var(--wg);margin-bottom:6px}
+.card-price{font-family:var(--fd);font-size:.95rem;font-weight:500;color:var(--burg)}
+.count-badge{display:inline-block;padding:2px 8px;border-radius:16px;background:rgba(200,169,110,.15);font-size:.75rem;color:var(--wg)}
 
-/* ══ MODAL ══════════════════════════════════════════ */
-#overlay{
-  display:none;position:fixed;inset:0;z-index:100;
-  background:rgba(45,42,38,.55);backdrop-filter:blur(6px)
-}
+/* ═══ TAB: ABOUT ═══ */
+.about-section{margin-bottom:28px}
+.section-title{font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--char);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(200,169,110,.2)}
+.para-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.para-pair .fm{position:relative}
+.para-pair .lang-label{position:absolute;top:6px;right:8px;font-size:.65rem;letter-spacing:.08em;color:var(--lg);text-transform:uppercase;pointer-events:none}
+.photo-upload-circle{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:24px}
+.artist-circle{width:120px;height:120px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--canvas-w),var(--lg));border:3px solid var(--gold);cursor:pointer;position:relative;flex-shrink:0}
+.artist-circle img{width:100%;height:100%;object-fit:cover}
+.artist-circle-label{font-size:.75rem;color:var(--wg)}
+
+/* ═══ TAB: EXHIBITIONS ═══ */
+.ex-list{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.ex-row{display:grid;grid-template-columns:64px 1fr 1fr auto;gap:8px;align-items:start;background:var(--canvas-w);border-radius:10px;padding:10px 12px;border:1px solid rgba(200,169,110,.1)}
+.ex-row input,.ex-row textarea{width:100%;padding:7px 10px;border:1px solid var(--lg);border-radius:7px;background:var(--canvas);color:var(--char);font-size:.82rem;outline:none;transition:.2s}
+.ex-row input:focus,.ex-row textarea:focus{border-color:var(--gold)}
+.ex-row .yr-in{text-align:center;font-weight:500;color:var(--burg)}
+.btn-del-row{width:30px;height:30px;flex-shrink:0;border-radius:8px;border:1px solid rgba(155,53,53,.2);background:none;color:var(--red);font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:.2s;margin-top:2px}
+.btn-del-row:hover{background:rgba(155,53,53,.08);border-color:var(--red)}
+.btn-add-row{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;border:1px dashed var(--lg);background:none;color:var(--wg);font-size:.8rem;transition:.2s}
+.btn-add-row:hover{border-color:var(--gold);color:var(--char)}
+
+/* ═══ TAB: PRESS ═══ */
+.press-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:16px}
+.press-card{background:var(--canvas-w);border-radius:12px;overflow:hidden;border:1px solid rgba(200,169,110,.1);cursor:pointer;transition:.25s}
+.press-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(45,42,38,.09);border-color:var(--gold-s)}
+.press-card-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,var(--canvas-w),var(--lg))}
+.press-card-img img{width:100%;height:100%;object-fit:cover;transition:.3s}
+.press-card:hover .press-card-img img{transform:scale(1.04)}
+.press-card-info{padding:10px 12px}
+.press-card-year{font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--burg);margin-bottom:3px}
+.press-card-name{font-family:var(--fd);font-size:.95rem;font-weight:500;line-height:1.3}
+
+/* ═══ TAB: CONTACTS ═══ */
+.contacts-form{max-width:520px}
+.contacts-form .fm{margin-bottom:14px}
+
+/* ═══ SHARED FORM ═══ */
+.fm label{display:block;font-size:.75rem;color:var(--wg);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.fm input,.fm textarea,.fm select{width:100%;padding:10px 12px;border:1px solid var(--lg);border-radius:9px;background:var(--canvas-w);color:var(--char);font-size:.9rem;outline:none;transition:.2s}
+.fm input:focus,.fm textarea:focus,.fm select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,169,110,.1)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.form-row.single{grid-template-columns:1fr}
+
+/* Save bar */
+.save-bar{position:sticky;bottom:0;background:rgba(247,241,232,.96);backdrop-filter:blur(10px);padding:14px 20px;border-top:1px solid rgba(200,169,110,.15);display:flex;gap:10px;align-items:center;z-index:20}
+.btn-save-section{flex:1;padding:12px;border-radius:28px;border:none;background:var(--burg);color:#fff;font-size:.9rem;transition:.2s}
+.btn-save-section:hover{background:var(--mars)}
+.btn-save-section:disabled{opacity:.5;cursor:not-allowed}
+
+/* ══ MODAL ══ */
+#overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(45,42,38,.55);backdrop-filter:blur(6px)}
 #overlay.show{display:block}
-#modal{
-  display:none;position:fixed;z-index:110;
-  bottom:0;left:0;right:0;
-  max-height:92vh;overflow-y:auto;
-  background:var(--canvas);
-  border-radius:20px 20px 0 0;
-  box-shadow:0 -8px 40px rgba(45,42,38,.16);
-  padding-bottom:env(safe-area-inset-bottom)
-}
+#modal{display:none;position:fixed;z-index:110;bottom:0;left:0;right:0;max-height:92vh;overflow-y:auto;background:var(--canvas);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(45,42,38,.16);padding-bottom:env(safe-area-inset-bottom)}
 #modal.show{display:block;animation:slideUp .3s var(--e)}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-
-/* on wide screens — centered dialog */
 @media(min-width:700px){
-  #modal{
-    top:50%;left:50%;right:auto;bottom:auto;
-    width:600px;max-height:88vh;
-    transform:translate(-50%,-50%);
-    border-radius:20px;
-    animation:fadeIn .2s ease
-  }
+  #modal{top:50%;left:50%;right:auto;bottom:auto;width:660px;max-height:88vh;transform:translate(-50%,-50%);border-radius:20px;animation:fadeIn .2s ease}
   @keyframes fadeIn{from{opacity:0;transform:translate(-50%,-54%)}to{opacity:1;transform:translate(-50%,-50%)}}
 }
-
-.modal-header{
-  position:sticky;top:0;z-index:10;
-  background:var(--canvas);
-  padding:18px 20px 14px;
-  border-bottom:1px solid rgba(200,169,110,.15);
-  display:flex;align-items:center;justify-content:space-between
-}
+.modal-header{position:sticky;top:0;z-index:10;background:var(--canvas);padding:16px 20px 12px;border-bottom:1px solid rgba(200,169,110,.15);display:flex;align-items:center;justify-content:space-between}
 .modal-header h3{font-family:var(--fd);font-size:1.2rem;font-weight:400}
-.btn-close{
-  width:32px;height:32px;border-radius:50%;border:none;
-  background:rgba(45,42,38,.06);color:var(--char);font-size:1rem;
-  display:flex;align-items:center;justify-content:center;transition:.2s
-}
+.btn-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(45,42,38,.06);color:var(--char);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.2s}
 .btn-close:hover{background:rgba(139,64,73,.12);color:var(--burg)}
-
-.modal-body{padding:20px}
-
-/* Photo upload area */
-.photo-area{
-  width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;
-  background:linear-gradient(135deg,var(--canvas-w),var(--lg));
-  position:relative;margin-bottom:16px;cursor:pointer;
-  border:2px dashed transparent;transition:.2s var(--e)
-}
-.photo-area:hover{border-color:var(--gold)}
-.photo-area img{width:100%;height:100%;object-fit:cover}
-.photo-overlay{
-  position:absolute;inset:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:8px;
-  background:rgba(45,42,38,.38);opacity:0;transition:.2s
-}
-.photo-area:hover .photo-overlay{opacity:1}
-.photo-overlay.always{opacity:1;background:transparent}
-.photo-icon{width:40px;height:40px;fill:#fff;opacity:.9}
-.photo-text{color:#fff;font-size:.82rem;font-weight:400;letter-spacing:.04em}
-#photoInput{display:none}
-
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.form-row.single{grid-template-columns:1fr}
-.fm label{display:block;font-size:.75rem;color:var(--wg);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
-.fm input,.fm textarea{
-  width:100%;padding:10px 12px;border:1px solid var(--lg);border-radius:9px;
-  background:var(--canvas-w);color:var(--char);font-size:.9rem;
-  transition:.2s;outline:none;resize:none
-}
-.fm input:focus,.fm textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,169,110,.1)}
-
-.modal-footer{
-  padding:16px 20px;border-top:1px solid rgba(200,169,110,.15);
-  display:flex;gap:10px;align-items:center
-}
-.btn-save{
-  flex:1;padding:13px;border-radius:28px;border:none;
-  background:var(--burg);color:#fff;font-size:.9rem;font-weight:400;
-  transition:.2s var(--e)
-}
+.modal-body{padding:18px 20px}
+.modal-footer{padding:14px 20px;border-top:1px solid rgba(200,169,110,.15);display:flex;gap:10px}
+.btn-save{flex:1;padding:12px;border-radius:28px;border:none;background:var(--burg);color:#fff;font-size:.9rem;transition:.2s}
 .btn-save:hover{background:var(--mars)}
 .btn-save:disabled{opacity:.5;cursor:not-allowed}
-.btn-delete{
-  padding:12px 18px;border-radius:28px;border:1px solid rgba(155,53,53,.3);
-  background:none;color:var(--red);font-size:.85rem;
-  transition:.2s var(--e)
-}
+.btn-delete{padding:11px 16px;border-radius:28px;border:1px solid rgba(155,53,53,.3);background:none;color:var(--red);font-size:.82rem;transition:.2s}
 .btn-delete:hover{background:rgba(155,53,53,.06);border-color:var(--red)}
 
-/* spinning loader */
-.spin{
-  display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);
-  border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle
-}
+/* ── MEDIA STRIP ── */
+.media-label{font-size:.75rem;color:var(--wg);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:block}
+.media-strip{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--canvas-w);border:1px solid var(--lg);border-radius:10px;margin-bottom:14px;min-height:82px;align-items:flex-start}
+.med-item{position:relative;width:74px;height:74px;flex-shrink:0;border-radius:8px;overflow:hidden;background:var(--lg);border:2px solid transparent;transition:.2s}
+.med-item.main-m{border-color:var(--gold)}
+.med-item img,.med-item video{width:100%;height:100%;object-fit:cover}
+.med-item.vid-item{background:#1a1a2e;display:flex;align-items:center;justify-content:center}
+.med-item.vid-item svg{width:22px;height:22px;fill:#fff;opacity:.8}
+.med-remove{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;border:none;background:rgba(45,42,38,.7);color:#fff;font-size:.6rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.15s}
+.med-remove:hover{background:var(--red)}
+.med-main-badge{position:absolute;bottom:2px;left:2px;font-size:.5rem;letter-spacing:.04em;text-transform:uppercase;background:var(--gold);color:#fff;padding:1px 4px;border-radius:3px}
+.med-add{width:74px;height:74px;border-radius:8px;flex-shrink:0;border:1.5px dashed var(--lg);background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--wg);font-size:.65rem;cursor:pointer;transition:.2s}
+.med-add:hover{border-color:var(--gold);color:var(--char)}
+.med-add svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+.med-loading{width:74px;height:74px;border-radius:8px;background:linear-gradient(90deg,var(--lg) 25%,var(--canvas-w) 50%,var(--lg) 75%);background-size:200% 100%;animation:shimmer 1.2s infinite}
+.med-size-note{font-size:.72rem;color:var(--lg);font-style:italic;margin-top:6px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* Press photo upload */
+.press-photo-area{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,var(--canvas-w),var(--lg));position:relative;cursor:pointer;border:2px dashed transparent;transition:.2s;margin-bottom:14px}
+.press-photo-area:hover{border-color:var(--gold)}
+.press-photo-area img{width:100%;height:100%;object-fit:cover}
+.press-photo-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(45,42,38,.38);opacity:0;transition:.2s}
+.press-photo-area:hover .press-photo-overlay{opacity:1}
+.press-photo-overlay.always{opacity:1;background:transparent}
+.press-photo-overlay svg{width:32px;height:32px;stroke:#fff;fill:none;stroke-width:1.5}
+.press-photo-overlay span{color:#fff;font-size:.78rem}
+
+.spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* count badge */
-.count-badge{
-  display:inline-block;padding:3px 10px;border-radius:20px;
-  background:rgba(200,169,110,.15);font-size:.78rem;color:var(--wg)
-}
-
 @media(max-width:600px){
-  .grid{grid-template-columns:1fr 1fr;gap:12px}
+  .grid{grid-template-columns:1fr 1fr;gap:10px}
   .form-row{grid-template-columns:1fr}
-  .adm-title{font-size:.9rem}
+  .para-pair{grid-template-columns:1fr}
+  .ex-row{grid-template-columns:48px 1fr auto;grid-template-rows:auto auto}
+  .ex-row .en-field{grid-column:2}
+  .adm-title{font-size:.85rem}
 }
-@media(max-width:380px){
-  .grid{grid-template-columns:1fr}
-}
+@media(max-width:380px){.grid{grid-template-columns:1fr}.press-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -268,23 +208,19 @@ img{display:block;max-width:100%}
 <div id="pg-login" class="page active">
   <div class="login-box">
     <div class="login-logo">М. Полушкина</div>
-    <div class="login-sub">Управление каталогом</div>
+    <div class="login-sub">Управление сайтом</div>
     <h2>Вход</h2>
     <div class="field">
       <label>GitHub Token</label>
-      <input type="password" id="tokenInput" placeholder="github_pat_…" autocomplete="off"
-             onkeydown="if(event.key==='Enter')doLogin()">
+      <input type="password" id="tokenInput" placeholder="github_pat_…" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
     </div>
     <button class="btn-primary" onclick="doLogin()" id="loginBtn">Войти</button>
     <div id="login-err"></div>
     <div class="login-hint">
-      <p>
-        <strong>Как получить токен (один раз):</strong><br>
-        1. Открыть <a href="https://github.com/settings/tokens?type=beta" target="_blank">github.com → Settings → Developer settings → Fine-grained tokens</a><br>
-        2. «Generate new token» → Repository access: выбрать только этот репозиторий<br>
-        3. Permissions → Contents → <strong>Read and write</strong><br>
-        4. Скопировать токен и вставить выше
-      </p>
+      <p><strong>Как получить токен:</strong><br>
+      1. <a href="https://github.com/settings/tokens?type=beta" target="_blank">github.com → Settings → Fine-grained tokens</a><br>
+      2. Repository access → выбрать этот репозиторий<br>
+      3. Permissions → Contents → <strong>Read and write</strong></p>
     </div>
   </div>
 </div>
@@ -292,526 +228,828 @@ img{display:block;max-width:100%}
 <!-- ══ MAIN ══ -->
 <div id="pg-main" class="page">
   <header class="adm-header">
-    <span class="adm-title">Каталог</span>
-    <div class="adm-actions">
-      <span class="count-badge" id="countBadge">0 работ</span>
-      <button class="btn-add" onclick="openNew()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Добавить
-      </button>
-      <button class="btn-signout" onclick="signOut()">Выйти</button>
+    <div class="adm-top">
+      <span class="adm-title">М. Полушкина — CMS</span>
+      <div class="adm-actions">
+        <span class="count-badge" id="countBadge">—</span>
+        <button class="btn-add" id="btnTabAdd" onclick="tabAdd()" style="display:none">+ Добавить</button>
+        <button class="btn-signout" onclick="signOut()">Выйти</button>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab on" onclick="switchTab('catalog')">🖼 Каталог</button>
+      <button class="tab" onclick="switchTab('about')">👤 О художнике</button>
+      <button class="tab" onclick="switchTab('exhibitions')">🏛 Выставки</button>
+      <button class="tab" onclick="switchTab('press')">📰 Публикации</button>
+      <button class="tab" onclick="switchTab('contacts')">📞 Контакты</button>
     </div>
   </header>
-  <div class="body">
-    <div class="grid" id="grid"></div>
+
+  <!-- ── CATALOG TAB ── -->
+  <div class="tab-body on" id="tab-catalog">
+    <div class="grid" id="catalogGrid"></div>
+  </div>
+
+  <!-- ── ABOUT TAB ── -->
+  <div class="tab-body" id="tab-about">
+    <div class="about-section">
+      <div class="section-title">Фото художницы</div>
+      <div class="photo-upload-circle">
+        <div class="artist-circle" onclick="document.getElementById('artistPhotoInput').click()">
+          <img id="artistPhotoPreview" src="site/images/artist-photo.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1 1%22/>'">
+        </div>
+        <span class="artist-circle-label">Нажмите для замены фото</span>
+        <input type="file" id="artistPhotoInput" accept="image/*" style="display:none" onchange="onArtistPhotoSelected(this)">
+      </div>
+    </div>
+
+    <div class="about-section">
+      <div class="section-title">Биография</div>
+      <div id="aboutParasEditor"></div>
+      <button class="btn-add-row" onclick="addAboutPara()">+ Добавить абзац</button>
+    </div>
+
+    <div class="about-section" style="margin-top:20px">
+      <div class="section-title">Цитата</div>
+      <div class="para-pair">
+        <div class="fm" style="position:relative">
+          <label>Русский</label>
+          <textarea id="quoteRu" rows="3" style="resize:vertical"></textarea>
+          <span class="lang-label">RU</span>
+        </div>
+        <div class="fm" style="position:relative">
+          <label>English</label>
+          <textarea id="quoteEn" rows="3" style="resize:vertical"></textarea>
+          <span class="lang-label">EN</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="save-bar">
+      <button class="btn-save-section" onclick="saveAbout()" id="btnSaveAbout">Сохранить изменения</button>
+    </div>
+  </div>
+
+  <!-- ── EXHIBITIONS TAB ── -->
+  <div class="tab-body" id="tab-exhibitions">
+    <div class="ex-list" id="exList"></div>
+    <button class="btn-add-row" onclick="addExRow()">+ Добавить выставку</button>
+    <div class="save-bar">
+      <button class="btn-save-section" onclick="saveExhibitions()" id="btnSaveEx">Сохранить выставки</button>
+    </div>
+  </div>
+
+  <!-- ── PRESS TAB ── -->
+  <div class="tab-body" id="tab-press">
+    <div class="press-grid" id="pressGrid"></div>
+    <div class="save-bar" style="position:relative;bottom:auto">
+      <button class="btn-add-row" onclick="openPressNew()" style="flex:none">+ Добавить публикацию</button>
+    </div>
+  </div>
+
+  <!-- ── CONTACTS TAB ── -->
+  <div class="tab-body" id="tab-contacts">
+    <div class="contacts-form">
+      <div class="section-title" style="font-family:var(--fd);font-size:1.1rem;font-weight:400;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(200,169,110,.2)">Контактная информация</div>
+      <div class="fm"><label>Telegram (без @)</label><input type="text" id="cTg" placeholder="artpolushkina"></div>
+      <div class="fm"><label>Instagram (без @)</label><input type="text" id="cIg" placeholder="artpolushkina"></div>
+      <div class="fm"><label>Email</label><input type="email" id="cEmail" placeholder="art@example.com"></div>
+      <div class="fm"><label>Телефон</label><input type="tel" id="cPhone" placeholder="+7 926 000-00-00"></div>
+    </div>
+    <div class="save-bar" style="position:relative;bottom:auto;margin-top:8px">
+      <button class="btn-save-section" onclick="saveContacts()" id="btnSaveContacts">Сохранить контакты</button>
+    </div>
   </div>
 </div>
 
-<!-- ══ OVERLAY + MODAL ══ -->
+<!-- ══ OVERLAY ══ -->
 <div id="overlay" onclick="closeModal()"></div>
+
+<!-- ══ MODAL (catalog item + press) ══ -->
 <div id="modal">
   <div class="modal-header">
     <h3 id="modalTitle">Редактировать</h3>
     <button class="btn-close" onclick="closeModal()">✕</button>
   </div>
-  <div class="modal-body">
-    <!-- Photo -->
-    <div class="photo-area" id="photoArea" onclick="document.getElementById('photoInput').click()">
-      <img id="photoPreview" src="" alt="" style="display:none">
-      <div class="photo-overlay" id="photoOverlay">
-        <svg class="photo-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-        <span class="photo-text">Нажмите чтобы загрузить фото</span>
-      </div>
-    </div>
-    <input type="file" id="photoInput" accept="image/*" onchange="onPhotoSelected(this)">
-
-    <!-- Fields -->
-    <div class="form-row">
-      <div class="fm">
-        <label>Название (рус)</label>
-        <input type="text" id="fT" placeholder="ГАМАК">
-      </div>
-      <div class="fm">
-        <label>Название (eng)</label>
-        <input type="text" id="fTe" placeholder="Hammock">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="fm">
-        <label>Материал (рус)</label>
-        <input type="text" id="fM" placeholder="Холст, акрил">
-      </div>
-      <div class="fm">
-        <label>Материал (eng)</label>
-        <input type="text" id="fMe" placeholder="Canvas, acrylic">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="fm">
-        <label>Размер (см)</label>
-        <input type="text" id="fS" placeholder="70×60">
-      </div>
-      <div class="fm">
-        <label>Год</label>
-        <input type="number" id="fY" placeholder="2026" min="1990" max="2099">
-      </div>
-    </div>
-    <div class="form-row single">
-      <div class="fm">
-        <label>Цена (₽)</label>
-        <input type="number" id="fP" placeholder="62000" min="0">
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn-delete" id="btnDelete" onclick="confirmDelete()">Удалить</button>
-    <button class="btn-save" id="btnSave" onclick="saveEdit()">Сохранить</button>
-  </div>
+  <div class="modal-body" id="modalBody"></div>
+  <div class="modal-footer" id="modalFooter"></div>
 </div>
 
 <div id="toast"></div>
+<input type="file" id="mediaInput" accept="image/*,video/*" multiple style="display:none" onchange="onMediaSelected(this)">
+<input type="file" id="pressPhotoInput" accept="image/*" style="display:none" onchange="onPressPhotoSelected(this)">
 
 <script>
 /* ══════════════════════════════════════════
-   CONFIG — репозиторий Марии
+   CONFIG
 ══════════════════════════════════════════ */
 const OWNER  = 'khinkis13-rgb';
 const REPO   = '-Users-dmitrykhinkis-Documents-CURSOR-FLAG-ART';
 const BRANCH = 'main';
-const CATALOG_PATH = 'catalog.json';
-const IMG_DIR      = 'site/images';
-const RAW_BASE     = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}`;
+const CATALOG_PATH  = 'catalog.json';
+const CONTENT_PATH  = 'content.json';
+const IMG_DIR       = 'site/images';
+const VID_DIR       = 'site/videos';
+const RAW_BASE      = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}`;
 
-/* ══════════════════════════════════════════
-   STATE
-══════════════════════════════════════════ */
-let token    = '';
-let catalog  = [];        // array of painting objects
-let catSha   = null;      // sha of catalog.json in repo (needed for updates)
-let editingId = null;     // id of painting being edited (null = new)
-let pendingPhoto = null;  // { base64, imgSha } for upload on save
+/* ── STATE ── */
+let token='',catalog=[],content={},catSha=null,ctSha=null;
+let currentTab='catalog';
+
+/* ── MODAL STATE ── */
+let modalMode=null; // 'catalog' | 'press'
+let editingId=null;
+let displayMedia=[]; // {key,src,type:'img'|'vid',path,sha,base64,mimeType}
+let deletedMedia=[];
+let pendingPressPhoto=null;
+let editingPressIdx=null;
 
 /* ══════════════════════════════════════════
    GITHUB API
 ══════════════════════════════════════════ */
-function apiHeaders() {
-  return {
-    'Authorization': `token ${token}`,
-    'Accept': 'application/vnd.github.v3+json',
-    'Content-Type': 'application/json'
-  };
+function apiH(){return{'Authorization':`token ${token}`,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'}}
+
+async function ghGet(path){
+  const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,{headers:apiH()});
+  if(r.status===404)return null;
+  if(!r.ok){const e=await r.json();throw new Error(e.message||r.status);}
+  const data=await r.json();
+  const b64=data.content.replace(/\s/g,'');
+  const bytes=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+  return{...data,content:new TextDecoder('utf-8').decode(bytes)};
 }
 
-async function ghGet(path) {
-  const r = await fetch(
-    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,
-    { headers: apiHeaders() }
-  );
-  if (r.status === 404) return null;
-  if (!r.ok) { const e = await r.json(); throw new Error(e.message || r.status); }
-  const data = await r.json();
-  // Decode base64 → UTF-8 bytes → string (atob alone breaks Cyrillic/Unicode)
-  const b64 = data.content.replace(/\s/g, '');
-  const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-  const content = new TextDecoder('utf-8').decode(bytes);
-  return { ...data, content };
-}
-
-async function ghPut(path, b64content, sha, message) {
-  const body = { message, content: b64content, branch: BRANCH };
-  if (sha) body.sha = sha;
-  const r = await fetch(
-    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,
-    { method: 'PUT', headers: apiHeaders(), body: JSON.stringify(body) }
-  );
-  if (!r.ok) { const e = await r.json(); throw new Error(e.message || r.status); }
+async function ghGetMeta(path){
+  const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,{headers:apiH()});
+  if(r.status===404)return null;
+  if(!r.ok)return null;
   return r.json();
 }
 
-async function ghDelete(path, sha, message) {
-  const r = await fetch(
-    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,
-    { method: 'DELETE', headers: apiHeaders(),
-      body: JSON.stringify({ message, sha, branch: BRANCH }) }
-  );
-  if (!r.ok && r.status !== 404) { const e = await r.json(); throw new Error(e.message || r.status); }
+async function ghPut(path,b64content,sha,message){
+  const body={message,content:b64content,branch:BRANCH};
+  if(sha)body.sha=sha;
+  const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,{method:'PUT',headers:apiH(),body:JSON.stringify(body)});
+  if(!r.ok){const e=await r.json();throw new Error(e.message||r.status);}
+  return r.json();
 }
 
-// Encode text to base64 (handles Unicode)
-function textToB64(str) {
-  return btoa(unescape(encodeURIComponent(str)));
+async function ghDelete(path,sha,message){
+  const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,{method:'DELETE',headers:apiH(),body:JSON.stringify({message,sha,branch:BRANCH})});
+  if(!r.ok&&r.status!==404){const e=await r.json();throw new Error(e.message||r.status);}
 }
+
+function textToB64(str){return btoa(unescape(encodeURIComponent(str)));}
 
 /* ══════════════════════════════════════════
-   LOGIN
+   LOGIN / LOGOUT
 ══════════════════════════════════════════ */
-async function doLogin() {
-  const t = document.getElementById('tokenInput').value.trim();
-  if (!t) return;
-  const btn = document.getElementById('loginBtn');
-  const err = document.getElementById('login-err');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spin"></span> Проверяем…';
-  err.style.display = 'none';
-
-  try {
-    token = t;
-    // Test: load catalog
-    await loadCatalog();
-    // Save token
-    localStorage.setItem('mp_token', t);
+async function doLogin(){
+  const t=document.getElementById('tokenInput').value.trim();
+  if(!t)return;
+  const btn=document.getElementById('loginBtn'),err=document.getElementById('login-err');
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Входим…';err.style.display='none';
+  try{
+    token=t;
+    await loadAll();
+    localStorage.setItem('mp_token',t);
     showPage('pg-main');
-    renderGrid();
-  } catch(e) {
-    err.textContent = 'Ошибка: ' + e.message;
-    err.style.display = 'block';
-    token = '';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Войти';
-  }
+    renderCurrentTab();
+  }catch(e){
+    err.textContent='Ошибка: '+e.message;err.style.display='block';token='';
+  }finally{btn.disabled=false;btn.textContent='Войти';}
 }
 
-function signOut() {
+function signOut(){
   localStorage.removeItem('mp_token');
-  token = ''; catalog = []; catSha = null;
-  document.getElementById('tokenInput').value = '';
+  token='';catalog=[];content={};catSha=null;ctSha=null;
+  document.getElementById('tokenInput').value='';
   showPage('pg-login');
 }
 
 /* ══════════════════════════════════════════
-   CATALOG LOAD / SAVE
+   LOAD DATA
 ══════════════════════════════════════════ */
-async function loadCatalog() {
-  const data = await ghGet(CATALOG_PATH);
-  if (!data) {
-    // catalog.json не найден — начнём с пустого
-    catalog = [];
-    catSha = null;
-    return;
-  }
-  catSha = data.sha;
-  catalog = JSON.parse(data.content);
+async function loadAll(){
+  const [cr,nr]=await Promise.all([ghGet(CATALOG_PATH),ghGet(CONTENT_PATH)]);
+  catalog=cr?JSON.parse(cr.content):[];catSha=cr?cr.sha:null;
+  content=nr?JSON.parse(nr.content):{};ctSha=nr?nr.sha:null;
+  if(!content.about)content.about={parasRu:[],parasEn:[],quoteRu:'',quoteEn:''};
+  if(!content.exhibitions)content.exhibitions=[];
+  if(!content.press)content.press=[];
+  if(!content.contacts)content.contacts={telegram:'',instagram:'',email:'',phone:''};
 }
 
-async function commitCatalog(message = 'Обновление каталога') {
-  const json = JSON.stringify(catalog, null, 2);
-  const result = await ghPut(CATALOG_PATH, textToB64(json), catSha, message);
-  catSha = result.content.sha;
+async function commitCatalog(msg){
+  const r=await ghPut(CATALOG_PATH,textToB64(JSON.stringify(catalog,null,2)),catSha,msg);
+  catSha=r.content.sha;
+}
+
+async function commitContent(msg){
+  const r=await ghPut(CONTENT_PATH,textToB64(JSON.stringify(content,null,2)),ctSha,msg);
+  ctSha=r.content.sha;
 }
 
 /* ══════════════════════════════════════════
-   IMAGE RESIZE
+   TABS
 ══════════════════════════════════════════ */
-function resizeImage(file, maxPx = 1400) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    const url = URL.createObjectURL(file);
-    img.onload = () => {
-      let w = img.width, h = img.height;
-      if (w > h && w > maxPx) { h = Math.round(h * maxPx / w); w = maxPx; }
-      else if (h > maxPx)     { w = Math.round(w * maxPx / h); h = maxPx; }
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      URL.revokeObjectURL(url);
-      canvas.toBlob(blob => {
-        const reader = new FileReader();
-        reader.onload = e => resolve(e.target.result.split(',')[1]); // base64 only
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      }, 'image/jpeg', 0.88);
+function switchTab(name){
+  currentTab=name;
+  document.querySelectorAll('.tab').forEach((t,i)=>{const tabs=['catalog','about','exhibitions','press','contacts'];t.classList.toggle('on',tabs[i]===name);});
+  document.querySelectorAll('.tab-body').forEach(b=>b.classList.toggle('on',b.id==='tab-'+name));
+  const addBtn=document.getElementById('btnTabAdd');
+  const badge=document.getElementById('countBadge');
+  if(name==='catalog'){addBtn.style.display='';addBtn.textContent='+ Работа';badge.textContent=catalog.length+' работ';}
+  else if(name==='about'){addBtn.style.display='none';badge.textContent='';}
+  else if(name==='exhibitions'){addBtn.style.display='none';badge.textContent=(content.exhibitions||[]).length+' выставок';}
+  else if(name==='press'){addBtn.style.display='none';badge.textContent=(content.press||[]).length+' публикаций';}
+  else if(name==='contacts'){addBtn.style.display='none';badge.textContent='';}
+  renderCurrentTab();
+}
+
+function tabAdd(){if(currentTab==='catalog')openCatalogNew();}
+
+function renderCurrentTab(){
+  if(currentTab==='catalog')renderCatalogGrid();
+  else if(currentTab==='about')renderAboutEditor();
+  else if(currentTab==='exhibitions')renderExEditor();
+  else if(currentTab==='press')renderPressGrid();
+  else if(currentTab==='contacts')renderContactsForm();
+}
+
+function renderCurrentTab(){}; // override below after all render fns defined
+
+/* ══════════════════════════════════════════
+   TAB: CATALOG
+══════════════════════════════════════════ */
+function getMedia(a){
+  if(a.media&&a.media.length)return a.media;
+  if(a.imgs&&a.imgs.length)return a.imgs.map(p=>({type:'img',path:p}));
+  return[{type:'img',path:`${IMG_DIR}/work-${a.id}.jpg`}];
+}
+
+function renderCatalogGrid(){
+  document.getElementById('countBadge').textContent=catalog.length+' работ';
+  const grid=document.getElementById('catalogGrid');
+  if(!catalog.length){grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:48px;font-family:var(--fd);color:var(--wg);font-style:italic">Каталог пуст. Нажмите «+ Работа».</div>`;return;}
+  grid.innerHTML=catalog.map(a=>{
+    const media=getMedia(a);
+    const first=media[0];
+    const hasVid=media.some(m=>m.type==='vid');
+    const thumb=first.type==='img'
+      ?`<img src="${RAW_BASE}/${first.path}" alt="${a.t}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      :`<video src="${RAW_BASE}/${first.path}" muted preload="none" style="width:100%;height:100%;object-fit:cover"></video>`;
+    return`<div class="card" onclick="openCatalogEdit(${a.id})">
+      <div class="card-img">${thumb}<div class="no-photo" style="display:none">нет фото</div>${media.length>1?`<div class="card-badge">📎 ${media.length}</div>`:''}${hasVid?`<div class="card-vid-badge">▶</div>`:''}</div>
+      <div class="card-info"><div class="card-title">${a.t}</div><div class="card-year">${a.s} · ${a.y}</div><div class="card-price">${a.p.toLocaleString('ru-RU')} ₽</div></div>
+    </div>`;
+  }).join('');
+}
+
+function openCatalogNew(){
+  editingId=null;displayMedia=[];deletedMedia=[];
+  const nextId=catalog.length?Math.max(...catalog.map(a=>a.id))+1:1;
+  buildCatalogModal({id:nextId,t:'',te:'',m:'Холст, акрил',me:'Canvas, acrylic',s:'',y:new Date().getFullYear(),p:''},'new');
+  showModal();
+}
+
+async function openCatalogEdit(id){
+  const a=catalog.find(x=>x.id===id);if(!a)return;
+  editingId=id;displayMedia=[];deletedMedia=[];
+  buildCatalogModal(a,'loading');
+  showModal();
+  // Load media shas
+  const paths=getMedia(a);
+  const loaded=[];
+  for(const m of paths){
+    try{
+      const meta=await ghGetMeta(m.path);
+      loaded.push({key:'ex-'+m.path,src:`${RAW_BASE}/${m.path}?t=${Date.now()}`,type:m.type,path:m.path,sha:meta?meta.sha:null,base64:null,mimeType:m.type==='vid'?'video/mp4':'image/jpeg'});
+    }catch(_){}
+  }
+  displayMedia=loaded;
+  renderMediaStrip(false);
+}
+
+function buildCatalogModal(a,state){
+  modalMode='catalog';
+  document.getElementById('modalTitle').textContent=editingId===null?`Новая работа #${a.id}`:'Редактировать работу';
+  const loading=state==='loading';
+  document.getElementById('modalBody').innerHTML=`
+    <span class="media-label">Фото и видео</span>
+    <div class="media-strip" id="mediaStrip">${loading?'<div class="med-loading"></div><div class="med-loading"></div>':''}</div>
+    <p class="med-size-note">Изображения сжимаются до 1400px. Видео загружается как есть (рекомендуем до 50 МБ).</p>
+    <div class="form-row" style="margin-top:14px">
+      <div class="fm"><label>Название (рус)</label><input type="text" id="fT" value="${esc(a.t||'')}"></div>
+      <div class="fm"><label>Название (eng)</label><input type="text" id="fTe" value="${esc(a.te||'')}"></div>
+    </div>
+    <div class="form-row">
+      <div class="fm"><label>Материал (рус)</label><input type="text" id="fM" value="${esc(a.m||'')}"></div>
+      <div class="fm"><label>Материал (eng)</label><input type="text" id="fMe" value="${esc(a.me||'')}"></div>
+    </div>
+    <div class="form-row">
+      <div class="fm"><label>Размер (см)</label><input type="text" id="fS" value="${esc(a.s||'')}"></div>
+      <div class="fm"><label>Год</label><input type="number" id="fY" value="${a.y||''}"></div>
+    </div>
+    <div class="form-row single">
+      <div class="fm"><label>Цена (₽)</label><input type="number" id="fP" value="${a.p||''}"></div>
+    </div>`;
+  document.getElementById('modalFooter').innerHTML=`
+    ${editingId!==null?`<button class="btn-delete" onclick="deleteCatalogItem()">Удалить</button>`:''}
+    <button class="btn-save" id="btnSave" onclick="saveCatalogItem()">Сохранить</button>`;
+  if(!loading)renderMediaStrip(false);
+}
+
+function renderMediaStrip(loading){
+  const strip=document.getElementById('mediaStrip');
+  if(!strip)return;
+  if(loading){strip.innerHTML='<div class="med-loading"></div><div class="med-loading"></div>';return;}
+  const playIcon=`<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+  let html='';
+  displayMedia.forEach((m,i)=>{
+    const isMain=i===0;
+    const isVid=m.type==='vid';
+    html+=`<div class="med-item ${isMain?'main-m':''} ${isVid?'vid-item':''}" data-key="${m.key}">`;
+    if(isVid){
+      html+=`${playIcon}`;
+    }else{
+      html+=`<img src="${m.src}" alt="" onerror="this.style.display='none'">`;
+    }
+    html+=`<button class="med-remove" onclick="removeMedia('${m.key}')" title="Удалить">✕</button>`;
+    if(isMain)html+=`<div class="med-main-badge">Главное</div>`;
+    html+=`</div>`;
+  });
+  html+=`<button class="med-add" onclick="document.getElementById('mediaInput').click()">
+    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    <span>Фото/видео</span>
+  </button>`;
+  strip.innerHTML=html;
+}
+
+/* ── MEDIA UPLOAD ── */
+async function onMediaSelected(input){
+  const files=Array.from(input.files);if(!files.length)return;
+  const id=editingId!==null?editingId:(catalog.length?Math.max(...catalog.map(a=>a.id))+1:1);
+  toast(`Обрабатываем ${files.length} файл(ов)…`,'info');
+  for(const file of files){
+    const isVid=file.type.startsWith('video/');
+    try{
+      let b64,path,mimeType;
+      if(isVid){
+        // Check size
+        if(file.size>80*1024*1024){toast('Видео слишком большое (макс 80 МБ)','err');continue;}
+        b64=await fileToB64(file);
+        const ext=file.name.split('.').pop()||'mp4';
+        path=nextMediaPath(id,'vid',ext);
+        mimeType=file.type;
+      }else{
+        b64=await resizeImage(file);
+        path=nextMediaPath(id,'img','jpg');
+        mimeType='image/jpeg';
+      }
+      const key='new-'+Date.now()+'-'+Math.random().toString(36).slice(2);
+      const src=isVid?`data:${mimeType};base64,${b64}`:`data:image/jpeg;base64,${b64}`;
+      displayMedia.push({key,src,type:isVid?'vid':'img',path,sha:null,base64:b64,mimeType});
+    }catch(e){toast('Ошибка: '+e.message,'err');}
+  }
+  renderMediaStrip(false);
+  toastHide();
+  input.value='';
+}
+
+function fileToB64(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=e=>res(e.target.result.split(',')[1]);
+    r.onerror=rej;
+    r.readAsDataURL(file);
+  });
+}
+
+function nextMediaPath(id,type,ext){
+  const all=[...displayMedia.map(m=>m.path),...deletedMedia.map(m=>m.path)].filter(Boolean);
+  const isVid=type==='vid';
+  const dir=isVid?VID_DIR:IMG_DIR;
+  const prefix=isVid?`work-${id}-`:`work-${id}`;
+  // Count existing of this type
+  let max=0;
+  all.forEach(p=>{
+    const base=p.split('/').pop();
+    if(isVid){
+      const m=base.match(new RegExp(`^work-${id}-(\\d+)\\.`));
+      if(m)max=Math.max(max,parseInt(m[1]));
+    }else{
+      const m=base.match(new RegExp(`^work-${id}(?:-(\\d+))?\\.jpg$`));
+      if(m){const n=m[1]?parseInt(m[1]):1;max=Math.max(max,n);}
+    }
+  });
+  const next=max+1;
+  if(isVid)return`${dir}/work-${id}-${next}.${ext}`;
+  return next===1?`${dir}/work-${id}.jpg`:`${dir}/work-${id}-${next}.jpg`;
+}
+
+function removeMedia(key){
+  const idx=displayMedia.findIndex(m=>m.key===key);if(idx===-1)return;
+  const m=displayMedia[idx];
+  if(m.type==='existing'||(!m.base64&&m.sha)){deletedMedia.push({path:m.path,sha:m.sha});}
+  displayMedia.splice(idx,1);
+  renderMediaStrip(false);
+}
+
+async function saveCatalogItem(){
+  const btn=document.getElementById('btnSave');
+  const data={
+    t:document.getElementById('fT').value.trim(),
+    te:document.getElementById('fTe').value.trim(),
+    m:document.getElementById('fM').value.trim(),
+    me:document.getElementById('fMe').value.trim(),
+    s:document.getElementById('fS').value.trim(),
+    y:parseInt(document.getElementById('fY').value)||0,
+    p:parseInt(document.getElementById('fP').value)||0,
+  };
+  if(!data.t){toast('Введите название','err');return;}
+  if(!data.y){toast('Укажите год','err');return;}
+  if(!displayMedia.length){toast('Нужно хотя бы одно фото или видео','err');return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Сохраняем…';
+  try{
+    let id=editingId;
+    if(id===null){id=catalog.length?Math.max(...catalog.map(a=>a.id))+1:1;data.id=id;}
+    // Upload new media
+    const newItems=displayMedia.filter(m=>m.base64);
+    if(newItems.length){
+      toast(`Загружаем ${newItems.length} файл(ов)…`,'info');
+      for(const m of newItems){
+        let sha=null;try{const ex=await ghGetMeta(m.path);if(ex)sha=ex.sha;}catch(_){}
+        const r=await ghPut(m.path,m.base64,sha,`Медиа: работа #${id}`);
+        m.sha=r.content.sha;m.base64=null;
+      }
+    }
+    // Delete removed
+    for(const d of deletedMedia){if(d.sha)await ghDelete(d.path,d.sha,`Удалено медиа: работа #${id}`).catch(()=>{});}
+    // Build media array
+    data.media=displayMedia.map(m=>({type:m.type,path:m.path}));
+    if(editingId===null){catalog.push(data);}
+    else{const idx=catalog.findIndex(a=>a.id===id);catalog[idx]={...catalog[idx],...data};}
+    await commitCatalog(editingId===null?`Добавлена работа: ${data.t}`:`Обновлена работа #${id}: ${data.t}`);
+    closeModal();renderCatalogGrid();
+    toast('Сохранено ✓','ok');
+  }catch(e){toast('Ошибка: '+e.message,'err');}
+  finally{btn.disabled=false;btn.textContent='Сохранить';}
+}
+
+async function deleteCatalogItem(){
+  const a=catalog.find(x=>x.id===editingId);if(!a)return;
+  if(!confirm(`Удалить работу «${a.t}»? Это нельзя отменить.`))return;
+  const btn=document.querySelector('#modalFooter .btn-delete');
+  btn.disabled=true;btn.textContent='…';
+  try{
+    const media=getMedia(a);
+    catalog=catalog.filter(x=>x.id!==editingId);
+    await commitCatalog(`Удалена работа #${editingId}: ${a.t}`);
+    for(const m of media){try{const mt=await ghGetMeta(m.path);if(mt)await ghDelete(m.path,mt.sha,`Удалено: работа #${editingId}`);}catch(_){}}
+    closeModal();renderCatalogGrid();
+    toast(`«${a.t}» удалена`,'ok');
+  }catch(e){toast('Ошибка: '+e.message,'err');btn.disabled=false;btn.textContent='Удалить';}
+}
+
+/* ══════════════════════════════════════════
+   TAB: ABOUT
+══════════════════════════════════════════ */
+let artistPhotoPending=null;
+
+function renderAboutEditor(){
+  const ab=content.about||{parasRu:[],parasEn:[],quoteRu:'',quoteEn:''};
+  // Update preview
+  // Build para editors
+  const maxLen=Math.max(ab.parasRu.length,ab.parasEn.length,1);
+  let html='';
+  for(let i=0;i<maxLen;i++){
+    html+=`<div class="para-pair" data-idx="${i}">
+      <div class="fm" style="position:relative">
+        <label>Абзац ${i+1} (рус)</label>
+        <textarea class="para-ru" rows="3">${esc(ab.parasRu[i]||'')}</textarea>
+      </div>
+      <div class="fm" style="position:relative">
+        <label>Абзац ${i+1} (eng)</label>
+        <textarea class="para-en" rows="3">${esc(ab.parasEn[i]||'')}</textarea>
+      </div>
+      <div style="grid-column:1/-1;display:flex;justify-content:flex-end;margin-top:-4px;margin-bottom:4px">
+        <button onclick="removeAboutPara(${i})" style="padding:3px 10px;border-radius:8px;border:1px solid rgba(155,53,53,.2);background:none;color:var(--red);font-size:.72rem;cursor:pointer">✕ Удалить абзац</button>
+      </div>
+    </div>`;
+  }
+  document.getElementById('aboutParasEditor').innerHTML=html;
+  document.getElementById('quoteRu').value=ab.quoteRu||'';
+  document.getElementById('quoteEn').value=ab.quoteEn||'';
+}
+
+function addAboutPara(){
+  const ab=content.about||{parasRu:[],parasEn:[],quoteRu:'',quoteEn:''};
+  collectAboutFields();
+  ab.parasRu.push('');ab.parasEn.push('');
+  content.about=ab;renderAboutEditor();
+}
+
+function removeAboutPara(idx){
+  collectAboutFields();
+  const ab=content.about;
+  ab.parasRu.splice(idx,1);ab.parasEn.splice(idx,1);
+  content.about=ab;renderAboutEditor();
+}
+
+function collectAboutFields(){
+  const parasRu=[],parasEn=[];
+  document.querySelectorAll('#aboutParasEditor .para-pair').forEach(row=>{
+    parasRu.push(row.querySelector('.para-ru').value.trim());
+    parasEn.push(row.querySelector('.para-en').value.trim());
+  });
+  content.about={
+    parasRu,parasEn,
+    quoteRu:document.getElementById('quoteRu').value.trim(),
+    quoteEn:document.getElementById('quoteEn').value.trim()
+  };
+}
+
+function onArtistPhotoSelected(input){
+  const file=input.files[0];if(!file)return;
+  toast('Обрабатываем фото…','info');
+  resizeImage(file,1400).then(b64=>{
+    artistPhotoPending=b64;
+    document.getElementById('artistPhotoPreview').src='data:image/jpeg;base64,'+b64;
+    toastHide();
+  }).catch(e=>toast('Ошибка: '+e.message,'err'));
+  input.value='';
+}
+
+async function saveAbout(){
+  const btn=document.getElementById('btnSaveAbout');
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Сохраняем…';
+  try{
+    collectAboutFields();
+    if(artistPhotoPending){
+      toast('Загружаем фото художницы…','info');
+      const photoPath=`${IMG_DIR}/artist-photo.jpg`;
+      let sha=null;try{const m=await ghGetMeta(photoPath);if(m)sha=m.sha;}catch(_){}
+      await ghPut(photoPath,artistPhotoPending,sha,'Обновлено фото художницы');
+      artistPhotoPending=null;
+    }
+    await commitContent('Обновлена биография');
+    toast('Биография сохранена ✓','ok');
+  }catch(e){toast('Ошибка: '+e.message,'err');}
+  finally{btn.disabled=false;btn.textContent='Сохранить изменения';}
+}
+
+/* ══════════════════════════════════════════
+   TAB: EXHIBITIONS
+══════════════════════════════════════════ */
+function renderExEditor(){
+  document.getElementById('countBadge').textContent=(content.exhibitions||[]).length+' выставок';
+  const list=document.getElementById('exList');
+  const ex=content.exhibitions||[];
+  list.innerHTML=ex.map((e,i)=>`
+    <div class="ex-row" data-idx="${i}">
+      <input class="yr-in" type="number" value="${e.y||''}" placeholder="год" min="1990" max="2099">
+      <textarea rows="2" placeholder="Название (рус)">${esc(e.r||'')}</textarea>
+      <textarea rows="2" class="en-field" placeholder="Name (eng)">${esc(e.e||'')}</textarea>
+      <button class="btn-del-row" onclick="removeExRow(${i})" title="Удалить">✕</button>
+    </div>`).join('');
+}
+
+function addExRow(){
+  content.exhibitions=[{y:new Date().getFullYear(),r:'',e:''},...(content.exhibitions||[])];
+  renderExEditor();
+}
+
+function removeExRow(idx){
+  if(!confirm('Удалить эту выставку?'))return;
+  content.exhibitions.splice(idx,1);renderExEditor();
+  document.getElementById('countBadge').textContent=content.exhibitions.length+' выставок';
+}
+
+function collectExhibitions(){
+  const rows=document.querySelectorAll('#exList .ex-row');
+  content.exhibitions=Array.from(rows).map(row=>{
+    const inputs=row.querySelectorAll('input,textarea');
+    return{y:parseInt(inputs[0].value)||0,r:inputs[1].value.trim(),e:inputs[2].value.trim()};
+  }).filter(e=>e.r||e.e);
+}
+
+async function saveExhibitions(){
+  const btn=document.getElementById('btnSaveEx');
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Сохраняем…';
+  try{
+    collectExhibitions();
+    await commitContent('Обновлены выставки');
+    renderExEditor();
+    toast('Выставки сохранены ✓','ok');
+  }catch(e){toast('Ошибка: '+e.message,'err');}
+  finally{btn.disabled=false;btn.textContent='Сохранить выставки';}
+}
+
+/* ══════════════════════════════════════════
+   TAB: PRESS
+══════════════════════════════════════════ */
+function renderPressGrid(){
+  document.getElementById('countBadge').textContent=(content.press||[]).length+' публикаций';
+  const grid=document.getElementById('pressGrid');
+  const pb=content.press||[];
+  grid.innerHTML=pb.map((p,i)=>`
+    <div class="press-card" onclick="openPressEdit(${i})">
+      <div class="press-card-img"><img src="${p.img||''}" alt="${p.r||''}" loading="lazy" onerror="this.parentElement.style.background='var(--lg)'"></div>
+      <div class="press-card-info"><div class="press-card-year">${p.y||''}</div><div class="press-card-name">${p.r||''}</div></div>
+    </div>`).join('');
+}
+
+function openPressNew(){
+  editingPressIdx=null;pendingPressPhoto=null;
+  buildPressModal({y:new Date().getFullYear(),r:'',e:'',u:'',img:''});
+  showModal();
+}
+
+function openPressEdit(idx){
+  editingPressIdx=idx;pendingPressPhoto=null;
+  const p=content.press[idx];
+  buildPressModal(p);
+  showModal();
+}
+
+function buildPressModal(p){
+  modalMode='press';
+  document.getElementById('modalTitle').textContent=editingPressIdx===null?'Новая публикация':'Редактировать публикацию';
+  const hasImg=!!(p.img);
+  document.getElementById('modalBody').innerHTML=`
+    <div class="press-photo-area" onclick="document.getElementById('pressPhotoInput').click()">
+      <img id="pressPhotoPreview" src="${p.img||''}" alt="" style="${hasImg?'':'display:none'}" onerror="this.style.display='none';document.getElementById('pressPhotoOverlay').classList.add('always')">
+      <div class="press-photo-overlay ${hasImg?'':'always'}" id="pressPhotoOverlay">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        <span>Загрузить обложку</span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="fm"><label>Название (рус)</label><input type="text" id="pR" value="${esc(p.r||'')}"></div>
+      <div class="fm"><label>Название (eng)</label><input type="text" id="pE" value="${esc(p.e||'')}"></div>
+    </div>
+    <div class="form-row">
+      <div class="fm"><label>Год</label><input type="number" id="pY" value="${p.y||''}"></div>
+      <div class="fm"><label>Ссылка (URL)</label><input type="url" id="pU" value="${esc(p.u||'')}"></div>
+    </div>`;
+  document.getElementById('modalFooter').innerHTML=`
+    ${editingPressIdx!==null?`<button class="btn-delete" onclick="deletePressItem()">Удалить</button>`:''}
+    <button class="btn-save" id="btnSave" onclick="savePress()">Сохранить</button>`;
+}
+
+function onPressPhotoSelected(input){
+  const file=input.files[0];if(!file)return;
+  toast('Обрабатываем…','info');
+  resizeImage(file,1400).then(b64=>{
+    pendingPressPhoto=b64;
+    const preview=document.getElementById('pressPhotoPreview');
+    const overlay=document.getElementById('pressPhotoOverlay');
+    preview.src='data:image/jpeg;base64,'+b64;
+    preview.style.display='block';
+    overlay.classList.remove('always');
+    toastHide();
+  }).catch(e=>toast('Ошибка: '+e.message,'err'));
+  input.value='';
+}
+
+async function savePress(){
+  const btn=document.getElementById('btnSave');
+  const data={
+    r:document.getElementById('pR').value.trim(),
+    e:document.getElementById('pE').value.trim(),
+    y:parseInt(document.getElementById('pY').value)||new Date().getFullYear(),
+    u:document.getElementById('pU').value.trim()||null,
+    img:editingPressIdx!==null?(content.press[editingPressIdx].img||''):''
+  };
+  if(!data.r){toast('Введите название','err');return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Сохраняем…';
+  try{
+    if(pendingPressPhoto){
+      toast('Загружаем обложку…','info');
+      const imgPath=`${IMG_DIR}/pub-${Date.now()}.jpg`;
+      await ghPut(imgPath,pendingPressPhoto,null,`Обложка публикации: ${data.r}`);
+      data.img=imgPath;
+    }
+    if(editingPressIdx===null){content.press.unshift(data);}
+    else{content.press[editingPressIdx]={...content.press[editingPressIdx],...data};}
+    await commitContent(editingPressIdx===null?`Добавлена публикация: ${data.r}`:`Обновлена публикация: ${data.r}`);
+    closeModal();renderPressGrid();
+    toast('Сохранено ✓','ok');
+  }catch(e){toast('Ошибка: '+e.message,'err');}
+  finally{btn.disabled=false;btn.textContent='Сохранить';}
+}
+
+async function deletePressItem(){
+  const p=content.press[editingPressIdx];
+  if(!confirm(`Удалить публикацию «${p.r}»?`))return;
+  try{
+    content.press.splice(editingPressIdx,1);
+    await commitContent(`Удалена публикация: ${p.r}`);
+    closeModal();renderPressGrid();
+    toast('Удалено ✓','ok');
+  }catch(e){toast('Ошибка: '+e.message,'err');}
+}
+
+/* ══════════════════════════════════════════
+   TAB: CONTACTS
+══════════════════════════════════════════ */
+function renderContactsForm(){
+  const c=content.contacts||{};
+  document.getElementById('cTg').value=(c.telegram||'').replace('@','');
+  document.getElementById('cIg').value=(c.instagram||'').replace('@','');
+  document.getElementById('cEmail').value=c.email||'';
+  document.getElementById('cPhone').value=c.phone||'';
+}
+
+async function saveContacts(){
+  const btn=document.getElementById('btnSaveContacts');
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Сохраняем…';
+  try{
+    content.contacts={
+      telegram:document.getElementById('cTg').value.trim().replace('@',''),
+      instagram:document.getElementById('cIg').value.trim().replace('@',''),
+      email:document.getElementById('cEmail').value.trim(),
+      phone:document.getElementById('cPhone').value.trim()
     };
-    img.onerror = reject;
-    img.src = url;
+    await commitContent('Обновлены контакты');
+    toast('Контакты сохранены ✓','ok');
+  }catch(e){toast('Ошибка: '+e.message,'err');}
+  finally{btn.disabled=false;btn.textContent='Сохранить контакты';}
+}
+
+/* ══════════════════════════════════════════
+   IMAGE RESIZE / VIDEO READ
+══════════════════════════════════════════ */
+function resizeImage(file,maxPx=1400){
+  return new Promise((resolve,reject)=>{
+    const img=new Image(),url=URL.createObjectURL(file);
+    img.onload=()=>{
+      let w=img.width,h=img.height;
+      if(w>h&&w>maxPx){h=Math.round(h*maxPx/w);w=maxPx;}
+      else if(h>maxPx){w=Math.round(w*maxPx/h);h=maxPx;}
+      const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(blob=>{const r=new FileReader();r.onload=e=>resolve(e.target.result.split(',')[1]);r.onerror=reject;r.readAsDataURL(blob);},'image/jpeg',0.88);
+    };
+    img.onerror=reject;img.src=url;
   });
 }
 
 /* ══════════════════════════════════════════
-   RENDER GRID
+   MODAL
 ══════════════════════════════════════════ */
-function imgUrl(id) {
-  return `${RAW_BASE}/${IMG_DIR}/work-${id}.jpg?t=${Date.now()}`;
-}
-
-function renderGrid() {
-  const grid = document.getElementById('grid');
-  document.getElementById('countBadge').textContent = `${catalog.length} работ`;
-
-  if (!catalog.length) {
-    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;font-family:var(--fd);font-size:1.1rem;color:var(--wg);font-style:italic">
-      Каталог пуст. Нажмите «Добавить» чтобы добавить первую картину.
-    </div>`;
-    return;
-  }
-
-  grid.innerHTML = catalog.map(a => `
-    <div class="card" onclick="openEdit(${a.id})">
-      <div class="card-img">
-        <img src="${RAW_BASE}/${IMG_DIR}/work-${a.id}.jpg"
-             alt="${a.t}" loading="lazy"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="no-photo" style="display:none">нет фото</div>
-      </div>
-      <div class="card-info">
-        <div class="card-title">${a.t}</div>
-        <div class="card-year">${a.s} · ${a.y}</div>
-        <div class="card-price">${a.p.toLocaleString('ru-RU')} ₽</div>
-      </div>
-    </div>
-  `).join('');
-}
-
-/* ══════════════════════════════════════════
-   OPEN EDIT MODAL
-══════════════════════════════════════════ */
-function openEdit(id) {
-  const a = catalog.find(x => x.id === id);
-  if (!a) return;
-  editingId = id;
-  pendingPhoto = null;
-
-  document.getElementById('modalTitle').textContent = 'Редактировать работу';
-  document.getElementById('btnDelete').style.display = 'block';
-  fillForm(a);
-
-  // Photo
-  const preview = document.getElementById('photoPreview');
-  const overlay = document.getElementById('photoOverlay');
-  preview.src = `${RAW_BASE}/${IMG_DIR}/work-${id}.jpg?t=${Date.now()}`;
-  preview.style.display = 'block';
-  overlay.classList.remove('always');
-  preview.onerror = () => {
-    preview.style.display = 'none';
-    overlay.classList.add('always');
-  };
-
-  showModal();
-}
-
-function openNew() {
-  editingId = null;
-  pendingPhoto = null;
-
-  const nextId = catalog.length ? Math.max(...catalog.map(a => a.id)) + 1 : 1;
-  document.getElementById('modalTitle').textContent = `Новая работа #${nextId}`;
-  document.getElementById('btnDelete').style.display = 'none';
-
-  fillForm({ t:'', te:'', m:'Холст, акрил', me:'Canvas, acrylic', s:'', y: new Date().getFullYear(), p:'' });
-
-  const preview = document.getElementById('photoPreview');
-  const overlay = document.getElementById('photoOverlay');
-  preview.style.display = 'none';
-  overlay.classList.add('always');
-
-  showModal();
-}
-
-function fillForm(a) {
-  document.getElementById('fT').value  = a.t  || '';
-  document.getElementById('fTe').value = a.te || '';
-  document.getElementById('fM').value  = a.m  || '';
-  document.getElementById('fMe').value = a.me || '';
-  document.getElementById('fS').value  = a.s  || '';
-  document.getElementById('fY').value  = a.y  || '';
-  document.getElementById('fP').value  = a.p  || '';
-}
-
-function readForm() {
-  return {
-    t:  document.getElementById('fT').value.trim(),
-    te: document.getElementById('fTe').value.trim(),
-    m:  document.getElementById('fM').value.trim(),
-    me: document.getElementById('fMe').value.trim(),
-    s:  document.getElementById('fS').value.trim(),
-    y:  parseInt(document.getElementById('fY').value) || 0,
-    p:  parseInt(document.getElementById('fP').value) || 0,
-  };
-}
-
-/* ══════════════════════════════════════════
-   PHOTO SELECTION
-══════════════════════════════════════════ */
-async function onPhotoSelected(input) {
-  const file = input.files[0];
-  if (!file) return;
-
-  toast('Обрабатываем фото…', 'info');
-  try {
-    const b64 = await resizeImage(file);
-    pendingPhoto = { base64: b64 };
-
-    // Show preview
-    const preview = document.getElementById('photoPreview');
-    const overlay = document.getElementById('photoOverlay');
-    preview.src = 'data:image/jpeg;base64,' + b64;
-    preview.style.display = 'block';
-    overlay.classList.remove('always');
-    toastHide();
-  } catch(e) {
-    toast('Ошибка обработки фото: ' + e.message, 'err');
-  }
-  input.value = '';
-}
-
-/* ══════════════════════════════════════════
-   SAVE
-══════════════════════════════════════════ */
-async function saveEdit() {
-  const btn = document.getElementById('btnSave');
-  const data = readForm();
-
-  if (!data.t) { toast('Введите название на русском', 'err'); return; }
-  if (!data.y) { toast('Укажите год', 'err'); return; }
-  if (editingId === null && !pendingPhoto) {
-    toast('Загрузите фото для новой работы', 'err'); return;
-  }
-
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spin"></span> Сохраняем…';
-
-  try {
-    let id = editingId;
-
-    // New painting → assign next id
-    if (id === null) {
-      id = catalog.length ? Math.max(...catalog.map(a => a.id)) + 1 : 1;
-      data.id = id;
-      catalog.push(data);
-    } else {
-      // Update existing
-      const idx = catalog.findIndex(a => a.id === id);
-      catalog[idx] = { ...catalog[idx], ...data };
-    }
-
-    // Upload photo if selected
-    if (pendingPhoto) {
-      toast('Загружаем фото…', 'info');
-      const imgPath = `${IMG_DIR}/work-${id}.jpg`;
-      // Get current sha if exists (for replace)
-      let imgSha = null;
-      try {
-        const existing = await ghGet(imgPath);
-        if (existing) imgSha = existing.sha;
-      } catch(_) {}
-      await ghPut(imgPath, pendingPhoto.base64, imgSha, `Фото: работа #${id} — ${data.t}`);
-      pendingPhoto = null;
-    }
-
-    // Save catalog.json
-    toast('Сохраняем каталог…', 'info');
-    await commitCatalog(
-      editingId === null
-        ? `Добавлена работа: ${data.t}`
-        : `Обновлена работа #${id}: ${data.t}`
-    );
-
-    closeModal();
-    renderGrid();
-    toast('Сохранено ✓', 'ok');
-  } catch(e) {
-    toast('Ошибка: ' + e.message, 'err');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Сохранить';
-  }
-}
-
-/* ══════════════════════════════════════════
-   DELETE
-══════════════════════════════════════════ */
-async function confirmDelete() {
-  const a = catalog.find(x => x.id === editingId);
-  if (!a) return;
-  const ok = confirm(`Удалить работу «${a.t}»?\nЭто действие нельзя отменить.`);
-  if (!ok) return;
-
-  const btn = document.getElementById('btnDelete');
-  btn.disabled = true;
-  btn.textContent = '…';
-
-  try {
-    // Remove from catalog
-    catalog = catalog.filter(x => x.id !== editingId);
-    await commitCatalog(`Удалена работа #${editingId}: ${a.t}`);
-
-    // Delete image (optional — не критично если файла нет)
-    try {
-      const imgPath = `${IMG_DIR}/work-${editingId}.jpg`;
-      const imgData = await ghGet(imgPath);
-      if (imgData) {
-        await ghDelete(imgPath, imgData.sha, `Удалено фото: работа #${editingId}`);
-      }
-    } catch(_) {}
-
-    closeModal();
-    renderGrid();
-    toast(`Работа «${a.t}» удалена`, 'ok');
-  } catch(e) {
-    toast('Ошибка: ' + e.message, 'err');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Удалить';
-  }
-}
-
-/* ══════════════════════════════════════════
-   MODAL OPEN / CLOSE
-══════════════════════════════════════════ */
-function showModal() {
+function showModal(){
   document.getElementById('modal').classList.add('show');
   document.getElementById('overlay').classList.add('show');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
 
-function closeModal() {
+function closeModal(){
   document.getElementById('modal').classList.remove('show');
   document.getElementById('overlay').classList.remove('show');
-  document.body.style.overflow = '';
-  editingId = null;
-  pendingPhoto = null;
+  document.body.style.overflow='';
+  editingId=null;editingPressIdx=null;pendingPressPhoto=null;
+  displayMedia=[];deletedMedia=[];modalMode=null;
 }
 
 /* ══════════════════════════════════════════
    TOAST
 ══════════════════════════════════════════ */
 let toastTimer;
-function toast(msg, type = 'info') {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = `show ${type}`;
-  clearTimeout(toastTimer);
-  if (type !== 'info') {
-    toastTimer = setTimeout(toastHide, 3500);
-  }
+function toast(msg,type='info'){
+  const el=document.getElementById('toast');el.textContent=msg;el.className=`show ${type}`;
+  clearTimeout(toastTimer);if(type!=='info')toastTimer=setTimeout(toastHide,3500);
 }
-function toastHide() {
-  document.getElementById('toast').className = '';
-}
+function toastHide(){document.getElementById('toast').className='';}
 
 /* ══════════════════════════════════════════
-   PAGE SWITCH
+   UTILS
 ══════════════════════════════════════════ */
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+/* ── Override renderCurrentTab ── */
+function renderCurrentTab(){
+  if(currentTab==='catalog')renderCatalogGrid();
+  else if(currentTab==='about')renderAboutEditor();
+  else if(currentTab==='exhibitions')renderExEditor();
+  else if(currentTab==='press')renderPressGrid();
+  else if(currentTab==='contacts')renderContactsForm();
 }
 
 /* ══════════════════════════════════════════
    AUTO-LOGIN
 ══════════════════════════════════════════ */
-(async () => {
-  const saved = localStorage.getItem('mp_token');
-  if (!saved) return;
-  token = saved;
-  try {
-    await loadCatalog();
-    showPage('pg-main');
-    renderGrid();
-  } catch(_) {
-    token = '';
-    localStorage.removeItem('mp_token');
-  }
+(async()=>{
+  const saved=localStorage.getItem('mp_token');if(!saved)return;
+  token=saved;
+  try{
+    await loadAll();showPage('pg-main');
+    switchTab('catalog');
+  }catch(_){token='';localStorage.removeItem('mp_token');}
 })();
 </script>
 </body>
