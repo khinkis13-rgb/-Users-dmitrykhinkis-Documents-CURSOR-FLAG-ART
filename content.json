@@ -1,0 +1,60 @@
+{
+  "about": {
+    "parasRu": [
+      "Мария Полушкина родилась в 1985 году в Москве. Творчеством начала заниматься в «КлассЦентре» музыкально-драматического искусства Сергея Казарновского. Посещала художественный класс Лены Будиной.",
+      "Несколько лет жила и училась в Германии. Окончила факультет теории коммуникации и средств массовой информации Freie Universität Berlin (Свободный университет Берлина). С 2011 года живёт в Москве.",
+      "Выпустила две книги в соавторстве с поэтом Анной Аркатовой: «Между нами» (2016) и «Женщины внутри женщины» (2024), в которых гармонично сочетаются стихи поэта и картины художницы. Работы находятся в частных коллекциях в Германии, Нидерландах, Франции, Испании, Израиле, Эстонии, Латвии, Швеции, Греции, США и России. Одна из картин — в коллекции Copelouzos Family Art Museum в Афинах.",
+      "С 2021 года Мария сотрудничает с сетью салонов красоты «Пальчики»: принты её работ украшают фасады входных групп, а в интерьерах салонов экспонируется триптих художницы."
+    ],
+    "parasEn": [
+      "Maria Polushkina was born in 1985 in Moscow. She began her creative path at the Sergey Kazarnovsky ClassCenter for musical-dramatic arts, attending Lena Budina's art class.",
+      "She lived and studied in Germany for several years, graduating from the Faculty of Communication Theory and Mass Media at Freie Universität Berlin. Since 2011, she has been based in Moscow.",
+      "She has co-authored two books with poet Anna Arkatova: 'Between Us' (2016) and 'Women Inside a Woman' (2024), in which the poet's verses and the artist's paintings harmoniously intertwine. Works are held in private collections in Germany, the Netherlands, France, Spain, Israel, Estonia, Latvia, Sweden, Greece, the USA, and Russia. One painting is in the collection of the Copelouzos Family Art Museum in Athens.",
+      "Since 2021, Maria has collaborated with the Palchiki beauty salon chain: prints of her works decorate the salon facades, and her triptych is exhibited inside."
+    ],
+    "quoteRu": "«Для меня работа художника — летопись событий, происходящих внутри меня, в моём окружении и в мире вокруг.»",
+    "quoteEn": "'For me, the artist's work is a chronicle of events unfolding inside me, in my surroundings, and in the world around.'"
+  },
+  "exhibitions": [
+    {"y":2025,"r":"«Ничего подобного». Дом-музей Марины Цветаевой, Москва","e":"'Nothing Like It'. Tsvetaeva House Museum, Moscow"},
+    {"y":2025,"r":"«Женщины внутри женщины». Галерея на Трубной (Выставочные залы Москвы)","e":"'Women Inside a Woman'. Gallery on Trubnaya, Moscow"},
+    {"y":2025,"r":"Pop-Up выставка у Киры Альтман и Артёма Соловейчика, Москва","e":"Pop-Up exhibition, Moscow"},
+    {"y":2024,"r":"«Беспредельное». Культурный центр «Артишок», Москва","e":"'Boundless'. Artichoke Cultural Center, Moscow"},
+    {"y":2024,"r":"«Дышу тобой». Галерея Ordynka Art, Москва","e":"'Breathing You'. Ordynka Art Gallery, Moscow"},
+    {"y":2023,"r":"«Яхтинг — это». Галерея МУХА + Сила Ветра, Москва","e":"'Yachting Is'. MUKHA + Sila Vetra Gallery, Moscow"},
+    {"y":2022,"r":"«Искусство и спорт». Omelchenko Gallery, Москва","e":"'Art & Sport'. Omelchenko Gallery, Moscow"},
+    {"y":2022,"r":"«Так никто не делает». Галерея Квартира S. ARTPLAY, Москва","e":"'Nobody Does That'. Apartment S Gallery. ARTPLAY, Moscow"},
+    {"y":2021,"r":"«Вчера-сегодня-завтра». Галерея Квартира S. ARTPLAY, Москва","e":"'Yesterday–Today–Tomorrow'. Apartment S Gallery. ARTPLAY, Moscow"},
+    {"y":2021,"r":"«Внутреннее и внешнее». Галерея Квартира S. ARTPLAY, Москва","e":"'Inner and Outer'. Apartment S Gallery. ARTPLAY, Moscow"},
+    {"y":2020,"r":"Moon Gallery. Het Glazen Huis, Амстердам, Нидерланды","e":"Moon Gallery. Het Glazen Huis, Amsterdam, Netherlands"},
+    {"y":2020,"r":"35×35 Art Project. Copelouzos Family Art Museum, Афины, Греция","e":"35×35 Art Project. Copelouzos Family Art Museum, Athens, Greece"},
+    {"y":2019,"r":"Moon Gallery. Onze Ambassade, Гаага, Нидерланды","e":"Moon Gallery. Onze Ambassade, The Hague, Netherlands"},
+    {"y":2019,"r":"Moon Gallery. Kunsträume / The Heinz Julen Art Gallery, Церматт, Швейцария","e":"Moon Gallery. Heinz Julen Art Gallery, Zermatt, Switzerland"},
+    {"y":2018,"r":"«Анна-Мария». Галерея CUB, Рига, Латвия","e":"'Anna-Maria'. CUB Gallery, Riga, Latvia"},
+    {"y":2018,"r":"«NU. Эстетика обнажённой натуры». OXE Capital, Москва","e":"'NU. Aesthetics of the Nude'. OXE Capital, Moscow"},
+    {"y":2017,"r":"«Между нами». Боярские палаты СТД РФ, Москва","e":"'Between Us'. Boyar Chambers STD RF, Moscow"},
+    {"y":2017,"r":"«Эра Водолея». Универмаг Цветной, Москва","e":"'Age of Aquarius'. Tsvetnoj Department Store, Moscow"},
+    {"y":2017,"r":"Art for Your Heart. Дизайн-завод FLACON, Москва","e":"Art for Your Heart. FLACON Design Factory, Moscow"},
+    {"y":2015,"r":"Выставка в КлассЦентре музыкально-драматического искусства, Москва","e":"Exhibition at ClassCenter for Musical-Dramatic Arts, Moscow"},
+    {"y":2011,"r":"«Pleasure». Фестиваль искусства 48 Stunden Neukölln, Берлин, Германия","e":"'Pleasure'. 48 Stunden Neukölln Art Festival, Berlin, Germany"}
+  ],
+  "press": [
+    {"y":2025,"r":"Журнал Salon","e":"Salon Magazine","u":"https://salon.ru/article/minimalizm-selementami-mid-century-kvartira-v-dome1936-goda-74182","img":"site/images/pub-salon-2025.jpg"},
+    {"y":2025,"r":"My Decor","e":"My Decor","u":"https://mydecor.ru/interiorflats/neskuchnyi-minimalizm-kvartira-47-m-v-moskve/","img":"site/images/pub-mydecor-2025.jpg"},
+    {"y":2024,"r":"Design Mate","e":"Design Mate","u":"https://design-mate.ru/read/objects/interior-of-small-apartment--project-by-art-studio-mir","img":"site/images/pub-designmate-2024.jpg"},
+    {"y":2024,"r":"My Decor","e":"My Decor","u":"https://mydecor.ru/interior/flats/yarkaya-kvartira-40-m-pod-sdachu-v-moskve/","img":"site/images/pub-mydecor-2024.jpg"},
+    {"y":2024,"r":"«Идеи вашего дома»","e":"Ideas for Your Home","u":"https://www.ivd.ru/dizajn-i-dekor/kvartira/iz-treh-komnat-pochti-pyat-yarkaya-kvartira-mechty-dlya-semi-s-dvumya-detmi-123972","img":"site/images/pub-ivd-2024.jpg"},
+    {"y":2023,"r":"Salon Interior (весенний номер)","e":"Salon Interior (spring)","u":null,"img":"site/images/pub-salon-spring-2023.jpg"},
+    {"y":2023,"r":"In My Room","e":"In My Room","u":"https://www.inmyroom.ru/posts/36789-semejnaya-kvartira-v-krasnogorske-s-prohodnoj-gostinoj-i-dvumya-detskimi","img":"site/images/pub-inmyroom-2023.jpg"},
+    {"y":2022,"r":"Salon Interior (зимний номер)","e":"Salon Interior (winter)","u":null,"img":"site/images/pub-salon-winter-2022.jpg"},
+    {"y":2021,"r":"COSMOPOLITAN","e":"COSMOPOLITAN","u":"https://www.cosmo.ru/beauty/news/24-05-2021/igrivoe-nastroenie-i-yarkie-kraski-zaigrali-na-oknah-salonov-palchiki/","img":"site/images/pub-cosmo-2021.jpg"},
+    {"y":2021,"r":"InStyle","e":"InStyle","u":"https://instyle.ru/stars/za-kadrom/khudozhnitsa-mariya-polushkina-razukrasila-vitriny-salonov-palchiki/","img":"site/images/pub-instyle-2021.jpg"},
+    {"y":2020,"r":"Art Muse (стр. 151)","e":"Art Muse (p. 151)","u":"https://ru.calameo.com/read/006223001745df126953b","img":"site/images/pub-artmuse-2020.jpg"}
+  ],
+  "contacts": {
+    "telegram": "artpolushkina",
+    "instagram": "artpolushkina",
+    "email": "artpolushkina@gmail.com",
+    "phone": "+79260209744"
+  }
+}
