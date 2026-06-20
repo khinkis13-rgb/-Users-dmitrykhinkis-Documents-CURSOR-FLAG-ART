@@ -993,7 +993,13 @@
     "me": "Canvas, acrylic",
     "s": "60×40",
     "y": 2023,
-    "p": 30000
+    "p": 45000,
+    "media": [
+      {
+        "type": "img",
+        "path": "site/images/work-71.jpg"
+      }
+    ]
   },
   {
     "id": 72,
