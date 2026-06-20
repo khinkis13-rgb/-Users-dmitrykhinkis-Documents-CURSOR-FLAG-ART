@@ -111,7 +111,13 @@
     "me": "Canvas, acrylic",
     "s": "40×30",
     "y": 2025,
-    "p": 20000
+    "p": 25000,
+    "media": [
+      {
+        "type": "img",
+        "path": "site/images/work-9.jpg"
+      }
+    ]
   },
   {
     "id": 10,
