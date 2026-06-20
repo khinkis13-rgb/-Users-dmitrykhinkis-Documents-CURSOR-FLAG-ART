@@ -737,7 +737,13 @@
     "me": "Diptych. Canvas, acrylic",
     "s": "40×30 + 40×30",
     "y": 2024,
-    "p": 40000
+    "p": 60000,
+    "media": [
+      {
+        "type": "img",
+        "path": "site/images/work-54.jpg"
+      }
+    ]
   },
   {
     "id": 55,
