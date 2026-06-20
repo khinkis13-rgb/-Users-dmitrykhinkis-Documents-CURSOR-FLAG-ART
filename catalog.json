@@ -299,7 +299,13 @@
     "me": "Canvas, acrylic",
     "s": "80×90",
     "y": 2024,
-    "p": 105000
+    "p": 130000,
+    "media": [
+      {
+        "type": "img",
+        "path": "site/images/work-23.jpg"
+      }
+    ]
   },
   {
     "id": 24,
