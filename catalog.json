@@ -753,7 +753,13 @@
     "me": "Canvas, acrylic, gold thread",
     "s": "90×70",
     "y": 2023,
-    "p": 100000
+    "p": 120000,
+    "media": [
+      {
+        "type": "img",
+        "path": "site/images/work-55.jpg"
+      }
+    ]
   },
   {
     "id": 56,
