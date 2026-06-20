@@ -175,7 +175,13 @@
     "me": "Canvas, acrylic",
     "s": "90×70",
     "y": 2025,
-    "p": 95000
+    "p": 115000,
+    "media": [
+      {
+        "type": "img",
+        "path": "site/images/work-13.jpg"
+      }
+    ]
   },
   {
     "id": 14,
