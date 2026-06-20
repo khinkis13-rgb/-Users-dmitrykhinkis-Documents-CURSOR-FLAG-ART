@@ -977,7 +977,13 @@
     "me": "Canvas, acrylic",
     "s": "100×50",
     "y": 2021,
-    "p": 45000
+    "p": 65000,
+    "media": [
+      {
+        "type": "img",
+        "path": "site/images/work-70.jpg"
+      }
+    ]
   },
   {
     "id": 71,
