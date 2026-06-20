@@ -605,7 +605,13 @@
     "me": "Canvas on board, acrylic",
     "s": "15×21",
     "y": 2024,
-    "p": 15000
+    "p": 20000,
+    "media": [
+      {
+        "type": "img",
+        "path": "site/images/work-45.jpg"
+      }
+    ]
   },
   {
     "id": 46,
