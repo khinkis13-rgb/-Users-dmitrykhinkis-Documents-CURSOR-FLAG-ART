@@ -558,22 +558,6 @@
     ]
   },
   {
-    "id": 40,
-    "t": "БУТЫЛКА",
-    "te": "Bottle",
-    "m": "Холст, акрил",
-    "me": "Canvas, acrylic",
-    "s": "50×30",
-    "y": 2024,
-    "p": 27000,
-    "media": [
-      {
-        "type": "img",
-        "path": "site/images/work-40.jpg"
-      }
-    ]
-  },
-  {
     "id": 41,
     "t": "КРАСНАЯ ШЛЯПА",
     "te": "Red Hat",
