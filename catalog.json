@@ -215,7 +215,13 @@
     "me": "Canvas, acrylic",
     "s": "60×70",
     "y": 2025,
-    "p": 55000
+    "p": 60000,
+    "media": [
+      {
+        "type": "img",
+        "path": "site/images/work-16.jpg"
+      }
+    ]
   },
   {
     "id": 17,
